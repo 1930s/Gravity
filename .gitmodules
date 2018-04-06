@@ -1,0 +1,3 @@
+[submodule "ARVideoKit"]
+	path = ARVideoKit
+	url = https://github.com/AFathi/ARVideoKit

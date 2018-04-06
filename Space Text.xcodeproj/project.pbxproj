@@ -15,15 +15,25 @@
 		84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84ABEA091F3D15E70052D547 /* Assets.scnassets */; };
 		FA75FD34207733EA008A4B42 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD33207733EA008A4B42 /* AppState.swift */; };
 		FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD3D20774484008A4B42 /* UserDefaults.swift */; };
+		FA75FD462077FC6A008A4B42 /* ARVideoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA75FD442077FC46008A4B42 /* ARVideoKit.framework */; };
+		FA75FD492077FE2F008A4B42 /* ViewController+RecordAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD482077FE2F008A4B42 /* ViewController+RecordAR.swift */; };
 		FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */; };
 		FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */; };
 		FAAAACAD2072C9AE00D3B84D /* PressStart2P-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FA75FD432077FC46008A4B42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FBD604DA1FA969DD00EC9804;
+			remoteInfo = ARVideoKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		112FE5661F4F95A200BF85EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		704187407041B63000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		704530507045358000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		842316DC1F2030C300D189D1 /* Space Text.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Text.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		842316DF1F2030C300D189D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		842316E31F2030C300D189D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,9 +41,10 @@
 		842316EB1F2030C300D189D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842316ED1F2030C300D189D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84ABEA091F3D15E70052D547 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
-		C85709121F34FC2200BB957F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FA75FD33207733EA008A4B42 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		FA75FD3D20774484008A4B42 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ARVideoKit.xcodeproj; path = ARVideoKit/ARVideoKit.xcodeproj; sourceTree = "<group>"; };
+		FA75FD482077FE2F008A4B42 /* ViewController+RecordAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+RecordAR.swift"; sourceTree = "<group>"; };
 		FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNMathExtensions.swift; sourceTree = "<group>"; };
 		FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNRibbon.swift; sourceTree = "<group>"; };
 		FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
@@ -44,36 +55,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA75FD462077FC6A008A4B42 /* ARVideoKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7041B6907041B77000000001 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				704187407041B63000000001 /* SampleCode.xcconfig */,
-			);
-			name = Configuration;
-			sourceTree = "<group>";
-		};
-		70452B1070452AE000000001 /* LICENSE */ = {
-			isa = PBXGroup;
-			children = (
-				704530507045358000000001 /* LICENSE.txt */,
-			);
-			path = LICENSE;
-			sourceTree = "<group>";
-		};
 		842316D31F2030C300D189D1 = {
 			isa = PBXGroup;
 			children = (
-				C85709121F34FC2200BB957F /* README.md */,
+				FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */,
 				842316DE1F2030C300D189D1 /* Space Text */,
 				842316DD1F2030C300D189D1 /* Products */,
-				7041B6907041B77000000001 /* Configuration */,
-				70452B1070452AE000000001 /* LICENSE */,
+				FA75FD452077FC6A008A4B42 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,10 +86,9 @@
 				842316DF1F2030C300D189D1 /* AppDelegate.swift */,
 				FA75FD33207733EA008A4B42 /* AppState.swift */,
 				FA75FD3D20774484008A4B42 /* UserDefaults.swift */,
-				842316E31F2030C300D189D1 /* ViewController.swift */,
-				FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */,
-				FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */,
-				FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */,
+				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
+				FA75FD472077FE0F008A4B42 /* Main View Controller */,
+				FA75FD4B2077FEC1008A4B42 /* Fonts */,
 				842316E51F2030C300D189D1 /* Main.storyboard */,
 				842316EA1F2030C300D189D1 /* LaunchScreen.storyboard */,
 				842316ED1F2030C300D189D1 /* Info.plist */,
@@ -102,6 +96,47 @@
 				112FE5661F4F95A200BF85EA /* Assets.xcassets */,
 			);
 			path = "Space Text";
+			sourceTree = "<group>";
+		};
+		FA75FD402077FC46008A4B42 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA75FD442077FC46008A4B42 /* ARVideoKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA75FD452077FC6A008A4B42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA75FD472077FE0F008A4B42 /* Main View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				842316E31F2030C300D189D1 /* ViewController.swift */,
+				FA75FD482077FE2F008A4B42 /* ViewController+RecordAR.swift */,
+			);
+			path = "Main View Controller";
+			sourceTree = "<group>";
+		};
+		FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */,
+				FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */,
+			);
+			path = "SceneKit Extensions";
+			sourceTree = "<group>";
+		};
+		FA75FD4B2077FEC1008A4B42 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,12 +185,28 @@
 			mainGroup = 842316D31F2030C300D189D1;
 			productRefGroup = 842316DD1F2030C300D189D1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FA75FD402077FC46008A4B42 /* Products */;
+					ProjectRef = FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				842316DB1F2030C300D189D1 /* Space Text */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FA75FD442077FC46008A4B42 /* ARVideoKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ARVideoKit.framework;
+			remoteRef = FA75FD432077FC46008A4B42 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		842316DA1F2030C300D189D1 /* Resources */ = {
@@ -179,6 +230,7 @@
 			files = (
 				FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */,
 				FA75FD34207733EA008A4B42 /* AppState.swift in Sources */,
+				FA75FD492077FE2F008A4B42 /* ViewController+RecordAR.swift in Sources */,
 				FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
 				FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */,
@@ -210,7 +262,6 @@
 /* Begin XCBuildConfiguration section */
 		842316EE1F2030C300D189D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 704187407041B63000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -270,7 +321,6 @@
 		};
 		842316EF1F2030C300D189D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 704187407041B63000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -324,14 +374,13 @@
 		};
 		842316F11F2030C300D189D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 704187407041B63000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GZABHNF58X;
-				INFOPLIST_FILE = ARKitBasics/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Space Text/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.ARKitBasics${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Space-Text";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -341,14 +390,13 @@
 		};
 		842316F21F2030C300D189D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 704187407041B63000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GZABHNF58X;
-				INFOPLIST_FILE = ARKitBasics/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Space Text/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.ARKitBasics${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Space-Text";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

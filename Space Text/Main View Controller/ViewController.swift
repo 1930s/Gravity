@@ -9,6 +9,7 @@ import UIKit
 import SceneKit
 import SpriteKit
 import ARKit
+import ARVideoKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
@@ -22,6 +23,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             UserDefaultsManager.set(value: newValue.rawValue, for: .currentObjectType)
         }
     }
+    private lazy var videoRecorder: RecordAR? = {
+        let recordAr = RecordAR(ARSceneKit: sceneView)
+        recordAr?.delegate = self
+        return recordAr
+    }()
     
     // MARK: - IBOutlets
     @IBOutlet weak var sessionInfoView: UIView!

@@ -7,6 +7,7 @@
 //
 
 import ARVideoKit
+import CoreMedia
 
 extension ViewController: RecordARDelegate {
     func recorder(didFailRecording error: Error?, and status: String) {

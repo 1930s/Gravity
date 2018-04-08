@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="WeU-Be-bo7">
             <objects>
-                <viewController id="7dh-A0-qGE" customClass="ViewController" customModule="ARKitBasics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7dh-A0-qGE" customClass="ViewController" customModule="Space_Text" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="loo-cG-myf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,12 +23,36 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="7dh-A0-qGE" id="6YV-aS-dot"/>
-                                    <outletCollection property="gestureRecognizers" destination="yYZ-Iy-NJX" appends="YES" id="KlE-E1-r0Z"/>
                                     <outletCollection property="gestureRecognizers" destination="26z-Ka-QnW" appends="YES" id="nxK-AP-wc4"/>
                                 </connections>
                             </arscnView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-iu-90u" customClass="InstagramActivityIndicator" customModule="Space_Text" customModuleProvider="target">
+                                <rect key="frame" x="137" y="283" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="jol-ZV-EE9"/>
+                                    <constraint firstAttribute="height" constant="100" id="srb-We-AD0"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="numSegments">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W46-Ja-uoI" customClass="RecordButton" customModule="Space_Text" customModuleProvider="target">
+                                <rect key="frame" x="147" y="550" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="HuM-Ru-8g3"/>
+                                    <constraint firstAttribute="width" constant="80" id="Ie1-Dg-7dh"/>
+                                </constraints>
+                            </button>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37h-bD-Iyn">
-                                <rect key="frame" x="15" y="596" width="191" height="38"/>
+                                <rect key="frame" x="92" y="399" width="191" height="38"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pkc-hu-yuO">
                                     <rect key="frame" x="0.0" y="0.0" width="191" height="38"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,6 +69,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="hCE-IA-wLv" firstAttribute="top" secondItem="pkc-hu-yuO" secondAttribute="top" constant="8" id="0Vh-6g-Gia"/>
                                         <constraint firstItem="hCE-IA-wLv" firstAttribute="leading" secondItem="pkc-hu-yuO" secondAttribute="leading" constant="8" id="6LO-f0-XCW"/>
                                         <constraint firstAttribute="bottom" secondItem="hCE-IA-wLv" secondAttribute="bottom" constant="8" id="9pn-kU-sot"/>
                                         <constraint firstAttribute="trailing" secondItem="hCE-IA-wLv" secondAttribute="trailing" constant="14" id="IgQ-c0-8xG"/>
@@ -61,30 +86,30 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="37h-bD-Iyn" firstAttribute="centerX" secondItem="loo-cG-myf" secondAttribute="centerX" id="6Do-Ao-inc"/>
                             <constraint firstAttribute="bottom" secondItem="BrB-h1-WRS" secondAttribute="bottom" id="8rY-15-6Ru"/>
+                            <constraint firstItem="37h-bD-Iyn" firstAttribute="top" secondItem="v1R-iu-90u" secondAttribute="bottom" constant="16" id="LiU-gr-iG9"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="71x-2l-AWw" secondAttribute="leading" id="QIa-Ri-qJo"/>
                             <constraint firstItem="71x-2l-AWw" firstAttribute="trailing" secondItem="BrB-h1-WRS" secondAttribute="trailing" id="a3B-9u-pb1"/>
-                            <constraint firstItem="71x-2l-AWw" firstAttribute="bottom" secondItem="37h-bD-Iyn" secondAttribute="bottom" constant="33" id="j5m-RQ-OjM"/>
-                            <constraint firstItem="37h-bD-Iyn" firstAttribute="leading" secondItem="71x-2l-AWw" secondAttribute="leading" constant="15" id="lLK-x7-VyJ"/>
+                            <constraint firstItem="71x-2l-AWw" firstAttribute="bottom" secondItem="W46-Ja-uoI" secondAttribute="bottom" constant="37" id="cYJ-C9-gGI"/>
+                            <constraint firstItem="v1R-iu-90u" firstAttribute="centerY" secondItem="loo-cG-myf" secondAttribute="centerY" id="e5L-eI-dhf"/>
+                            <constraint firstItem="v1R-iu-90u" firstAttribute="centerX" secondItem="loo-cG-myf" secondAttribute="centerX" id="on1-Rf-U2y"/>
+                            <constraint firstItem="W46-Ja-uoI" firstAttribute="centerX" secondItem="loo-cG-myf" secondAttribute="centerX" id="p3h-Of-iCH"/>
                             <constraint firstAttribute="top" secondItem="BrB-h1-WRS" secondAttribute="top" id="ulI-xa-35w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="71x-2l-AWw"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="v1R-iu-90u" id="MWi-jI-MPr"/>
+                        <outlet property="recordButton" destination="W46-Ja-uoI" id="92p-WV-uxz"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="sgr-g8-kdG"/>
                         <outlet property="sessionInfoLabel" destination="hCE-IA-wLv" id="fqx-0o-IdX"/>
                         <outlet property="sessionInfoView" destination="37h-bD-Iyn" id="e6g-gN-reW"/>
-                        <outlet property="tapGestureRecognizer" destination="yYZ-Iy-NJX" id="osV-Pm-LRA"/>
                         <outlet property="touchDownGestureRecognizer" destination="26z-Ka-QnW" id="DkJ-Os-GaV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvH-ud-t1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="dh1-aA-Oau" customClass="SCNScene"/>
-                <tapGestureRecognizer id="yYZ-Iy-NJX">
-                    <connections>
-                        <action selector="tapRecognizedWithSender:" destination="7dh-A0-qGE" id="AlD-00-Xha"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.0" id="26z-Ka-QnW">
                     <connections>
                         <action selector="touchDownRecognizedWithSender:" destination="7dh-A0-qGE" id="g7x-xz-uPo"/>

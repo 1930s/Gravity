@@ -10,6 +10,7 @@ import SceneKit
 import SpriteKit
 import ARKit
 import ARVideoKit
+import AVKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
@@ -23,6 +24,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             UserDefaultsManager.set(value: newValue.rawValue, for: .currentObjectType)
         }
     }
+    var maximumRecordingDuration: TimeInterval = 30.0
+    private var recordingTimer: Timer?
+    private var recordingStartTime: Date?
     private lazy var videoRecorder: RecordAR? = {
         let recordAr = RecordAR(ARSceneKit: sceneView)
         recordAr?.delegate = self
@@ -33,7 +37,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var sessionInfoView: UIView!
     @IBOutlet weak var sessionInfoLabel: UILabel!
     @IBOutlet weak var sceneView: ARSCNView!
-    @IBOutlet weak var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var recordButton: RecordButton!
+    @IBOutlet weak var activityIndicator: InstagramActivityIndicator!
     @IBOutlet weak var touchDownGestureRecognizer: UILongPressGestureRecognizer!
     
     private var currentRibbonNode: SCNNode?
@@ -41,6 +46,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     private var currentRibbonMaterial: SCNMaterial?
     private var displayLink: CADisplayLink?
     var didSet: Bool = false
+    private var needsHelpInfo: Bool = true
     
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
         switch sender.state {
@@ -80,46 +86,42 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         //didSet = true
     }
-    
-    @IBAction func tapRecognized(sender: UITapGestureRecognizer) {
-        return
-        //guard let currentFrame = sceneView.session.currentFrame else { return }
-        //var translationMatrix = matrix_identity_float4x4
-        //translationMatrix.columns.3.z = -1.0  // Moves the object away from the camera
-        //let transform = simd_mul(currentFrame.camera.transform, translationMatrix)
-        guard let cameraNode = sceneView.pointOfView else { return }
-        let cameraTranslation = cameraNode.simdWorldFront * 1.0
-        
-        switch sender.state {
-        case .began:
-            let transform = float4x4(SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z))
-            let anchor = ARAnchor(transform: transform)
-            sceneView.session.add(anchor: anchor)
-        case .changed:
-            print(cameraTranslation)
-        default:
-            break
-        }
-    }
 
     // MARK: - View Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        recordButton.recordingStateDidChange = { recordButton in
+            if recordButton.buttonState == .Recording {
+                self.videoRecorder?.record()
+                self.recordingStartTime = Date()
+                self.recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
+                    guard let startTime = self.recordingStartTime else { return }
+                    let duration = Date().timeIntervalSince(startTime)
+                    if duration >= self.maximumRecordingDuration {
+                        recordButton.buttonState = .Idle
+                    } else {
+                        recordButton.setProgress(newProgress: CGFloat(duration / self.maximumRecordingDuration))
+                    }
+                })
+            } else {
+                self.videoRecorder?.stop({ (url) in
+                    self.recordingTimer?.invalidate()
+                    self.recordingStartTime = nil
+                    self.recordingTimer = nil
+                    // send to preview
+                    let player = AVPlayer(url: url)
+                    let playerViewController = AVPlayerViewController()
+                    playerViewController.player = player
+                    self.present(playerViewController, animated: true, completion: nil)
+                })
+            }
+        }
+    }
 
     /// - Tag: StartARSession
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        guard ARWorldTrackingConfiguration.isSupported else {
-            fatalError("""
-                ARKit is not available on this device. For apps that require ARKit
-                for core functionality, use the `arkit` key in the key in the
-                `UIRequiredDeviceCapabilities` section of the Info.plist to prevent
-                the app from installing. (If the app can't be installed, this error
-                can't be triggered in a production scenario.)
-                In apps where AR is an additive feature, use `isSupported` to
-                determine whether to show UI for launching AR experiences.
-            """) // For details, see https://developer.apple.com/documentation/arkit
-        }
-
         // Start the view's AR session with a configuration that uses the rear camera,
         // device position and orientation tracking, and plane detection.
         let configuration = ARWorldTrackingConfiguration()
@@ -238,6 +240,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         guard let frame = session.currentFrame else { return }
+        needsHelpInfo = false
         updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
     }
 
@@ -270,60 +273,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 
     // MARK: - Private methods
-    private func addPositioningCube() {
-        
-        guard let cameraNode = sceneView.pointOfView else { return }
-        
-        let cube = SCNBox(width: 0.2, height: 0.2, length: 0.2, chamferRadius: 0.0)
-        let cubeNode = SCNNode(geometry: cube)
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor.gray
-        material.transparency = 0.5
-        cube.materials = [material]
-        cubeNode.name = "tracker"
-        cubeNode.position = SCNVector3Make(0, 0, -1.0)
-        
-        cameraNode.addChildNode(cubeNode)
-        
-        print("added tracker node")
-        
-    }
-    
-    private func removePositioningCube() {
-        if let trackerNode = sceneView.pointOfView?.childNode(withName: "tracker", recursively: false) {
-            trackerNode.removeFromParentNode()
-        }
-    }
-
     private func updateSessionInfoLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
         // Update the UI to provide feedback on the state of the AR experience.
-        let message: String
-        
-        removePositioningCube()
-        
+        var message: String = ""
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         switch trackingState {
-        case .normal where frame.anchors.isEmpty:
-            message = "Tap to Add Cubes"
-            // Add positioning cube
-            addPositioningCube()
-            
+        case .normal:
+            if needsHelpInfo {
+                message = "Drag and move."
+            }
+            self.activityIndicator.isHidden = true
         case .notAvailable:
             message = "Tracking unavailable."
-            
         case .limited(.excessiveMotion):
             message = "Tracking limited - Move the device more slowly."
-            
         case .limited(.insufficientFeatures):
             message = "Tracking limited - Point the device at an area with visible surface detail, or improve lighting conditions."
-            
         case .limited(.initializing):
-            message = "Initializing AR session."
-            
+            message = "Move camera left and right."
         default:
             // No feedback needed when tracking is normal and planes are visible.
             // (Nor when in unreachable limited-tracking states.)
             message = ""
-
         }
 
         sessionInfoLabel.text = message

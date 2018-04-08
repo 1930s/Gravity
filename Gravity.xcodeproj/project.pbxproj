@@ -59,7 +59,7 @@
 
 /* Begin PBXFileReference section */
 		112FE5661F4F95A200BF85EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		842316DC1F2030C300D189D1 /* Space Text.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Text.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		842316DC1F2030C300D189D1 /* Gravity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gravity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842316DF1F2030C300D189D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		842316E31F2030C300D189D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		842316E61F2030C300D189D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 				FA75FD4F2078036E008A4B42 /* InstagramActivityIndicator */,
 				FA75FD4C2077FFA6008A4B42 /* RecordButton */,
 				FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */,
-				842316DE1F2030C300D189D1 /* Space Text */,
+				842316DE1F2030C300D189D1 /* Gravity */,
 				842316DD1F2030C300D189D1 /* Products */,
 				FA75FD452077FC6A008A4B42 /* Frameworks */,
 			);
@@ -105,12 +105,12 @@
 		842316DD1F2030C300D189D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				842316DC1F2030C300D189D1 /* Space Text.app */,
+				842316DC1F2030C300D189D1 /* Gravity.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		842316DE1F2030C300D189D1 /* Space Text */ = {
+		842316DE1F2030C300D189D1 /* Gravity */ = {
 			isa = PBXGroup;
 			children = (
 				842316DF1F2030C300D189D1 /* AppDelegate.swift */,
@@ -125,7 +125,7 @@
 				84ABEA091F3D15E70052D547 /* Assets.scnassets */,
 				112FE5661F4F95A200BF85EA /* Assets.xcassets */,
 			);
-			path = "Space Text";
+			path = Gravity;
 			sourceTree = "<group>";
 		};
 		FA75FD402077FC46008A4B42 /* Products */ = {
@@ -189,9 +189,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		842316DB1F2030C300D189D1 /* Space Text */ = {
+		842316DB1F2030C300D189D1 /* Gravity */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 842316F01F2030C300D189D1 /* Build configuration list for PBXNativeTarget "Space Text" */;
+			buildConfigurationList = 842316F01F2030C300D189D1 /* Build configuration list for PBXNativeTarget "Gravity" */;
 			buildPhases = (
 				842316D81F2030C300D189D1 /* Sources */,
 				842316D91F2030C300D189D1 /* Frameworks */,
@@ -203,9 +203,9 @@
 			dependencies = (
 				FA75FD552078A664008A4B42 /* PBXTargetDependency */,
 			);
-			name = "Space Text";
+			name = Gravity;
 			productName = ARKitBasics;
-			productReference = 842316DC1F2030C300D189D1 /* Space Text.app */;
+			productReference = 842316DC1F2030C300D189D1 /* Gravity.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -223,7 +223,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 842316D71F2030C300D189D1 /* Build configuration list for PBXProject "Space Text" */;
+			buildConfigurationList = 842316D71F2030C300D189D1 /* Build configuration list for PBXProject "Gravity" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -242,7 +242,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				842316DB1F2030C300D189D1 /* Space Text */,
+				842316DB1F2030C300D189D1 /* Gravity */,
 			);
 		};
 /* End PBXProject section */
@@ -441,7 +441,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Space Text/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Space-Text";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Gravity";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -458,7 +458,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Space Text/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Space-Text";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Gravity";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -469,7 +469,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		842316D71F2030C300D189D1 /* Build configuration list for PBXProject "Space Text" */ = {
+		842316D71F2030C300D189D1 /* Build configuration list for PBXProject "Gravity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				842316EE1F2030C300D189D1 /* Debug */,
@@ -478,7 +478,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		842316F01F2030C300D189D1 /* Build configuration list for PBXNativeTarget "Space Text" */ = {
+		842316F01F2030C300D189D1 /* Build configuration list for PBXNativeTarget "Gravity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				842316F11F2030C300D189D1 /* Debug */,

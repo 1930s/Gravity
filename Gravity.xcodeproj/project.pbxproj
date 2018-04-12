@@ -13,6 +13,8 @@
 		842316E71F2030C300D189D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842316E51F2030C300D189D1 /* Main.storyboard */; };
 		842316EC1F2030C300D189D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842316EA1F2030C300D189D1 /* LaunchScreen.storyboard */; };
 		84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84ABEA091F3D15E70052D547 /* Assets.scnassets */; };
+		FA43458B207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43458A207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift */; };
+		FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43458C207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift */; };
 		FA75FD34207733EA008A4B42 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD33207733EA008A4B42 /* AppState.swift */; };
 		FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD3D20774484008A4B42 /* UserDefaults.swift */; };
 		FA75FD462077FC6A008A4B42 /* ARVideoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA75FD442077FC46008A4B42 /* ARVideoKit.framework */; };
@@ -66,6 +68,8 @@
 		842316EB1F2030C300D189D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842316ED1F2030C300D189D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84ABEA091F3D15E70052D547 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
+		FA43458A207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadowMotionEffects.swift"; sourceTree = "<group>"; };
+		FA43458C207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddParallaxMotionEffects.swift"; sourceTree = "<group>"; };
 		FA75FD33207733EA008A4B42 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		FA75FD3D20774484008A4B42 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ARVideoKit.xcodeproj; path = ARVideoKit/ARVideoKit.xcodeproj; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				842316E31F2030C300D189D1 /* ViewController.swift */,
+				FA43458A207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift */,
+				FA43458C207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift */,
 				FA75FD482077FE2F008A4B42 /* ViewController+RecordAR.swift */,
 				FA75FD572079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift */,
 			);
@@ -281,8 +287,10 @@
 				FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */,
 				FA75FD34207733EA008A4B42 /* AppState.swift in Sources */,
 				FA75FD492077FE2F008A4B42 /* ViewController+RecordAR.swift in Sources */,
+				FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */,
 				FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
+				FA43458B207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift in Sources */,
 				FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */,
 				FA75FD512078038B008A4B42 /* InstagramActivityIndicator.swift in Sources */,
 				FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */,
@@ -438,7 +446,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GZABHNF58X;
-				INFOPLIST_FILE = "$(SRCROOT)/Space Text/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Gravity/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Gravity";
@@ -455,7 +463,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GZABHNF58X;
-				INFOPLIST_FILE = "$(SRCROOT)/Space Text/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Gravity/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Gravity";

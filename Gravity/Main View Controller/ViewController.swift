@@ -37,9 +37,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var sessionInfoView: UIView!
     @IBOutlet weak var sessionInfoLabel: UILabel!
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var buttonsContainerView: UIView!
+    @IBOutlet weak var buttonsVisualEffectView: UIVisualEffectView!
+    @IBOutlet weak var undoButton: UIButton!
+    @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var recordButton: RecordButton!
+    @IBOutlet weak var objectButton: UIButton!
+    @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var activityIndicator: InstagramActivityIndicator!
     @IBOutlet weak var touchDownGestureRecognizer: UILongPressGestureRecognizer!
+    
     
     private var currentRibbonNode: SCNNode?
     private var currentRibbon: SCNRibbon?
@@ -91,6 +98,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let shadowView = self.buttonsContainerView
+        shadowView?.addShadowMotionEffects(intensity: 5.0, radius: 6.0)
+        shadowView?.addParallaxMotionEffects(intensity: 10.0)
+        let cornerRadiusView = self.buttonsVisualEffectView
+        cornerRadiusView?.layer.cornerRadius = 14.0
+        cornerRadiusView?.layer.masksToBounds = true
         recordButton.recordingStateDidChange = { recordButton in
             if recordButton.buttonState == .Recording {
                 self.videoRecorder?.record()

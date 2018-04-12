@@ -18,6 +18,8 @@ class SCNRibbon {
     private var textureCoord: [CGPoint] = []
     private var indices: [UInt32] = []
     private var index: UInt32 = 0
+    private var length: CGFloat = 0
+    // keep track of total length to calculate tex coordinates
     private var sources: [SCNGeometrySource] {
         get {
             let positionSource = SCNGeometrySource(vertices: vertexes)

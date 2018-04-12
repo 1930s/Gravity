@@ -395,6 +395,13 @@ extension SCNMatrix4
 		self = SCNMatrix4MakeScale(scale.x, scale.y, scale.z)
 	}
 	
+    public func position() -> SCNVector3 {
+        return SCNVector3(self.m41, self.m42, self.m43)
+    }
+    
+    public func orientation() -> SCNVector3 {
+        return SCNVector3(self.m31, self.m32, self.m33)
+    }
 	
 	// MARK: Invert
 	

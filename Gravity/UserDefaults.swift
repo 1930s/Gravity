@@ -10,6 +10,7 @@ import Foundation
 
 enum UserDefaultKeys: String {
     case currentObjectType
+    case lastUsedObject
     case recentlyUsedObjects
     case lastUsedTextAttributesForTypes
 }

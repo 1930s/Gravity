@@ -12,16 +12,11 @@ import ARKit
 import ARVideoKit
 import AVKit
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, TextInputViewControllerDelegate {
     
-    var state: AppState = AppState()
-    var currentObjectType: ObjectType {
-        get {
-            guard let type = ObjectType(rawValue: (UserDefaultsManager.value(for: .currentObjectType) as? Int) ?? 0) else { return .text(.twoDimensional) }
-            return type
-        }
-        set {
-            UserDefaultsManager.set(value: newValue.rawValue, for: .currentObjectType)
+    var state: AppState = AppState() {
+        didSet {
+            
         }
     }
     var maximumRecordingDuration: TimeInterval = 30.0
@@ -54,6 +49,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     private var displayLink: CADisplayLink?
     var didSet: Bool = false
     private var needsHelpInfo: Bool = true
+    
+    @IBAction func actionButtonPressed(sender: UIButton) {
+        switch state.currentObject.type {
+        case .text(let textType):
+            self.presentTextInputViewController()
+        }
+    }
+    
+    private func presentTextInputViewController() {
+        let textInputViewController = TextInputViewController(nibName: "TextInputViewController", bundle: nil)
+        textInputViewController.delegate = self
+        textInputViewController.modalPresentationStyle = .overCurrentContext
+        self.present(textInputViewController, animated: true, completion: nil)
+    }
+    
+    func textInput(didFinishWith text: String, font: UIFont, color: UIColor, backgroundColor: UIColor?) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
         switch sender.state {
@@ -98,6 +111,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let data = try? Data(contentsOf: FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data")) {
+            state = (try? PropertyListDecoder().decode(AppState.self, from: data)) ?? AppState()
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { (notification) in
+            do {
+                let data = try PropertyListEncoder().encode(self.state)
+                try data.write(to: FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data"))
+            } catch {
+                print(error)
+            }
+        }
         let shadowView = self.buttonsContainerView
         shadowView?.addShadowMotionEffects(intensity: 5.0, radius: 6.0)
         shadowView?.addParallaxMotionEffects(intensity: 10.0)

@@ -15,6 +15,10 @@
 		84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84ABEA091F3D15E70052D547 /* Assets.scnassets */; };
 		FA43458B207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43458A207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift */; };
 		FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43458C207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift */; };
+		FA434591207FF25A00339ACF /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43458F207FF25A00339ACF /* TextInputViewController.swift */; };
+		FA434592207FF25A00339ACF /* TextInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA434590207FF25A00339ACF /* TextInputViewController.xib */; };
+		FA43459A2080069200339ACF /* UIButton-BorderedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4345992080069200339ACF /* UIButton-BorderedStyle.swift */; };
+		FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43459B208095BB00339ACF /* UIVerticallyCenteredTextView.swift */; };
 		FA75FD34207733EA008A4B42 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD33207733EA008A4B42 /* AppState.swift */; };
 		FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD3D20774484008A4B42 /* UserDefaults.swift */; };
 		FA75FD462077FC6A008A4B42 /* ARVideoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA75FD442077FC46008A4B42 /* ARVideoKit.framework */; };
@@ -23,6 +27,38 @@
 		FA75FD512078038B008A4B42 /* InstagramActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD502078038B008A4B42 /* InstagramActivityIndicator.swift */; };
 		FA75FD532078A664008A4B42 /* ARVideoKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA75FD442077FC46008A4B42 /* ARVideoKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD572079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift */; };
+		FA75FD5E2082B5A0008A4B42 /* ArchivoBlack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD5D2082B5A0008A4B42 /* ArchivoBlack-Regular.ttf */; };
+		FA75FD622082B5D1008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD5F2082B5D0008A4B42 /* BowlbyOneSC-Regular.ttf */; };
+		FA75FD632082B5D1008A4B42 /* BungeeShade-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD602082B5D0008A4B42 /* BungeeShade-Regular.ttf */; };
+		FA75FD642082B5D1008A4B42 /* Butcherman-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD612082B5D1008A4B42 /* Butcherman-Regular.ttf */; };
+		FA75FD6B2082B5E4008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD652082B5E3008A4B42 /* BowlbyOneSC-Regular.ttf */; };
+		FA75FD6C2082B5E4008A4B42 /* BungeeShade-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD662082B5E3008A4B42 /* BungeeShade-Regular.ttf */; };
+		FA75FD6D2082B5E4008A4B42 /* Butcherman-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD672082B5E3008A4B42 /* Butcherman-Regular.ttf */; };
+		FA75FD6E2082B5E4008A4B42 /* Caveat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD682082B5E3008A4B42 /* Caveat-Regular.ttf */; };
+		FA75FD6F2082B5E4008A4B42 /* Creepster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD692082B5E3008A4B42 /* Creepster-Regular.ttf */; };
+		FA75FD702082B5E4008A4B42 /* CreteRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD6A2082B5E3008A4B42 /* CreteRound-Regular.ttf */; };
+		FA75FD872082B622008A4B42 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD712082B61F008A4B42 /* SpaceMono-Regular.ttf */; };
+		FA75FD882082B622008A4B42 /* LuckiestGuy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD722082B61F008A4B42 /* LuckiestGuy-Regular.ttf */; };
+		FA75FD892082B622008A4B42 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD732082B620008A4B42 /* Pacifico-Regular.ttf */; };
+		FA75FD8A2082B622008A4B42 /* PermanentMarker-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD742082B620008A4B42 /* PermanentMarker-Regular.ttf */; };
+		FA75FD8B2082B622008A4B42 /* LondrinaShadow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD752082B620008A4B42 /* LondrinaShadow-Regular.ttf */; };
+		FA75FD8C2082B622008A4B42 /* Diplomata-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD762082B620008A4B42 /* Diplomata-Regular.ttf */; };
+		FA75FD8D2082B622008A4B42 /* Righteous-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD772082B620008A4B42 /* Righteous-Regular.ttf */; };
+		FA75FD8E2082B622008A4B42 /* Knewave-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD782082B620008A4B42 /* Knewave-Regular.ttf */; };
+		FA75FD8F2082B622008A4B42 /* IndieFlower.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD792082B620008A4B42 /* IndieFlower.ttf */; };
+		FA75FD902082B622008A4B42 /* Ewert-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD7A2082B621008A4B42 /* Ewert-Regular.ttf */; };
+		FA75FD912082B622008A4B42 /* Yesteryear-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD7B2082B621008A4B42 /* Yesteryear-Regular.ttf */; };
+		FA75FD922082B622008A4B42 /* PlayfairDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD7C2082B621008A4B42 /* PlayfairDisplay-Regular.ttf */; };
+		FA75FD932082B622008A4B42 /* LondrinaSketch-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD7D2082B621008A4B42 /* LondrinaSketch-Regular.ttf */; };
+		FA75FD942082B622008A4B42 /* Molle-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD7E2082B621008A4B42 /* Molle-Regular.ttf */; };
+		FA75FD952082B622008A4B42 /* Sacramento-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD7F2082B621008A4B42 /* Sacramento-Regular.ttf */; };
+		FA75FD962082B622008A4B42 /* Monoton-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD802082B621008A4B42 /* Monoton-Regular.ttf */; };
+		FA75FD972082B622008A4B42 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD812082B622008A4B42 /* Quicksand-Regular.ttf */; };
+		FA75FD982082B622008A4B42 /* UnifrakturCook-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD822082B622008A4B42 /* UnifrakturCook-Bold.ttf */; };
+		FA75FD992082B622008A4B42 /* Ramabhadra-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD832082B622008A4B42 /* Ramabhadra-Regular.ttf */; };
+		FA75FD9A2082B622008A4B42 /* Shrikhand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD842082B622008A4B42 /* Shrikhand-Regular.ttf */; };
+		FA75FD9B2082B622008A4B42 /* MetalMania-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD852082B622008A4B42 /* MetalMania-Regular.ttf */; };
+		FA75FD9C2082B622008A4B42 /* FasterOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD862082B622008A4B42 /* FasterOne-Regular.ttf */; };
 		FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */; };
 		FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */; };
 		FAAAACAD2072C9AE00D3B84D /* PressStart2P-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */; };
@@ -70,6 +106,10 @@
 		84ABEA091F3D15E70052D547 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
 		FA43458A207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadowMotionEffects.swift"; sourceTree = "<group>"; };
 		FA43458C207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddParallaxMotionEffects.swift"; sourceTree = "<group>"; };
+		FA43458F207FF25A00339ACF /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
+		FA434590207FF25A00339ACF /* TextInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextInputViewController.xib; sourceTree = "<group>"; };
+		FA4345992080069200339ACF /* UIButton-BorderedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton-BorderedStyle.swift"; sourceTree = "<group>"; };
+		FA43459B208095BB00339ACF /* UIVerticallyCenteredTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVerticallyCenteredTextView.swift; sourceTree = "<group>"; };
 		FA75FD33207733EA008A4B42 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		FA75FD3D20774484008A4B42 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ARVideoKit.xcodeproj; path = ARVideoKit/ARVideoKit.xcodeproj; sourceTree = "<group>"; };
@@ -77,6 +117,38 @@
 		FA75FD4D2077FFBC008A4B42 /* RecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		FA75FD502078038B008A4B42 /* InstagramActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramActivityIndicator.swift; sourceTree = "<group>"; };
 		FA75FD572079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AVPlayerViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		FA75FD5D2082B5A0008A4B42 /* ArchivoBlack-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ArchivoBlack-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD5F2082B5D0008A4B42 /* BowlbyOneSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BowlbyOneSC-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD602082B5D0008A4B42 /* BungeeShade-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BungeeShade-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD612082B5D1008A4B42 /* Butcherman-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Butcherman-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD652082B5E3008A4B42 /* BowlbyOneSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BowlbyOneSC-Regular.ttf"; path = "../../../../Downloads/fonts/Bowlby_One_SC/BowlbyOneSC-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD662082B5E3008A4B42 /* BungeeShade-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BungeeShade-Regular.ttf"; path = "../../../../Downloads/fonts/Bungee_Shade/BungeeShade-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD672082B5E3008A4B42 /* Butcherman-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Butcherman-Regular.ttf"; path = "../../../../Downloads/fonts/Butcherman/Butcherman-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD682082B5E3008A4B42 /* Caveat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Caveat-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD692082B5E3008A4B42 /* Creepster-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Creepster-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD6A2082B5E3008A4B42 /* CreteRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CreteRound-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD712082B61F008A4B42 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD722082B61F008A4B42 /* LuckiestGuy-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LuckiestGuy-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD732082B620008A4B42 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD742082B620008A4B42 /* PermanentMarker-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PermanentMarker-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD752082B620008A4B42 /* LondrinaShadow-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LondrinaShadow-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD762082B620008A4B42 /* Diplomata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Diplomata-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD772082B620008A4B42 /* Righteous-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Righteous-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD782082B620008A4B42 /* Knewave-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Knewave-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD792082B620008A4B42 /* IndieFlower.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IndieFlower.ttf; sourceTree = "<group>"; };
+		FA75FD7A2082B621008A4B42 /* Ewert-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ewert-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD7B2082B621008A4B42 /* Yesteryear-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Yesteryear-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD7C2082B621008A4B42 /* PlayfairDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD7D2082B621008A4B42 /* LondrinaSketch-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LondrinaSketch-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD7E2082B621008A4B42 /* Molle-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Molle-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD7F2082B621008A4B42 /* Sacramento-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sacramento-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD802082B621008A4B42 /* Monoton-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Monoton-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD812082B622008A4B42 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD822082B622008A4B42 /* UnifrakturCook-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UnifrakturCook-Bold.ttf"; sourceTree = "<group>"; };
+		FA75FD832082B622008A4B42 /* Ramabhadra-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ramabhadra-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD842082B622008A4B42 /* Shrikhand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shrikhand-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD852082B622008A4B42 /* MetalMania-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MetalMania-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FD862082B622008A4B42 /* FasterOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FasterOne-Regular.ttf"; sourceTree = "<group>"; };
 		FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNMathExtensions.swift; sourceTree = "<group>"; };
 		FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNRibbon.swift; sourceTree = "<group>"; };
 		FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
@@ -121,6 +193,7 @@
 				FA75FD33207733EA008A4B42 /* AppState.swift */,
 				FA75FD3D20774484008A4B42 /* UserDefaults.swift */,
 				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
+				FA43458E207FEE9B00339ACF /* Text Input View Controller */,
 				FA75FD472077FE0F008A4B42 /* Main View Controller */,
 				FA75FD4B2077FEC1008A4B42 /* Fonts */,
 				842316E51F2030C300D189D1 /* Main.storyboard */,
@@ -130,6 +203,17 @@
 				112FE5661F4F95A200BF85EA /* Assets.xcassets */,
 			);
 			path = Gravity;
+			sourceTree = "<group>";
+		};
+		FA43458E207FEE9B00339ACF /* Text Input View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FA43458F207FF25A00339ACF /* TextInputViewController.swift */,
+				FA4345992080069200339ACF /* UIButton-BorderedStyle.swift */,
+				FA434590207FF25A00339ACF /* TextInputViewController.xib */,
+				FA43459B208095BB00339ACF /* UIVerticallyCenteredTextView.swift */,
+			);
+			path = "Text Input View Controller";
 			sourceTree = "<group>";
 		};
 		FA75FD402077FC46008A4B42 /* Products */ = {
@@ -171,7 +255,39 @@
 		FA75FD4B2077FEC1008A4B42 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FA75FD5D2082B5A0008A4B42 /* ArchivoBlack-Regular.ttf */,
 				FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */,
+				FA75FD652082B5E3008A4B42 /* BowlbyOneSC-Regular.ttf */,
+				FA75FD662082B5E3008A4B42 /* BungeeShade-Regular.ttf */,
+				FA75FD672082B5E3008A4B42 /* Butcherman-Regular.ttf */,
+				FA75FD762082B620008A4B42 /* Diplomata-Regular.ttf */,
+				FA75FD7A2082B621008A4B42 /* Ewert-Regular.ttf */,
+				FA75FD862082B622008A4B42 /* FasterOne-Regular.ttf */,
+				FA75FD792082B620008A4B42 /* IndieFlower.ttf */,
+				FA75FD782082B620008A4B42 /* Knewave-Regular.ttf */,
+				FA75FD752082B620008A4B42 /* LondrinaShadow-Regular.ttf */,
+				FA75FD7D2082B621008A4B42 /* LondrinaSketch-Regular.ttf */,
+				FA75FD722082B61F008A4B42 /* LuckiestGuy-Regular.ttf */,
+				FA75FD852082B622008A4B42 /* MetalMania-Regular.ttf */,
+				FA75FD7E2082B621008A4B42 /* Molle-Regular.ttf */,
+				FA75FD802082B621008A4B42 /* Monoton-Regular.ttf */,
+				FA75FD732082B620008A4B42 /* Pacifico-Regular.ttf */,
+				FA75FD742082B620008A4B42 /* PermanentMarker-Regular.ttf */,
+				FA75FD7C2082B621008A4B42 /* PlayfairDisplay-Regular.ttf */,
+				FA75FD812082B622008A4B42 /* Quicksand-Regular.ttf */,
+				FA75FD832082B622008A4B42 /* Ramabhadra-Regular.ttf */,
+				FA75FD772082B620008A4B42 /* Righteous-Regular.ttf */,
+				FA75FD7F2082B621008A4B42 /* Sacramento-Regular.ttf */,
+				FA75FD842082B622008A4B42 /* Shrikhand-Regular.ttf */,
+				FA75FD712082B61F008A4B42 /* SpaceMono-Regular.ttf */,
+				FA75FD822082B622008A4B42 /* UnifrakturCook-Bold.ttf */,
+				FA75FD7B2082B621008A4B42 /* Yesteryear-Regular.ttf */,
+				FA75FD682082B5E3008A4B42 /* Caveat-Regular.ttf */,
+				FA75FD692082B5E3008A4B42 /* Creepster-Regular.ttf */,
+				FA75FD6A2082B5E3008A4B42 /* CreteRound-Regular.ttf */,
+				FA75FD5F2082B5D0008A4B42 /* BowlbyOneSC-Regular.ttf */,
+				FA75FD602082B5D0008A4B42 /* BungeeShade-Regular.ttf */,
+				FA75FD612082B5D1008A4B42 /* Butcherman-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -268,10 +384,43 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA75FD932082B622008A4B42 /* LondrinaSketch-Regular.ttf in Resources */,
 				84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */,
+				FA75FD622082B5D1008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */,
+				FA75FD872082B622008A4B42 /* SpaceMono-Regular.ttf in Resources */,
+				FA75FD972082B622008A4B42 /* Quicksand-Regular.ttf in Resources */,
+				FA75FD6F2082B5E4008A4B42 /* Creepster-Regular.ttf in Resources */,
+				FA75FD982082B622008A4B42 /* UnifrakturCook-Bold.ttf in Resources */,
 				FAAAACAD2072C9AE00D3B84D /* PressStart2P-Regular.ttf in Resources */,
+				FA434592207FF25A00339ACF /* TextInputViewController.xib in Resources */,
+				FA75FD5E2082B5A0008A4B42 /* ArchivoBlack-Regular.ttf in Resources */,
+				FA75FD8B2082B622008A4B42 /* LondrinaShadow-Regular.ttf in Resources */,
+				FA75FD922082B622008A4B42 /* PlayfairDisplay-Regular.ttf in Resources */,
 				842316EC1F2030C300D189D1 /* LaunchScreen.storyboard in Resources */,
+				FA75FD8C2082B622008A4B42 /* Diplomata-Regular.ttf in Resources */,
+				FA75FD8F2082B622008A4B42 /* IndieFlower.ttf in Resources */,
+				FA75FD632082B5D1008A4B42 /* BungeeShade-Regular.ttf in Resources */,
+				FA75FD6E2082B5E4008A4B42 /* Caveat-Regular.ttf in Resources */,
+				FA75FD6B2082B5E4008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */,
+				FA75FD992082B622008A4B42 /* Ramabhadra-Regular.ttf in Resources */,
+				FA75FD882082B622008A4B42 /* LuckiestGuy-Regular.ttf in Resources */,
+				FA75FD902082B622008A4B42 /* Ewert-Regular.ttf in Resources */,
+				FA75FD952082B622008A4B42 /* Sacramento-Regular.ttf in Resources */,
 				112FE5671F4F95A200BF85EA /* Assets.xcassets in Resources */,
+				FA75FD942082B622008A4B42 /* Molle-Regular.ttf in Resources */,
+				FA75FD8E2082B622008A4B42 /* Knewave-Regular.ttf in Resources */,
+				FA75FD6C2082B5E4008A4B42 /* BungeeShade-Regular.ttf in Resources */,
+				FA75FD702082B5E4008A4B42 /* CreteRound-Regular.ttf in Resources */,
+				FA75FD9C2082B622008A4B42 /* FasterOne-Regular.ttf in Resources */,
+				FA75FD962082B622008A4B42 /* Monoton-Regular.ttf in Resources */,
+				FA75FD9A2082B622008A4B42 /* Shrikhand-Regular.ttf in Resources */,
+				FA75FD642082B5D1008A4B42 /* Butcherman-Regular.ttf in Resources */,
+				FA75FD892082B622008A4B42 /* Pacifico-Regular.ttf in Resources */,
+				FA75FD6D2082B5E4008A4B42 /* Butcherman-Regular.ttf in Resources */,
+				FA75FD912082B622008A4B42 /* Yesteryear-Regular.ttf in Resources */,
+				FA75FD9B2082B622008A4B42 /* MetalMania-Regular.ttf in Resources */,
+				FA75FD8D2082B622008A4B42 /* Righteous-Regular.ttf in Resources */,
+				FA75FD8A2082B622008A4B42 /* PermanentMarker-Regular.ttf in Resources */,
 				842316E71F2030C300D189D1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,9 +432,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA434591207FF25A00339ACF /* TextInputViewController.swift in Sources */,
 				FA75FD4E2077FFBC008A4B42 /* RecordButton.swift in Sources */,
 				FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */,
 				FA75FD34207733EA008A4B42 /* AppState.swift in Sources */,
+				FA43459A2080069200339ACF /* UIButton-BorderedStyle.swift in Sources */,
+				FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */,
 				FA75FD492077FE2F008A4B42 /* ViewController+RecordAR.swift in Sources */,
 				FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */,
 				FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */,

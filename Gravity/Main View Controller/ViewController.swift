@@ -164,6 +164,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             // send to preview
             let previewViewController = VideoPreviewViewController(fileURL: url)
             DispatchQueue.main.async {
+                previewViewController.modalPresentationStyle = .overCurrentContext
                 self.present(previewViewController, animated: true, completion: nil)
             }
         })
@@ -188,6 +189,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         
         // Show debug UI to view performance metrics (e.g. frames per second).
         //sceneView.showsStatistics = true
+        self.videoRecorder?.record(forDuration: 3.0)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

@@ -14,33 +14,34 @@ protocol TextInputViewControllerDelegate {
     func textInput(didFinishWith text: String, font: UIFont, color: UIColor, backgroundColor: UIColor?)
 }
 
-class TextInputViewController: UIViewController {
+class TextInputViewController: UIViewController, UITextViewDelegate {
     
     var font: UIFont {
-        if let textAttributes = object?.textAttributes {
+        if let textAttributes = object.textAttributes {
             return UIFont(name: textAttributes.fontName ?? fontNames.first!, size: textAttributes.fontSize ?? 30.0)!
         }
         return UIFont(name: fontNames.first!, size: 30.0)!
     }
     var textColor: UIColor {
-        if let textAttributes = object?.textAttributes {
+        if let textAttributes = object.textAttributes {
             return textAttributes.textColor ?? UIColor.white
         }
         return UIColor.white
     }
     var backgroundColor: UIColor {
-        return object?.backgroundColor ?? UIColor.clear
+        return object.backgroundColor ?? UIColor.clear
     }
     var text: String = "Hello World" {
         didSet {
             textView.font = font
             textView.textColor = textColor
             textView.text = text
+            fontButton.setTitle(font.familyName, for: .normal)
         }
     }
-    var object: Object? {
+    var object: Object {
         didSet {
-            text = object?.text ?? "Hello World"
+            text = object.text ?? "Hello World"
         }
     }
 
@@ -54,7 +55,15 @@ class TextInputViewController: UIViewController {
     @IBOutlet weak var textViewBottomLayoutConstraint: NSLayoutConstraint!
     
     var delegate: TextInputViewControllerDelegate?
-    private var fontNames: [String] = ["PressStart2P-Regular"]
+    
+    init(object: Object) {
+        self.object = object
+        super.init(nibName: "TextInputViewController", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +74,8 @@ class TextInputViewController: UIViewController {
             self.textViewBottomLayoutConstraint.constant = keyboardFrame.height
         }
         navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.text = "Hello World"
+        let object = self.object
+        self.object = object
         textView.becomeFirstResponder()
     }
     
@@ -86,11 +96,27 @@ class TextInputViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Actions
+    
     @IBAction func didPressDone(sender: Any) {
         delegate?.textInput(didFinishWith: textView.text, font: font, color: textColor, backgroundColor: backgroundColor)
     }
     
-
+    @IBAction func fontButtonPressed(sender: Any) {
+        let fontName = font.fontName
+        if let index = fontNames.index(of: fontName) {
+            let newIndex = (index == fontNames.count-1) ? 0 : index+1
+            object.textAttributes?.fontName = fontNames[newIndex]
+        } else {
+            object.textAttributes?.fontName = fontNames[0]
+        }
+    }
+    
+    // MARK: UITextViewDelegate
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return textView.text.count + (text.count - range.length) <= 140
+    }
+    
     /*
     // MARK: - Navigation
 

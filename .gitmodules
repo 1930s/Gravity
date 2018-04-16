@@ -1,3 +1,6 @@
 [submodule "ARVideoKit"]
 	path = ARVideoKit
 	url = https://github.com/AFathi/ARVideoKit
+[submodule "FontBlaster"]
+	path = FontBlaster
+	url = https://github.com/ArtSabintsev/FontBlaster

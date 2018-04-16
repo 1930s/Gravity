@@ -11,9 +11,8 @@ import ARKit
 
 struct AppState: Codable {
     var objects: [Object] = []
-    var currentObject: Object = Object(type: .text(.twoDimensional))
+    var currentObject: Object = Object(type: .text(.ribbon))
     var recentObjects: [Object] = []
-    
     enum CodingKeys: String, CodingKey {
         case currentObject
         case recentObjects
@@ -88,6 +87,18 @@ struct Object: Codable, Hashable {
         if let color = backgroundColor {
             try container.encode(NSKeyedArchiver.archivedData(withRootObject: color), forKey: .backgroundColor)
         }
+    }
+    
+    func fontName() -> String {
+        return textAttributes?.fontName ?? fontNames[0]
+    }
+    
+    func getText() -> String {
+        return text ?? "Hello World"
+    }
+    
+    func fontSize() -> CGFloat {
+        return textAttributes?.fontSize ?? 30.0
     }
 }
 

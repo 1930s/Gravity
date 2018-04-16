@@ -19,21 +19,17 @@
 		FA434592207FF25A00339ACF /* TextInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA434590207FF25A00339ACF /* TextInputViewController.xib */; };
 		FA43459A2080069200339ACF /* UIButton-BorderedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4345992080069200339ACF /* UIButton-BorderedStyle.swift */; };
 		FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43459B208095BB00339ACF /* UIVerticallyCenteredTextView.swift */; };
+		FA4E99322084673700C3E9AA /* VideoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E99302084673700C3E9AA /* VideoPreviewViewController.swift */; };
+		FA4E99332084673700C3E9AA /* VideoPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */; };
+		FA4E9935208473DC00C3E9AA /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */; };
+		FA6FFB462085306600332394 /* ARVideoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6FFB452085304100332394 /* ARVideoKit.framework */; };
+		FA6FFB472085306600332394 /* ARVideoKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA6FFB452085304100332394 /* ARVideoKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA75FD34207733EA008A4B42 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD33207733EA008A4B42 /* AppState.swift */; };
 		FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD3D20774484008A4B42 /* UserDefaults.swift */; };
-		FA75FD462077FC6A008A4B42 /* ARVideoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA75FD442077FC46008A4B42 /* ARVideoKit.framework */; };
-		FA75FD492077FE2F008A4B42 /* ViewController+RecordAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD482077FE2F008A4B42 /* ViewController+RecordAR.swift */; };
 		FA75FD4E2077FFBC008A4B42 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD4D2077FFBC008A4B42 /* RecordButton.swift */; };
 		FA75FD512078038B008A4B42 /* InstagramActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD502078038B008A4B42 /* InstagramActivityIndicator.swift */; };
-		FA75FD532078A664008A4B42 /* ARVideoKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA75FD442077FC46008A4B42 /* ARVideoKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD572079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift */; };
 		FA75FD5E2082B5A0008A4B42 /* ArchivoBlack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD5D2082B5A0008A4B42 /* ArchivoBlack-Regular.ttf */; };
-		FA75FD622082B5D1008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD5F2082B5D0008A4B42 /* BowlbyOneSC-Regular.ttf */; };
-		FA75FD632082B5D1008A4B42 /* BungeeShade-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD602082B5D0008A4B42 /* BungeeShade-Regular.ttf */; };
-		FA75FD642082B5D1008A4B42 /* Butcherman-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD612082B5D1008A4B42 /* Butcherman-Regular.ttf */; };
-		FA75FD6B2082B5E4008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD652082B5E3008A4B42 /* BowlbyOneSC-Regular.ttf */; };
-		FA75FD6C2082B5E4008A4B42 /* BungeeShade-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD662082B5E3008A4B42 /* BungeeShade-Regular.ttf */; };
-		FA75FD6D2082B5E4008A4B42 /* Butcherman-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD672082B5E3008A4B42 /* Butcherman-Regular.ttf */; };
 		FA75FD6E2082B5E4008A4B42 /* Caveat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD682082B5E3008A4B42 /* Caveat-Regular.ttf */; };
 		FA75FD6F2082B5E4008A4B42 /* Creepster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD692082B5E3008A4B42 /* Creepster-Regular.ttf */; };
 		FA75FD702082B5E4008A4B42 /* CreteRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD6A2082B5E3008A4B42 /* CreteRound-Regular.ttf */; };
@@ -59,22 +55,27 @@
 		FA75FD9A2082B622008A4B42 /* Shrikhand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD842082B622008A4B42 /* Shrikhand-Regular.ttf */; };
 		FA75FD9B2082B622008A4B42 /* MetalMania-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD852082B622008A4B42 /* MetalMania-Regular.ttf */; };
 		FA75FD9C2082B622008A4B42 /* FasterOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FD862082B622008A4B42 /* FasterOne-Regular.ttf */; };
+		FA75FE152082B89F008A4B42 /* FontBlaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FDCF2082B89E008A4B42 /* FontBlaster.swift */; };
+		FA75FE2D2082BA02008A4B42 /* BungeeShade-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FE2A2082BA02008A4B42 /* BungeeShade-Regular.ttf */; };
+		FA75FE2E2082BA02008A4B42 /* Butcherman-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FE2B2082BA02008A4B42 /* Butcherman-Regular.ttf */; };
+		FA75FE2F2082BA02008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA75FE2C2082BA02008A4B42 /* BowlbyOneSC-Regular.ttf */; };
 		FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */; };
 		FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */; };
+		FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80F2E9208358F200AA7698 /* CircularButtonView.swift */; };
 		FAAAACAD2072C9AE00D3B84D /* PressStart2P-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FA75FD432077FC46008A4B42 /* PBXContainerItemProxy */ = {
+		FA6FFB442085304100332394 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */;
+			containerPortal = FA6FFB402085304000332394 /* ARVideoKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = FBD604DA1FA969DD00EC9804;
 			remoteInfo = ARVideoKit;
 		};
-		FA75FD542078A664008A4B42 /* PBXContainerItemProxy */ = {
+		FA6FFB482085306600332394 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */;
+			containerPortal = FA6FFB402085304000332394 /* ARVideoKit.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = FBD604D91FA969DD00EC9804;
 			remoteInfo = ARVideoKit;
@@ -88,7 +89,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FA75FD532078A664008A4B42 /* ARVideoKit.framework in Embed Frameworks */,
+				FA6FFB472085306600332394 /* ARVideoKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,10 +111,13 @@
 		FA434590207FF25A00339ACF /* TextInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextInputViewController.xib; sourceTree = "<group>"; };
 		FA4345992080069200339ACF /* UIButton-BorderedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton-BorderedStyle.swift"; sourceTree = "<group>"; };
 		FA43459B208095BB00339ACF /* UIVerticallyCenteredTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVerticallyCenteredTextView.swift; sourceTree = "<group>"; };
+		FA4E99302084673700C3E9AA /* VideoPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewViewController.swift; sourceTree = "<group>"; };
+		FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPreviewViewController.xib; sourceTree = "<group>"; };
+		FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
+		FA5EA2FC2084919B00C10A9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FA6FFB402085304000332394 /* ARVideoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ARVideoKit.xcodeproj; path = ARVideoKit/ARVideoKit.xcodeproj; sourceTree = "<group>"; };
 		FA75FD33207733EA008A4B42 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		FA75FD3D20774484008A4B42 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
-		FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ARVideoKit.xcodeproj; path = ARVideoKit/ARVideoKit.xcodeproj; sourceTree = "<group>"; };
-		FA75FD482077FE2F008A4B42 /* ViewController+RecordAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+RecordAR.swift"; sourceTree = "<group>"; };
 		FA75FD4D2077FFBC008A4B42 /* RecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		FA75FD502078038B008A4B42 /* InstagramActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramActivityIndicator.swift; sourceTree = "<group>"; };
 		FA75FD572079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AVPlayerViewControllerDelegate.swift"; sourceTree = "<group>"; };
@@ -121,9 +125,6 @@
 		FA75FD5F2082B5D0008A4B42 /* BowlbyOneSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BowlbyOneSC-Regular.ttf"; sourceTree = "<group>"; };
 		FA75FD602082B5D0008A4B42 /* BungeeShade-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BungeeShade-Regular.ttf"; sourceTree = "<group>"; };
 		FA75FD612082B5D1008A4B42 /* Butcherman-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Butcherman-Regular.ttf"; sourceTree = "<group>"; };
-		FA75FD652082B5E3008A4B42 /* BowlbyOneSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BowlbyOneSC-Regular.ttf"; path = "../../../../Downloads/fonts/Bowlby_One_SC/BowlbyOneSC-Regular.ttf"; sourceTree = "<group>"; };
-		FA75FD662082B5E3008A4B42 /* BungeeShade-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BungeeShade-Regular.ttf"; path = "../../../../Downloads/fonts/Bungee_Shade/BungeeShade-Regular.ttf"; sourceTree = "<group>"; };
-		FA75FD672082B5E3008A4B42 /* Butcherman-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Butcherman-Regular.ttf"; path = "../../../../Downloads/fonts/Butcherman/Butcherman-Regular.ttf"; sourceTree = "<group>"; };
 		FA75FD682082B5E3008A4B42 /* Caveat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Caveat-Regular.ttf"; sourceTree = "<group>"; };
 		FA75FD692082B5E3008A4B42 /* Creepster-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Creepster-Regular.ttf"; sourceTree = "<group>"; };
 		FA75FD6A2082B5E3008A4B42 /* CreteRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CreteRound-Regular.ttf"; sourceTree = "<group>"; };
@@ -149,8 +150,13 @@
 		FA75FD842082B622008A4B42 /* Shrikhand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shrikhand-Regular.ttf"; sourceTree = "<group>"; };
 		FA75FD852082B622008A4B42 /* MetalMania-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MetalMania-Regular.ttf"; sourceTree = "<group>"; };
 		FA75FD862082B622008A4B42 /* FasterOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FasterOne-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FDCF2082B89E008A4B42 /* FontBlaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontBlaster.swift; sourceTree = "<group>"; };
+		FA75FE2A2082BA02008A4B42 /* BungeeShade-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BungeeShade-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FE2B2082BA02008A4B42 /* Butcherman-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Butcherman-Regular.ttf"; sourceTree = "<group>"; };
+		FA75FE2C2082BA02008A4B42 /* BowlbyOneSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BowlbyOneSC-Regular.ttf"; sourceTree = "<group>"; };
 		FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNMathExtensions.swift; sourceTree = "<group>"; };
 		FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNRibbon.swift; sourceTree = "<group>"; };
+		FA80F2E9208358F200AA7698 /* CircularButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButtonView.swift; sourceTree = "<group>"; };
 		FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,7 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA75FD462077FC6A008A4B42 /* ARVideoKit.framework in Frameworks */,
+				FA6FFB462085306600332394 /* ARVideoKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,9 +175,10 @@
 		842316D31F2030C300D189D1 = {
 			isa = PBXGroup;
 			children = (
+				FA6FFB402085304000332394 /* ARVideoKit.xcodeproj */,
+				FA75FD9E2082B89E008A4B42 /* FontBlaster */,
 				FA75FD4F2078036E008A4B42 /* InstagramActivityIndicator */,
 				FA75FD4C2077FFA6008A4B42 /* RecordButton */,
-				FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */,
 				842316DE1F2030C300D189D1 /* Gravity */,
 				842316DD1F2030C300D189D1 /* Products */,
 				FA75FD452077FC6A008A4B42 /* Frameworks */,
@@ -194,6 +201,7 @@
 				FA75FD3D20774484008A4B42 /* UserDefaults.swift */,
 				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
 				FA43458E207FEE9B00339ACF /* Text Input View Controller */,
+				FA75FE302083574C008A4B42 /* Video Player View Controller */,
 				FA75FD472077FE0F008A4B42 /* Main View Controller */,
 				FA75FD4B2077FEC1008A4B42 /* Fonts */,
 				842316E51F2030C300D189D1 /* Main.storyboard */,
@@ -216,10 +224,10 @@
 			path = "Text Input View Controller";
 			sourceTree = "<group>";
 		};
-		FA75FD402077FC46008A4B42 /* Products */ = {
+		FA6FFB412085304000332394 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FA75FD442077FC46008A4B42 /* ARVideoKit.framework */,
+				FA6FFB452085304100332394 /* ARVideoKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +235,7 @@
 		FA75FD452077FC6A008A4B42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA5EA2FC2084919B00C10A9A /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -237,7 +246,6 @@
 				842316E31F2030C300D189D1 /* ViewController.swift */,
 				FA43458A207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift */,
 				FA43458C207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift */,
-				FA75FD482077FE2F008A4B42 /* ViewController+RecordAR.swift */,
 				FA75FD572079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift */,
 			);
 			path = "Main View Controller";
@@ -256,10 +264,9 @@
 			isa = PBXGroup;
 			children = (
 				FA75FD5D2082B5A0008A4B42 /* ArchivoBlack-Regular.ttf */,
-				FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */,
-				FA75FD652082B5E3008A4B42 /* BowlbyOneSC-Regular.ttf */,
-				FA75FD662082B5E3008A4B42 /* BungeeShade-Regular.ttf */,
-				FA75FD672082B5E3008A4B42 /* Butcherman-Regular.ttf */,
+				FA75FE2C2082BA02008A4B42 /* BowlbyOneSC-Regular.ttf */,
+				FA75FE2A2082BA02008A4B42 /* BungeeShade-Regular.ttf */,
+				FA75FE2B2082BA02008A4B42 /* Butcherman-Regular.ttf */,
 				FA75FD762082B620008A4B42 /* Diplomata-Regular.ttf */,
 				FA75FD7A2082B621008A4B42 /* Ewert-Regular.ttf */,
 				FA75FD862082B622008A4B42 /* FasterOne-Regular.ttf */,
@@ -274,6 +281,7 @@
 				FA75FD732082B620008A4B42 /* Pacifico-Regular.ttf */,
 				FA75FD742082B620008A4B42 /* PermanentMarker-Regular.ttf */,
 				FA75FD7C2082B621008A4B42 /* PlayfairDisplay-Regular.ttf */,
+				FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */,
 				FA75FD812082B622008A4B42 /* Quicksand-Regular.ttf */,
 				FA75FD832082B622008A4B42 /* Ramabhadra-Regular.ttf */,
 				FA75FD772082B620008A4B42 /* Righteous-Regular.ttf */,
@@ -308,6 +316,33 @@
 			path = InstagramActivityIndicator;
 			sourceTree = "<group>";
 		};
+		FA75FD9E2082B89E008A4B42 /* FontBlaster */ = {
+			isa = PBXGroup;
+			children = (
+				FA75FDCE2082B89E008A4B42 /* Sources */,
+			);
+			path = FontBlaster;
+			sourceTree = "<group>";
+		};
+		FA75FDCE2082B89E008A4B42 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				FA75FDCF2082B89E008A4B42 /* FontBlaster.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		FA75FE302083574C008A4B42 /* Video Player View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FA4E99302084673700C3E9AA /* VideoPreviewViewController.swift */,
+				FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */,
+				FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */,
+				FA80F2E9208358F200AA7698 /* CircularButtonView.swift */,
+			);
+			path = "Video Player View Controller";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -323,7 +358,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				FA75FD552078A664008A4B42 /* PBXTargetDependency */,
+				FA6FFB492085306600332394 /* PBXTargetDependency */,
 			);
 			name = Gravity;
 			productName = ARKitBasics;
@@ -358,8 +393,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = FA75FD402077FC46008A4B42 /* Products */;
-					ProjectRef = FA75FD3F2077FC46008A4B42 /* ARVideoKit.xcodeproj */;
+					ProductGroup = FA6FFB412085304000332394 /* Products */;
+					ProjectRef = FA6FFB402085304000332394 /* ARVideoKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -370,11 +405,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		FA75FD442077FC46008A4B42 /* ARVideoKit.framework */ = {
+		FA6FFB452085304100332394 /* ARVideoKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ARVideoKit.framework;
-			remoteRef = FA75FD432077FC46008A4B42 /* PBXContainerItemProxy */;
+			remoteRef = FA6FFB442085304100332394 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -386,7 +421,6 @@
 			files = (
 				FA75FD932082B622008A4B42 /* LondrinaSketch-Regular.ttf in Resources */,
 				84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */,
-				FA75FD622082B5D1008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */,
 				FA75FD872082B622008A4B42 /* SpaceMono-Regular.ttf in Resources */,
 				FA75FD972082B622008A4B42 /* Quicksand-Regular.ttf in Resources */,
 				FA75FD6F2082B5E4008A4B42 /* Creepster-Regular.ttf in Resources */,
@@ -399,29 +433,28 @@
 				842316EC1F2030C300D189D1 /* LaunchScreen.storyboard in Resources */,
 				FA75FD8C2082B622008A4B42 /* Diplomata-Regular.ttf in Resources */,
 				FA75FD8F2082B622008A4B42 /* IndieFlower.ttf in Resources */,
-				FA75FD632082B5D1008A4B42 /* BungeeShade-Regular.ttf in Resources */,
 				FA75FD6E2082B5E4008A4B42 /* Caveat-Regular.ttf in Resources */,
-				FA75FD6B2082B5E4008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */,
+				FA75FE2F2082BA02008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */,
 				FA75FD992082B622008A4B42 /* Ramabhadra-Regular.ttf in Resources */,
 				FA75FD882082B622008A4B42 /* LuckiestGuy-Regular.ttf in Resources */,
 				FA75FD902082B622008A4B42 /* Ewert-Regular.ttf in Resources */,
 				FA75FD952082B622008A4B42 /* Sacramento-Regular.ttf in Resources */,
 				112FE5671F4F95A200BF85EA /* Assets.xcassets in Resources */,
 				FA75FD942082B622008A4B42 /* Molle-Regular.ttf in Resources */,
+				FA75FE2D2082BA02008A4B42 /* BungeeShade-Regular.ttf in Resources */,
 				FA75FD8E2082B622008A4B42 /* Knewave-Regular.ttf in Resources */,
-				FA75FD6C2082B5E4008A4B42 /* BungeeShade-Regular.ttf in Resources */,
 				FA75FD702082B5E4008A4B42 /* CreteRound-Regular.ttf in Resources */,
 				FA75FD9C2082B622008A4B42 /* FasterOne-Regular.ttf in Resources */,
 				FA75FD962082B622008A4B42 /* Monoton-Regular.ttf in Resources */,
+				FA75FE2E2082BA02008A4B42 /* Butcherman-Regular.ttf in Resources */,
 				FA75FD9A2082B622008A4B42 /* Shrikhand-Regular.ttf in Resources */,
-				FA75FD642082B5D1008A4B42 /* Butcherman-Regular.ttf in Resources */,
 				FA75FD892082B622008A4B42 /* Pacifico-Regular.ttf in Resources */,
-				FA75FD6D2082B5E4008A4B42 /* Butcherman-Regular.ttf in Resources */,
 				FA75FD912082B622008A4B42 /* Yesteryear-Regular.ttf in Resources */,
 				FA75FD9B2082B622008A4B42 /* MetalMania-Regular.ttf in Resources */,
 				FA75FD8D2082B622008A4B42 /* Righteous-Regular.ttf in Resources */,
 				FA75FD8A2082B622008A4B42 /* PermanentMarker-Regular.ttf in Resources */,
 				842316E71F2030C300D189D1 /* Main.storyboard in Resources */,
+				FA4E99332084673700C3E9AA /* VideoPreviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,18 +467,21 @@
 			files = (
 				FA434591207FF25A00339ACF /* TextInputViewController.swift in Sources */,
 				FA75FD4E2077FFBC008A4B42 /* RecordButton.swift in Sources */,
+				FA4E99322084673700C3E9AA /* VideoPreviewViewController.swift in Sources */,
 				FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */,
 				FA75FD34207733EA008A4B42 /* AppState.swift in Sources */,
 				FA43459A2080069200339ACF /* UIButton-BorderedStyle.swift in Sources */,
 				FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */,
-				FA75FD492077FE2F008A4B42 /* ViewController+RecordAR.swift in Sources */,
 				FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */,
+				FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */,
 				FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
 				FA43458B207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift in Sources */,
 				FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */,
 				FA75FD512078038B008A4B42 /* InstagramActivityIndicator.swift in Sources */,
 				FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */,
+				FA75FE152082B89F008A4B42 /* FontBlaster.swift in Sources */,
+				FA4E9935208473DC00C3E9AA /* AVPlayerView.swift in Sources */,
 				842316E01F2030C300D189D1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,10 +489,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FA75FD552078A664008A4B42 /* PBXTargetDependency */ = {
+		FA6FFB492085306600332394 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ARVideoKit;
-			targetProxy = FA75FD542078A664008A4B42 /* PBXContainerItemProxy */;
+			targetProxy = FA6FFB482085306600332394 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -586,7 +622,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};

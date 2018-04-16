@@ -49,8 +49,18 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qtj-CK-hQ2" customClass="UIVerticallyCenteredTextView" customModule="Gravity" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="IS6-97-6Ne"/>
+                    </connections>
+                </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VyM-d4-0eW" customClass="BorderedButton" customModule="Gravity" customModuleProvider="target">
-                    <rect key="frame" x="143.5" y="27" width="87" height="30"/>
+                    <rect key="frame" x="144" y="27" width="87" height="30"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <inset key="contentEdgeInsets" minX="12" minY="4" maxX="12" maxY="4"/>
                     <state key="normal" title="Classic"/>
@@ -62,14 +72,10 @@
                             <real key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="fontButtonPressedWithSender:" destination="-1" eventType="touchUpInside" id="P3y-qf-ez6"/>
+                    </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qtj-CK-hQ2" customClass="UIVerticallyCenteredTextView" customModule="Gravity" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
             </subviews>
             <color key="backgroundColor" red="0.074258814069999998" green="0.074258814069999998" blue="0.074258814069999998" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
             <constraints>

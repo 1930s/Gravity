@@ -24,6 +24,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This application will use the camera for Augmented Reality.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save created videos to your library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Import photos from your library.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Capture microphone audio when recording videos.</string>
 	<key>UIAppFonts</key>

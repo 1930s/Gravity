@@ -22,11 +22,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     var maximumRecordingDuration: TimeInterval = 30.0
     private var recordingTimer: Timer?
     private var recordingStartTime: Date?
-    private lazy var videoRecorder: RecordAR? = {
-        let recordAr = RecordAR(ARSceneKit: sceneView)
-        recordAr?.delegate = self
-        return recordAr
-    }()
+    private var videoRecorder: RecordAR?
     
     // MARK: - IBOutlets
     @IBOutlet weak var sessionInfoView: UIView!
@@ -58,7 +54,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
     
     private func presentTextInputViewController() {
-        let textInputViewController = TextInputViewController(nibName: "TextInputViewController", bundle: nil)
+        let textInputViewController = TextInputViewController(object: state.currentObject)
         textInputViewController.delegate = self
         textInputViewController.modalPresentationStyle = .overCurrentContext
         self.present(textInputViewController, animated: true, completion: nil)
@@ -66,6 +62,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     
     func textInput(didFinishWith text: String, font: UIFont, color: UIColor, backgroundColor: UIColor?) {
         self.dismiss(animated: true, completion: nil)
+        state.currentObject.text = text
+        state.currentObject.textAttributes?.fontName = font.fontName
+        state.currentObject.textAttributes?.fontSize = font.pointSize
+        state.currentObject.textAttributes?.textColor = color
+        state.currentObject.backgroundColor = backgroundColor
     }
     
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
@@ -111,6 +112,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Load state
         if let data = try? Data(contentsOf: FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data")) {
             state = (try? PropertyListDecoder().decode(AppState.self, from: data)) ?? AppState()
         }
@@ -122,6 +124,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
                 print(error)
             }
         }
+        // Video recording
+        videoRecorder = RecordAR(ARSceneKit: sceneView)
+        // Set up UI
         let shadowView = self.buttonsContainerView
         shadowView?.addShadowMotionEffects(intensity: 5.0, radius: 6.0)
         shadowView?.addParallaxMotionEffects(intensity: 10.0)
@@ -130,30 +135,38 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         cornerRadiusView?.layer.masksToBounds = true
         recordButton.recordingStateDidChange = { recordButton in
             if recordButton.buttonState == .Recording {
-                self.videoRecorder?.record()
-                self.recordingStartTime = Date()
-                self.recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
-                    guard let startTime = self.recordingStartTime else { return }
-                    let duration = Date().timeIntervalSince(startTime)
-                    if duration >= self.maximumRecordingDuration {
-                        recordButton.buttonState = .Idle
-                    } else {
-                        recordButton.setProgress(newProgress: CGFloat(duration / self.maximumRecordingDuration))
-                    }
-                })
+                self.startRecording()
             } else {
-                self.videoRecorder?.stop({ (url) in
-                    self.recordingTimer?.invalidate()
-                    self.recordingStartTime = nil
-                    self.recordingTimer = nil
-                    // send to preview
-                    let player = AVPlayer(url: url)
-                    let playerViewController = AVPlayerViewController()
-                    playerViewController.player = player
-                    self.present(playerViewController, animated: true, completion: nil)
-                })
+                self.stopRecording()
             }
         }
+    }
+    
+    private func startRecording() {
+        self.videoRecorder?.record()
+        self.recordingStartTime = Date()
+        self.recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
+            guard let startTime = self.recordingStartTime else { return }
+            let duration = Date().timeIntervalSince(startTime)
+            if duration >= self.maximumRecordingDuration {
+                self.recordButton.buttonState = .Idle
+            } else {
+                self.recordButton.setProgress(newProgress: CGFloat(duration / self.maximumRecordingDuration))
+            }
+        })
+    }
+    
+    private func stopRecording() {
+        self.videoRecorder?.stop({ (url) in
+            self.recordingTimer?.invalidate()
+            self.recordingStartTime = nil
+            self.recordingTimer = nil
+            // send to preview
+            let previewViewController = VideoPreviewViewController(fileURL: url)
+            DispatchQueue.main.async {
+                self.present(previewViewController, animated: true, completion: nil)
+            }
+        })
     }
 
     /// - Tag: StartARSession
@@ -174,7 +187,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         UIApplication.shared.isIdleTimerDisabled = true
         
         // Show debug UI to view performance metrics (e.g. frames per second).
-        sceneView.showsStatistics = true
+        //sceneView.showsStatistics = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -186,37 +199,34 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
 
     // MARK: - ARSCNViewDelegate
     
-    /// - Tag: PlaceARContent
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        
-        let textSprite = SKLabelNode(fontNamed: "PressStart2P-Regular")
-        textSprite.text = "Hello World"
+    func createRibbon(for anchor: ARAnchor) -> SCNNode? {
+        let textSprite = SKLabelNode(fontNamed: state.currentObject.fontName())
+        textSprite.text = state.currentObject.getText()
         textSprite.verticalAlignmentMode = .center
         textSprite.horizontalAlignmentMode = .center
         textSprite.lineBreakMode = .byWordWrapping
         textSprite.numberOfLines = 1
-        textSprite.fontSize = 100
-        let materialScene = SKScene(size: CGSize(width: 1200, height: 200))
+        textSprite.fontSize = 400.0
+        let font = UIFont(name: state.currentObject.fontName(), size: 400.0)
+        let textSize = (state.currentObject.getText() as NSString).boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 400.0), options: [], attributes: [NSAttributedStringKey.font : font], context: nil)
+        let materialScene = SKScene(size: CGSize(width: textSize.width * 1.1, height: textSize.height * 1.1))
         materialScene.anchorPoint = .init(x: 0.5, y: 0.5)
         textSprite.zRotation = .pi
         textSprite.xScale = -1.0
-        textSprite.preferredMaxLayoutWidth = 1000
+        textSprite.preferredMaxLayoutWidth = textSize.width
         materialScene.addChild(textSprite)
-        materialScene.backgroundColor = .black
+        materialScene.backgroundColor = state.currentObject.backgroundColor ?? .clear
         materialScene.scaleMode = .aspectFit
         
         // initialize
         let ribbon = SCNRibbon(width: 0.2, transforms: [SCNMatrix4Identity])
-        //let geometry = SCNPlane(width: 0.2, height: 0.2)//ribbon.geometry
         let geometry = ribbon.geometry
         let material = SCNMaterial()
-        //material.diffuse.contentsTransform = SCNMatrix4MakeScale(0.5, 0.5, 1)
         material.isDoubleSided = true
         material.diffuse.contents = materialScene
         material.diffuse.wrapS = .repeat
         material.diffuse.wrapT = .repeat
         geometry.materials = [material]
-        //return SCNNode(geometry: geometry)
         
         currentRibbon = ribbon
         currentRibbonMaterial = material
@@ -224,8 +234,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         
         return currentRibbonNode
     }
+    
+    /// - Tag: PlaceARContent
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        switch state.currentObject.type {
+        case .text(let textType):
+            switch textType {
+            case .twoDimensional:
+                break
+            case .threeDimensional:
+                break
+            case .ribbon:
+                return createRibbon(for: anchor)
+            case .nth:
+                break
+            }
+        }
+        return nil
+    }
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
+        print("did add node")
         
         //cubeNode.simdTransform = anchor.transform
         //node.addChildNode(cubeNode)

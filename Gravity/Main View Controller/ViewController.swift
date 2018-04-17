@@ -38,7 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     @IBOutlet weak var activityIndicator: InstagramActivityIndicator!
     @IBOutlet weak var touchDownGestureRecognizer: UILongPressGestureRecognizer!
     
-    
+    private var anchors: [ARAnchor] = []
     private var currentRibbonNode: SCNNode?
     private var currentRibbon: SCNRibbon?
     private var currentRibbonMaterial: SCNMaterial?
@@ -51,6 +51,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         case .text(let textType):
             self.presentTextInputViewController()
         }
+    }
+    
+    @IBAction func undoButtonPressed(sender: UIButton) {
+        guard let lastAnchor = anchors.last else { return }
+        sceneView.session.remove(anchor: lastAnchor)
     }
     
     private func presentTextInputViewController() {
@@ -311,6 +316,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         guard let frame = session.currentFrame else { return }
         needsHelpInfo = false
         updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
+        self.anchors += anchors
     }
 
     func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {

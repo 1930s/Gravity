@@ -63,10 +63,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     func textInput(didFinishWith text: String, font: UIFont, color: UIColor, backgroundColor: UIColor?) {
         self.dismiss(animated: true, completion: nil)
         state.currentObject.text = text
-        state.currentObject.textAttributes?.fontName = font.fontName
-        state.currentObject.textAttributes?.fontSize = font.pointSize
-        state.currentObject.textAttributes?.textColor = color
-        state.currentObject.backgroundColor = backgroundColor
+        state.currentObject.setFontName(font.fontName)
+        //state.currentObject.textAttributes?.fontSize = font.pointSize
+        //state.currentObject.textAttributes?.textColor = color
+        //state.currentObject.backgroundColor = backgroundColor
     }
     
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
@@ -202,26 +202,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     // MARK: - ARSCNViewDelegate
     
     func createRibbon(for anchor: ARAnchor) -> SCNNode? {
-        let textSprite = SKLabelNode(fontNamed: state.currentObject.fontName())
-        textSprite.text = state.currentObject.getText()
+        let fontName = state.currentObject.fontName()
+        let text = state.currentObject.getText()
+        let fontSize = 200.0 as CGFloat
+        let textSprite = SKLabelNode(fontNamed: fontName)
+        textSprite.text = text
         textSprite.verticalAlignmentMode = .center
         textSprite.horizontalAlignmentMode = .center
         textSprite.lineBreakMode = .byWordWrapping
         textSprite.numberOfLines = 1
-        textSprite.fontSize = 400.0
-        let font = UIFont(name: state.currentObject.fontName(), size: 400.0)
-        let textSize = (state.currentObject.getText() as NSString).boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 400.0), options: [], attributes: [NSAttributedStringKey.font : font], context: nil)
-        let materialScene = SKScene(size: CGSize(width: textSize.width * 1.1, height: textSize.height * 1.1))
+        textSprite.fontSize = fontSize
+        let textureWidth = textSprite.frame.width * 1.1
+        let textureHeight = textSprite.frame.height * 1.1
+        let materialScene = SKScene(size: CGSize(width: textureWidth, height: textureHeight))
         materialScene.anchorPoint = .init(x: 0.5, y: 0.5)
         textSprite.zRotation = .pi
         textSprite.xScale = -1.0
-        textSprite.preferredMaxLayoutWidth = textSize.width
         materialScene.addChild(textSprite)
         materialScene.backgroundColor = state.currentObject.backgroundColor ?? .clear
         materialScene.scaleMode = .aspectFit
         
         // initialize
-        let ribbon = SCNRibbon(width: 0.2, transforms: [SCNMatrix4Identity])
+        let ribbon = SCNRibbon(width: fontSize/1000, transforms: [SCNMatrix4Identity])
         let geometry = ribbon.geometry
         let material = SCNMaterial()
         material.isDoubleSided = true

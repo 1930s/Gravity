@@ -59,7 +59,6 @@ class SCNRibbon {
         indices.append(index)
         index += 1
         indices.append(index)
-        print(indices)
     }
     
     private func updateGeometry() {

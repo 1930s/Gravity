@@ -18,9 +18,9 @@ class TextInputViewController: UIViewController, UITextViewDelegate {
     
     var font: UIFont {
         if let textAttributes = object.textAttributes {
-            return UIFont(name: textAttributes.fontName ?? fontNames.first!, size: textAttributes.fontSize ?? 30.0)!
+            return UIFont(name: textAttributes.fontName ?? fontNames.first!, size: textAttributes.fontSize ?? 50.0)!
         }
-        return UIFont(name: fontNames.first!, size: 30.0)!
+        return UIFont(name: fontNames.first!, size: 50.0)!
     }
     var textColor: UIColor {
         if let textAttributes = object.textAttributes {
@@ -106,9 +106,9 @@ class TextInputViewController: UIViewController, UITextViewDelegate {
         let fontName = font.fontName
         if let index = fontNames.index(of: fontName) {
             let newIndex = (index == fontNames.count-1) ? 0 : index+1
-            object.textAttributes?.fontName = fontNames[newIndex]
+            object.setFontName(fontNames[newIndex])
         } else {
-            object.textAttributes?.fontName = fontNames[0]
+            object.setFontName(fontNames[0])
         }
     }
     

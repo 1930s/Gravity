@@ -89,6 +89,15 @@ struct Object: Codable, Hashable {
         }
     }
     
+    mutating func setFontName(_ name: String) {
+        var updatedTextAttributes: TextAttributes = TextAttributes()
+        if let previousAttributes = self.textAttributes {
+            updatedTextAttributes = previousAttributes
+        }
+        updatedTextAttributes.fontName = name
+        self.textAttributes = updatedTextAttributes
+    }
+    
     func fontName() -> String {
         return textAttributes?.fontName ?? fontNames[0]
     }
@@ -115,6 +124,10 @@ struct TextAttributes: Codable {
         case textColor
         case strokeWidth
         case strokeColor
+    }
+    
+    init() {
+        
     }
     
     init(from decoder: Decoder) throws {

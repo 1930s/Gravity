@@ -48,7 +48,7 @@ struct Object: Codable, Hashable {
     var identifier: UUID = UUID()
     var type: ObjectType
     var text: String?
-    var textAttributes: TextAttributes?
+    var textAttributes: TextAttributes = TextAttributes()
     var backgroundColor: UIColor?
     
     var hashValue: Int {
@@ -89,17 +89,8 @@ struct Object: Codable, Hashable {
         }
     }
     
-    mutating func setFontName(_ name: String) {
-        var updatedTextAttributes: TextAttributes = TextAttributes()
-        if let previousAttributes = self.textAttributes {
-            updatedTextAttributes = previousAttributes
-        }
-        updatedTextAttributes.fontName = name
-        self.textAttributes = updatedTextAttributes
-    }
-    
     func fontName() -> String {
-        return textAttributes?.fontName ?? fontNames[0]
+        return textAttributes.fontName ?? fontNames[0]
     }
     
     func getText() -> String {
@@ -107,7 +98,11 @@ struct Object: Codable, Hashable {
     }
     
     func fontSize() -> CGFloat {
-        return textAttributes?.fontSize ?? 30.0
+        return textAttributes.fontSize ?? 30.0
+    }
+    
+    func textColor() -> UIColor {
+        return textAttributes.textColor ?? UIColor.white
     }
 }
 

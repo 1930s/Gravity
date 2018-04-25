@@ -68,10 +68,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     func textInput(didFinishWith text: String, font: UIFont, color: UIColor, backgroundColor: UIColor?) {
         self.dismiss(animated: true, completion: nil)
         state.currentObject.text = text
-        state.currentObject.setFontName(font.fontName)
+        state.currentObject.textAttributes.fontName = font.fontName
         //state.currentObject.textAttributes?.fontSize = font.pointSize
-        //state.currentObject.textAttributes?.textColor = color
-        //state.currentObject.backgroundColor = backgroundColor
+        state.currentObject.textAttributes.textColor = color
+        state.currentObject.backgroundColor = backgroundColor
     }
     
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
@@ -217,6 +217,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         textSprite.lineBreakMode = .byWordWrapping
         textSprite.numberOfLines = 1
         textSprite.fontSize = fontSize
+        textSprite.fontColor = state.currentObject.textColor()
         let textureWidth = textSprite.frame.width * 1.1
         let textureHeight = textSprite.frame.height * 1.1
         let materialScene = SKScene(size: CGSize(width: textureWidth, height: textureHeight))

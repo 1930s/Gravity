@@ -17,16 +17,12 @@ protocol TextInputViewControllerDelegate {
 class TextInputViewController: UIViewController, UITextViewDelegate {
     
     var font: UIFont {
-        if let textAttributes = object.textAttributes {
-            return UIFont(name: textAttributes.fontName ?? fontNames.first!, size: textAttributes.fontSize ?? 50.0)!
-        }
-        return UIFont(name: fontNames.first!, size: 50.0)!
+        let textAttributes = object.textAttributes
+        return UIFont(name: textAttributes.fontName ?? fontNames.first!, size: textAttributes.fontSize ?? 50.0)!
     }
     var textColor: UIColor {
-        if let textAttributes = object.textAttributes {
-            return textAttributes.textColor ?? UIColor.white
-        }
-        return UIColor.white
+        let textAttributes = object.textAttributes
+        return textAttributes.textColor ?? UIColor.white
     }
     var backgroundColor: UIColor {
         return object.backgroundColor ?? UIColor.clear
@@ -37,6 +33,7 @@ class TextInputViewController: UIViewController, UITextViewDelegate {
             textView.textColor = textColor
             textView.text = text
             fontButton.setTitle(font.familyName, for: .normal)
+            textView.backgroundColor = backgroundColor == UIColor.clear ? backgroundColor : backgroundColor.withAlphaComponent(0.3)
         }
     }
     var object: Object {
@@ -44,6 +41,7 @@ class TextInputViewController: UIViewController, UITextViewDelegate {
             text = object.text ?? "Hello World"
         }
     }
+    var popUp: PopUp?
 
     @IBOutlet weak var fontButton: BorderedButton!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -102,13 +100,39 @@ class TextInputViewController: UIViewController, UITextViewDelegate {
         delegate?.textInput(didFinishWith: textView.text, font: font, color: textColor, backgroundColor: backgroundColor)
     }
     
-    @IBAction func fontButtonPressed(sender: Any) {
+    @IBAction func fontButtonPressed(sender: UIButton) {
         let fontName = font.fontName
         if let index = fontNames.index(of: fontName) {
             let newIndex = (index == fontNames.count-1) ? 0 : index+1
-            object.setFontName(fontNames[newIndex])
+            object.textAttributes.fontName = fontNames[newIndex]
         } else {
-            object.setFontName(fontNames[0])
+            object.textAttributes.fontName = fontNames[0]
+        }
+    }
+    
+    @IBAction func textColorButtonPressed(sender: UIButton) {
+        let popup = PopUp()
+        let colorPicker = ColorPickerViewController()
+        popup.presentingViewController = self
+        popup.presentedViewController = colorPicker
+        popup.present(from: CGPoint(x: navigationBar.frame.midX, y: navigationBar.frame.maxY + 30), preferredSize: CGSize(width: self.view.bounds.width-10, height: 60.0))
+        self.popUp = popup
+        popup.passthroughViews = [self.navigationBar]
+        colorPicker.colors.removeFirst()
+        colorPicker.didSelectColor = { color in
+            self.object.textAttributes.textColor = color
+        }
+    }
+    
+    @IBAction func backgroundColorButtonPressed(sender: Any) {
+        let popup = PopUp()
+        let colorPicker = ColorPickerViewController()
+        popup.presentingViewController = self
+        popup.presentedViewController = colorPicker
+        popup.present(from: CGPoint(x: navigationBar.frame.midX, y: navigationBar.frame.maxY + 30), preferredSize: CGSize(width: self.view.bounds.width-10, height: 60.0))
+        self.popUp = popup
+        colorPicker.didSelectColor = { color in
+            self.object.backgroundColor = color
         }
     }
     

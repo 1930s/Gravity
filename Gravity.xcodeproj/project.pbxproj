@@ -62,6 +62,15 @@
 		FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */; };
 		FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */; };
 		FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80F2E9208358F200AA7698 /* CircularButtonView.swift */; };
+		FA9F2B352090686A00E5AC00 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */; };
+		FA9F2B362090686A00E5AC00 /* ColorPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */; };
+		FA9F2B3A209068DF00E5AC00 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */; };
+		FA9F2B3B209068DF00E5AC00 /* ColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9F2B39209068DF00E5AC00 /* ColorCollectionViewCell.xib */; };
+		FA9F2B412090711600E5AC00 /* PopUp+PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B3C2090711500E5AC00 /* PopUp+PresentationController.swift */; };
+		FA9F2B422090711600E5AC00 /* PopUp+TransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B3D2090711500E5AC00 /* PopUp+TransitioningDelegate.swift */; };
+		FA9F2B432090711600E5AC00 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B3E2090711500E5AC00 /* PopUp.swift */; };
+		FA9F2B442090711600E5AC00 /* PopUp+Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B3F2090711600E5AC00 /* PopUp+Animator.swift */; };
+		FA9F2B452090711600E5AC00 /* PopUp+UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B402090711600E5AC00 /* PopUp+UIGestureRecognizer.swift */; };
 		FAAAACAD2072C9AE00D3B84D /* PressStart2P-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +166,15 @@
 		FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNMathExtensions.swift; sourceTree = "<group>"; };
 		FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNRibbon.swift; sourceTree = "<group>"; };
 		FA80F2E9208358F200AA7698 /* CircularButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButtonView.swift; sourceTree = "<group>"; };
+		FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerViewController.xib; sourceTree = "<group>"; };
+		FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA9F2B39209068DF00E5AC00 /* ColorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA9F2B3C2090711500E5AC00 /* PopUp+PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopUp+PresentationController.swift"; sourceTree = "<group>"; };
+		FA9F2B3D2090711500E5AC00 /* PopUp+TransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopUp+TransitioningDelegate.swift"; sourceTree = "<group>"; };
+		FA9F2B3E2090711500E5AC00 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
+		FA9F2B3F2090711600E5AC00 /* PopUp+Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopUp+Animator.swift"; sourceTree = "<group>"; };
+		FA9F2B402090711600E5AC00 /* PopUp+UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopUp+UIGestureRecognizer.swift"; sourceTree = "<group>"; };
 		FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +214,8 @@
 		842316DE1F2030C300D189D1 /* Gravity */ = {
 			isa = PBXGroup;
 			children = (
+				FA9F2B462090712300E5AC00 /* PopUp */,
+				FA9F2B372090687500E5AC00 /* Color Picker View Controller */,
 				842316DF1F2030C300D189D1 /* AppDelegate.swift */,
 				FA75FD33207733EA008A4B42 /* AppState.swift */,
 				FA75FD3D20774484008A4B42 /* UserDefaults.swift */,
@@ -343,6 +363,29 @@
 			path = "Video Player View Controller";
 			sourceTree = "<group>";
 		};
+		FA9F2B372090687500E5AC00 /* Color Picker View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */,
+				FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */,
+				FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */,
+				FA9F2B39209068DF00E5AC00 /* ColorCollectionViewCell.xib */,
+			);
+			path = "Color Picker View Controller";
+			sourceTree = "<group>";
+		};
+		FA9F2B462090712300E5AC00 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				FA9F2B3E2090711500E5AC00 /* PopUp.swift */,
+				FA9F2B3F2090711600E5AC00 /* PopUp+Animator.swift */,
+				FA9F2B3C2090711500E5AC00 /* PopUp+PresentationController.swift */,
+				FA9F2B3D2090711500E5AC00 /* PopUp+TransitioningDelegate.swift */,
+				FA9F2B402090711600E5AC00 /* PopUp+UIGestureRecognizer.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -422,6 +465,7 @@
 				FA75FD932082B622008A4B42 /* LondrinaSketch-Regular.ttf in Resources */,
 				84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */,
 				FA75FD872082B622008A4B42 /* SpaceMono-Regular.ttf in Resources */,
+				FA9F2B362090686A00E5AC00 /* ColorPickerViewController.xib in Resources */,
 				FA75FD972082B622008A4B42 /* Quicksand-Regular.ttf in Resources */,
 				FA75FD6F2082B5E4008A4B42 /* Creepster-Regular.ttf in Resources */,
 				FA75FD982082B622008A4B42 /* UnifrakturCook-Bold.ttf in Resources */,
@@ -446,6 +490,7 @@
 				FA75FD702082B5E4008A4B42 /* CreteRound-Regular.ttf in Resources */,
 				FA75FD9C2082B622008A4B42 /* FasterOne-Regular.ttf in Resources */,
 				FA75FD962082B622008A4B42 /* Monoton-Regular.ttf in Resources */,
+				FA9F2B3B209068DF00E5AC00 /* ColorCollectionViewCell.xib in Resources */,
 				FA75FE2E2082BA02008A4B42 /* Butcherman-Regular.ttf in Resources */,
 				FA75FD9A2082B622008A4B42 /* Shrikhand-Regular.ttf in Resources */,
 				FA75FD892082B622008A4B42 /* Pacifico-Regular.ttf in Resources */,
@@ -466,23 +511,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA434591207FF25A00339ACF /* TextInputViewController.swift in Sources */,
+				FA9F2B432090711600E5AC00 /* PopUp.swift in Sources */,
 				FA75FD4E2077FFBC008A4B42 /* RecordButton.swift in Sources */,
 				FA4E99322084673700C3E9AA /* VideoPreviewViewController.swift in Sources */,
 				FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */,
 				FA75FD34207733EA008A4B42 /* AppState.swift in Sources */,
 				FA43459A2080069200339ACF /* UIButton-BorderedStyle.swift in Sources */,
+				FA9F2B412090711600E5AC00 /* PopUp+PresentationController.swift in Sources */,
+				FA9F2B452090711600E5AC00 /* PopUp+UIGestureRecognizer.swift in Sources */,
 				FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */,
 				FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */,
 				FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */,
 				FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */,
+				FA9F2B3A209068DF00E5AC00 /* ColorCollectionViewCell.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
 				FA43458B207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift in Sources */,
 				FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */,
+				FA9F2B352090686A00E5AC00 /* ColorPickerViewController.swift in Sources */,
+				FA9F2B442090711600E5AC00 /* PopUp+Animator.swift in Sources */,
 				FA75FD512078038B008A4B42 /* InstagramActivityIndicator.swift in Sources */,
 				FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */,
 				FA75FE152082B89F008A4B42 /* FontBlaster.swift in Sources */,
 				FA4E9935208473DC00C3E9AA /* AVPlayerView.swift in Sources */,
 				842316E01F2030C300D189D1 /* AppDelegate.swift in Sources */,
+				FA9F2B422090711600E5AC00 /* PopUp+TransitioningDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

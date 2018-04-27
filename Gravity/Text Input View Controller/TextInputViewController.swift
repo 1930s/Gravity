@@ -138,9 +138,12 @@ class TextInputViewController: UIViewController, UITextViewDelegate {
     
     // MARK: UITextViewDelegate
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return textView.text.count + (text.count - range.length) <= 140
+        return textView.text.count + (text.count - range.length) <= 30
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        self.object.text = textView.text
+    }
     /*
     // MARK: - Navigation
 

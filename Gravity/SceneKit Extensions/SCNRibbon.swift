@@ -20,6 +20,8 @@ class SCNRibbon {
     private var index: UInt32 = 0
     private var length: Double = 0
     private var previousTransform: SCNMatrix4 = SCNMatrix4Identity
+    private var smoothBox: [SCNMatrix4] = []
+    private var smoothWidth: Int = 10
     // keep track of total length to calculate tex coordinates
     private var sources: [SCNGeometrySource] {
         get {
@@ -41,8 +43,9 @@ class SCNRibbon {
         updateGeometry()
     }
     
-    public func append(transform: SCNMatrix4) {
+    public func append(rawTransform: SCNMatrix4) {
         //guard index < 3 else { return }
+        let transform = smoothedTransform(rawTransform)
         let topPoint = SCNMatrix4Translate(transform, 0.0, Float(width / 2.0), 0.0)
         let bottomPoint = SCNMatrix4Translate(transform, 0.0, Float(-width / 2.0), 0.0)
         vertexes.append(SCNVector3(topPoint.m41, topPoint.m42, topPoint.m43))
@@ -70,10 +73,11 @@ class SCNRibbon {
         index = 0
         length = 0
         previousTransform = SCNMatrix4Identity
-        for (idx, transform) in transforms.enumerated() {
+        smoothBox = [previousTransform]
+        for (idx, rawTransform) in transforms.enumerated() {
+            let transform = smoothedTransform(rawTransform)
             let topPoint = SCNMatrix4Translate(transform, 0.0, Float(width / 2.0), 0.0)
             let bottomPoint = SCNMatrix4Translate(transform, 0.0, Float(-width / 2.0), 0.0)
-            //let rightPoint = SCNMatrix4Translate(transform, Float(width), 0.0, 0.0)
             vertexes.append(SCNVector3(topPoint.m41, topPoint.m42, topPoint.m43))
             vertexes.append(SCNVector3(bottomPoint.m41, bottomPoint.m42, bottomPoint.m43))
             textureCoord.append(CGPoint(x: 0, y: 0))
@@ -93,5 +97,20 @@ class SCNRibbon {
             //index = UInt8(idx+2)
             //indices.append(index)
         }
+    }
+    
+    private func smoothedTransform(_ transform: SCNMatrix4) -> SCNMatrix4 {
+        let smoothFactor: Float = 0.3
+        let previousX = previousTransform.m41
+        let previousY = previousTransform.m42
+        let previousZ = previousTransform.m43
+        let x = transform.m41
+        let y = transform.m42
+        let z = transform.m43
+        var updatedTransform = transform
+        updatedTransform.m41 = smoothFactor*x + (1-smoothFactor) * previousX
+        updatedTransform.m42 = smoothFactor*y + (1-smoothFactor) * previousY
+        updatedTransform.m43 = smoothFactor*z + (1-smoothFactor) * previousZ
+        return updatedTransform
     }
 }

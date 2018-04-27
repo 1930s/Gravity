@@ -105,7 +105,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         let transform = SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z)
         // convert transform to ribbon coordinates
         let convertedTransform = currentRibbonNode.convertTransform(transform, from: nil)
-        currentRibbon.append(transform: convertedTransform)
+        currentRibbon.append(rawTransform: convertedTransform)
         let geometry = currentRibbon.geometry
         geometry.materials = [currentRibbonMaterial]
         currentRibbonNode.geometry = geometry

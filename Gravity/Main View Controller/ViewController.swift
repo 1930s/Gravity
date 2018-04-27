@@ -54,8 +54,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
     
     @IBAction func undoButtonPressed(sender: UIButton) {
-        guard let lastAnchor = anchors.last else { return }
-        sceneView.session.remove(anchor: lastAnchor)
+        let alert = UIAlertController(title: "Undo / Clear All", message: "Undo last object or clear all objects.", preferredStyle: .actionSheet)
+        let undo = UIAlertAction(title: "Undo Last", style: .default) { (action) in
+            guard let lastAnchor = self.anchors.last else { return }
+            self.sceneView.session.remove(anchor: lastAnchor)
+        }
+        let reset = UIAlertAction(title: "Clear All", style: .destructive) { (action) in
+            for anchor in self.anchors {
+                self.sceneView.session.remove(anchor: anchor)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+        }
+        alert.addAction(undo)
+        alert.addAction(reset)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func presentTextInputViewController() {
@@ -201,7 +216,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         super.viewWillDisappear(animated)
 
         // Pause the view's AR session.
-        sceneView.session.pause()
+        //sceneView.session.pause()
     }
 
     // MARK: - ARSCNViewDelegate
@@ -264,32 +279,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("did add node")
-        
-        //cubeNode.simdTransform = anchor.transform
-        //node.addChildNode(cubeNode)
-        
-        return
-        
-        // Place content only for anchors found by plane detection.
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-        
-        print(planeAnchor)
-
-        // Create a SceneKit plane to visualize the plane anchor using its position and extent.
-        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-        let planeNode = SCNNode(geometry: plane)
-        planeNode.simdPosition = float3(planeAnchor.center.x, 0, planeAnchor.center.z)
-        
-        // `SCNPlane` is vertically oriented in its local coordinate space, so
-        // rotate the plane to match the horizontal orientation of `ARPlaneAnchor`.
-        planeNode.eulerAngles.x = -.pi / 2
-        
-        // Make the plane visualization semitransparent to clearly show real-world placement.
-        planeNode.opacity = 0.25
-        
-        // Add the plane visualization to the ARKit-managed node so that it tracks
-        // changes in the plane anchor as plane estimation continues.
-        node.addChildNode(planeNode)
     }
 
     /// - Tag: UpdateARContent
@@ -350,6 +339,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
 
     // MARK: - Private methods
     private func updateSessionInfoLabel(for frame: ARFrame, trackingState: ARCamera.TrackingState) {
+        func helpStringForMode(_ mode: ObjectType) -> String {
+            switch mode {
+            case .text(let textObjectType):
+                switch textObjectType {
+                case .ribbon:
+                    return "Drag and move"
+                default:
+                    return "Tap to add"
+                }
+            }
+        }
         // Update the UI to provide feedback on the state of the AR experience.
         var message: String = ""
         self.activityIndicator.isHidden = false
@@ -357,17 +357,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         switch trackingState {
         case .normal:
             if needsHelpInfo {
-                message = "Drag and move."
+                message = helpStringForMode(self.state.currentObject.type)
             }
             self.activityIndicator.isHidden = true
         case .notAvailable:
-            message = "Tracking unavailable."
+            message = "Tracking unavailable"
         case .limited(.excessiveMotion):
-            message = "Tracking limited - Move the device more slowly."
+            message = "Move more slowly"
         case .limited(.insufficientFeatures):
-            message = "Tracking limited - Point the device at an area with visible surface detail, or improve lighting conditions."
+            message = "Insufficient lighting or details in scene"
         case .limited(.initializing):
-            message = "Move camera left and right."
+            message = "Move camera left and right"
         default:
             // No feedback needed when tracking is normal and planes are visible.
             // (Nor when in unreachable limited-tracking states.)
@@ -379,8 +379,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
 
     private func resetTracking() {
-        //let configuration = ARWorldTrackingConfiguration()
-        //configuration.planeDetection = .horizontal
-        //sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.worldAlignment = .gravityAndHeading
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 }

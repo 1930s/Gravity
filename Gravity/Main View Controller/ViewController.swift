@@ -94,7 +94,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         case .began:
             // Add anchor
             guard let cameraNode = sceneView.pointOfView else { return }
-            let cameraTranslation = cameraNode.simdWorldFront * 1.0
+            let cameraTranslation = cameraNode.simdWorldFront * 0.3
             let transform = float4x4(SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z))
             let anchor = ARAnchor(transform: transform)
             sceneView.session.add(anchor: anchor)
@@ -116,7 +116,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         // get current end point
         guard didSet == false else { return }
         guard let cameraNode = sceneView.pointOfView, let currentRibbonNode = currentRibbonNode, let currentRibbon = currentRibbon, let currentRibbonMaterial = currentRibbonMaterial else { return }
-        let cameraTranslation = cameraNode.worldFront
+        let cameraTranslation = cameraNode.worldFront * 0.3
         let transform = SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z)
         // convert transform to ribbon coordinates
         let convertedTransform = currentRibbonNode.convertTransform(transform, from: nil)
@@ -245,6 +245,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         
         // initialize
         let ribbon = SCNRibbon(width: fontSize/1000, transforms: [SCNMatrix4Identity])
+        ribbon.textureHorizontalScale = Double(1000 / textureWidth)
         let geometry = ribbon.geometry
         let material = SCNMaterial()
         material.isDoubleSided = true

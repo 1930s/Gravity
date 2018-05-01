@@ -11,6 +11,7 @@ import SceneKit
 class SCNRibbon {
     
     public var width: CGFloat = 1.0 { didSet { updateGeometry() }}
+    public var textureHorizontalScale: Double = 1.0
     public var geometry: SCNGeometry { return SCNGeometry(sources: sources, elements: elements) }
     private var transforms: [SCNMatrix4] = []
     private var vertexes: [SCNVector3] = []
@@ -55,7 +56,7 @@ class SCNRibbon {
         length += Double((transform.position() - previousTransform.position()).magnitude())
         previousTransform = transform
         //let texX = 0.01 * Double(index)
-        let texX = length
+        let texX = length*textureHorizontalScale
         textureCoord.append(CGPoint(x: texX, y: 0))
         textureCoord.append(CGPoint(x: texX, y: 1))
         index += 1
@@ -100,7 +101,7 @@ class SCNRibbon {
     }
     
     private func smoothedTransform(_ transform: SCNMatrix4) -> SCNMatrix4 {
-        let smoothFactor: Float = 0.3
+        let smoothFactor: Float = 0.2
         let previousX = previousTransform.m41
         let previousY = previousTransform.m42
         let previousZ = previousTransform.m43

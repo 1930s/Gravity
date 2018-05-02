@@ -74,6 +74,20 @@ class VideoPreviewViewController: UIViewController {
     
     @IBAction func shareVideo(sender: UIButton) {
         let activityController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        activityController.completionWithItemsHandler = { _, completed, _, error in
+            guard completed else {
+                if let error = error {
+                    let errorAlert = UIAlertController(title: "Share Failed", message: error.localizedDescription, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+                return
+            }
+            let completeAlert = UIAlertController(title: "Share Successful!", message: "The video was successfully shared.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            completeAlert.addAction(okAction)
+            self.present(completeAlert, animated: true, completion: nil)
+        }
         self.present(activityController, animated: true, completion: nil)
     }
 

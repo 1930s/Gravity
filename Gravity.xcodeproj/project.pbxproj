@@ -72,6 +72,7 @@
 		FA9F2B442090711600E5AC00 /* PopUp+Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B3F2090711600E5AC00 /* PopUp+Animator.swift */; };
 		FA9F2B452090711600E5AC00 /* PopUp+UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B402090711600E5AC00 /* PopUp+UIGestureRecognizer.swift */; };
 		FAAAACAD2072C9AE00D3B84D /* PressStart2P-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */; };
+		FACC5AFE209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		FA9F2B3F2090711600E5AC00 /* PopUp+Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopUp+Animator.swift"; sourceTree = "<group>"; };
 		FA9F2B402090711600E5AC00 /* PopUp+UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopUp+UIGestureRecognizer.swift"; sourceTree = "<group>"; };
 		FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
+		FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Arrow.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 				842316DF1F2030C300D189D1 /* AppDelegate.swift */,
 				FA75FD33207733EA008A4B42 /* AppState.swift */,
 				FA75FD3D20774484008A4B42 /* UserDefaults.swift */,
+				FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */,
 				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
 				FA43458E207FEE9B00339ACF /* Text Input View Controller */,
 				FA75FE302083574C008A4B42 /* Video Player View Controller */,
@@ -529,6 +532,7 @@
 				FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */,
 				FA9F2B352090686A00E5AC00 /* ColorPickerViewController.swift in Sources */,
 				FA9F2B442090711600E5AC00 /* PopUp+Animator.swift in Sources */,
+				FACC5AFE209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift in Sources */,
 				FA75FD512078038B008A4B42 /* InstagramActivityIndicator.swift in Sources */,
 				FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */,
 				FA75FE152082B89F008A4B42 /* FontBlaster.swift in Sources */,

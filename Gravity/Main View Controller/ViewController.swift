@@ -44,11 +44,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     private var currentRibbonMaterial: SCNMaterial?
     private var displayLink: CADisplayLink?
     private var needsHelpInfo: Bool = true
+    private var currentNode: SCNNode?
+    private var disableViewAutorotation = false
+    
+    // MARK: Actions
     
     @IBAction func actionButtonPressed(sender: UIButton) {
         switch state.currentObject.type {
         case .text(let textType):
             self.presentTextInputViewController()
+        case .shape(let shapeType):
+            break
         }
     }
     
@@ -72,39 +78,80 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         self.present(alert, animated: true, completion: nil)
     }
     
-    private func presentTextInputViewController() {
-        let textInputViewController = TextInputViewController(object: state.currentObject)
-        textInputViewController.delegate = self
-        textInputViewController.modalPresentationStyle = .overCurrentContext
-        self.present(textInputViewController, animated: true, completion: nil)
-    }
-    
-    func textInput(didFinishWith text: String, font: UIFont, color: UIColor, backgroundColor: UIColor?) {
-        self.dismiss(animated: true, completion: nil)
-        state.currentObject.text = text
-        state.currentObject.textAttributes.fontName = font.fontName
-        //state.currentObject.textAttributes?.fontSize = font.pointSize
-        state.currentObject.textAttributes.textColor = color
-        state.currentObject.backgroundColor = backgroundColor
-    }
-    
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            // Add anchor
-            let anchor = ARAnchor(transform: sceneView.scene.rootNode.simdTransform)
-            sceneView.session.add(anchor: anchor)
-            // Initialize display link
-            displayLink = CADisplayLink(target: self, selector: #selector(updateRibbon(displayLink:)))
-            displayLink?.preferredFramesPerSecond = 15
-            displayLink?.add(to: .current, forMode: .defaultRunLoopMode)
-        case .ended:
-            currentRibbon = nil
-            displayLink?.invalidate()
-            displayLink = nil
-        default:
-            break
+        if sender.state == .began { disableViewAutorotation = true }
+        else if sender.state == .ended { disableViewAutorotation = false }
+        switch state.currentObject.type {
+        case .text(let textType):
+            switch textType {
+            case .ribbon:
+                if sender.state == .began { beginTouchForRibbon() }
+                else if sender.state == .ended { endTouchForRibbon() }
+            default:
+                break
+            }
+        case .shape:
+            if sender.state == .began { beginTouchForShape() }
+            else if sender.state == .ended { endTouchForShape() }
         }
+    }
+    
+    // MARK: OBJECT / Arrow
+    func beginTouchForShape() {
+        // Add shape to camera node
+        let arrow = UIBezierPath.arrowShape(width: 0.1, height: 0.2, headWidthRatio: 0.5, headHeightRatio: 0.5)
+        let shape = SCNShape(path: arrow, extrusionDepth: 0.05)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.green.cgColor
+        shape.materials = [material]
+        let node = SCNNode(geometry: shape)
+        //node.scale = SCNVector3(0.01, 0.01, 0.01)
+        let cameraNode = sceneView.pointOfView
+        let rotationAnimation = CABasicAnimation(keyPath: "rotation")
+        // Animate one complete revolution around the node's Y axis.
+        rotationAnimation.toValue = SCNVector4(0, 1, 0, Float.pi*2)
+        rotationAnimation.duration = 10.0; // One revolution in ten seconds.
+        rotationAnimation.repeatCount = .greatestFiniteMagnitude; // Repeat the animation forever.
+        node.addAnimation(rotationAnimation, forKey: nil)
+        let parentNode = SCNNode()
+        parentNode.addChildNode(node)
+        parentNode.localRotate(by: SCNQuaternion(angle: .pi, axis: SCNVector3(0, 0, 1)))
+        parentNode.position = SCNVector3(0, 0, -0.5)
+        cameraNode?.addChildNode(parentNode)
+        currentNode = parentNode
+    }
+    
+    func endTouchForShape() {
+        guard let transform = getCurrentCameraTransform(distanceInFront: 0.5) else { return }
+        let anchor = ARAnchor(transform: transform.toSimd())
+        sceneView.session.add(anchor: anchor)
+    }
+    
+    func shapeNode() -> SCNNode? {
+        guard let shape = currentNode else { return nil }
+        shape.removeFromParentNode()
+        shape.transform = SCNMatrix4MakeRotation(-.pi/2, 0, 0, 1)
+        let node = SCNNode()
+        node.addChildNode(shape)
+        currentNode = nil
+        return node
+    }
+    
+    // MARK: TEXT: Ribbon
+    func beginTouchForRibbon() {
+        // Add anchor
+        let anchor = ARAnchor(transform: sceneView.scene.rootNode.simdTransform)
+        sceneView.session.add(anchor: anchor)
+        // Initialize display link
+        displayLink = CADisplayLink(target: self, selector: #selector(updateRibbon(displayLink:)))
+        displayLink?.preferredFramesPerSecond = 15
+        displayLink?.add(to: .current, forMode: .defaultRunLoopMode)
+    }
+    
+    func endTouchForRibbon() {
+        currentRibbon = nil
+        displayLink?.invalidate()
+        displayLink = nil
     }
     
     @objc private func updateRibbon(displayLink: CADisplayLink) {
@@ -117,14 +164,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         currentRibbonNode.geometry = geometry
     }
     
-    private func getCurrentCameraTransform() -> SCNMatrix4? {
-        guard let transform = sceneView.session.currentFrame?.camera.transform else { return nil }
-        let mat4 = SCNMatrix4(transform)
-        let front = mat4.orientation().inverted().multiplied(by: 0.3)
-        let t = mat4.translated(front)
-        return t
-        //let cameraTranslation = cameraNode.worldFront * 0.3
-        //let transform = cameraNode.transform//SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z)
+    // MARK: TextInputViewControllerDelegate
+    func textInput(didFinishWith text: String, font: UIFont, color: UIColor, backgroundColor: UIColor?) {
+        self.dismiss(animated: true, completion: nil)
+        state.currentObject.text = text
+        state.currentObject.textAttributes.fontName = font.fontName
+        //state.currentObject.textAttributes?.fontSize = font.pointSize
+        state.currentObject.textAttributes.textColor = color
+        state.currentObject.backgroundColor = backgroundColor
     }
 
     // MARK: - View Life Cycle
@@ -143,8 +190,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
                 print(error)
             }
         }
+        self.state.currentObject.type = .shape(.arrow)
         // Video recording
         videoRecorder = RecordAR(ARSceneKit: sceneView)
+        videoRecorder?.enableAdjsutEnvironmentLighting = true
         // Set up UI
         let shadowView = self.buttonsContainerView
         shadowView?.addShadowMotionEffects(intensity: 5.0, radius: 6.0)
@@ -219,7 +268,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if currentRibbon != nil {
+        if disableViewAutorotation {
             return self.interfaceOrientation.isPortrait ? UIInterfaceOrientationMask.portrait : UIInterfaceOrientationMask.landscape
         }
         return UIInterfaceOrientationMask.all
@@ -282,6 +331,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             case .nth:
                 break
             }
+        case .shape(let shapeType):
+            return shapeNode()
         }
         return nil
     }
@@ -341,6 +392,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
                 default:
                     return "Tap to add"
                 }
+            default:
+                return ""
             }
         }
         // Update the UI to provide feedback on the state of the AR experience.
@@ -376,4 +429,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
+    
+    private func presentTextInputViewController() {
+        let textInputViewController = TextInputViewController(object: state.currentObject)
+        textInputViewController.delegate = self
+        textInputViewController.modalPresentationStyle = .overCurrentContext
+        self.present(textInputViewController, animated: true, completion: nil)
+    }
+    
+    private func getCurrentCameraTransform(distanceInFront: Float=0.3) -> SCNMatrix4? {
+        guard let transform = sceneView.session.currentFrame?.camera.transform else { return nil }
+        let mat4 = SCNMatrix4(transform)
+        let front = mat4.orientation().inverted().multiplied(by: distanceInFront)
+        let t = mat4.translated(front)
+        return t
+        //let cameraTranslation = cameraNode.worldFront * 0.3
+        //let transform = cameraNode.transform//SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z)
+    }
+
 }

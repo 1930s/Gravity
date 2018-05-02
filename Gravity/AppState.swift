@@ -20,11 +20,14 @@ struct AppState: Codable {
 }
 
 enum ObjectType: RawRepresentable, Codable {
-    case text(TextObjectType)
+    case text(TextObjectType) // 0...10
+    case shape(ShapeObjectType) // 100...110
     init?(rawValue: Int) {
         switch rawValue {
         case 0...3:
             self = ObjectType.text(TextObjectType(rawValue: rawValue)!)
+        case 100...200:
+            self = ObjectType.shape(ShapeObjectType(rawValue: rawValue)!)
         default:
             self = .text(.twoDimensional)
         }
@@ -33,15 +36,26 @@ enum ObjectType: RawRepresentable, Codable {
         switch self {
         case .text(let type):
             return type.rawValue
+        case .shape(let type):
+            return type.rawValue
         }
     }
 }
 
+// 0...10
 enum TextObjectType: Int, Codable {
-    case twoDimensional
-    case threeDimensional
-    case nth
-    case ribbon
+    case twoDimensional = 0
+    case threeDimensional = 1
+    case nth = 2
+    case ribbon = 3
+}
+// 100...
+enum ShapeObjectType: Int, Codable {
+    case arrow = 100
+}
+// 1000...
+enum MediaObjectType: Int, Codable {
+    case image = 1000
 }
 
 struct Object: Codable, Hashable {

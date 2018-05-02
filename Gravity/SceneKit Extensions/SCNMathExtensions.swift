@@ -402,6 +402,10 @@ extension SCNMatrix4
     public func orientation() -> SCNVector3 {
         return SCNVector3(self.m31, self.m32, self.m33)
     }
+    
+    public func upDirection() -> SCNVector3 {
+        return SCNVector3(self.m11, self.m12, self.m13)
+    }
 	
 	// MARK: Invert
 	

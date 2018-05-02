@@ -43,7 +43,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     private var currentRibbon: SCNRibbon?
     private var currentRibbonMaterial: SCNMaterial?
     private var displayLink: CADisplayLink?
-    var didSet: Bool = false
     private var needsHelpInfo: Bool = true
     
     @IBAction func actionButtonPressed(sender: UIButton) {
@@ -93,10 +92,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         switch sender.state {
         case .began:
             // Add anchor
-            guard let cameraNode = sceneView.pointOfView else { return }
-            let cameraTranslation = cameraNode.simdWorldFront * 0.3
-            let transform = float4x4(SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z))
-            let anchor = ARAnchor(transform: transform)
+            let anchor = ARAnchor(transform: sceneView.scene.rootNode.simdTransform)
             sceneView.session.add(anchor: anchor)
             // Initialize display link
             displayLink = CADisplayLink(target: self, selector: #selector(updateRibbon(displayLink:)))
@@ -114,18 +110,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     @objc private func updateRibbon(displayLink: CADisplayLink) {
         //return
         // get current end point
-        guard didSet == false else { return }
-        guard let cameraNode = sceneView.pointOfView, let currentRibbonNode = currentRibbonNode, let currentRibbon = currentRibbon, let currentRibbonMaterial = currentRibbonMaterial else { return }
-        let cameraTranslation = cameraNode.worldFront * 0.3
-        let transform = SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z)
-        // convert transform to ribbon coordinates
-        let convertedTransform = currentRibbonNode.convertTransform(transform, from: nil)
-        currentRibbon.append(rawTransform: convertedTransform)
+        guard let transform = getCurrentCameraTransform(), let currentRibbon = self.currentRibbon, let currentRibbonNode = self.currentRibbonNode, let currentRibbonMaterial = currentRibbonMaterial else { return }
+        currentRibbon.append(rawTransform: transform)
         let geometry = currentRibbon.geometry
         geometry.materials = [currentRibbonMaterial]
         currentRibbonNode.geometry = geometry
-        
-        //didSet = true
+    }
+    
+    private func getCurrentCameraTransform() -> SCNMatrix4? {
+        guard let transform = sceneView.session.currentFrame?.camera.transform else { return nil }
+        let mat4 = SCNMatrix4(transform)
+        let front = mat4.orientation().inverted().multiplied(by: 0.3)
+        let t = mat4.translated(front)
+        return t
+        //let cameraTranslation = cameraNode.worldFront * 0.3
+        //let transform = cameraNode.transform//SCNMatrix4Translate(cameraNode.transform, cameraTranslation.x, cameraTranslation.y, cameraTranslation.z)
     }
 
     // MARK: - View Life Cycle
@@ -218,10 +217,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         // Pause the view's AR session.
         //sceneView.session.pause()
     }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if currentRibbon != nil {
+            return self.interfaceOrientation.isPortrait ? UIInterfaceOrientationMask.portrait : UIInterfaceOrientationMask.landscape
+        }
+        return UIInterfaceOrientationMask.all
+    }
 
     // MARK: - ARSCNViewDelegate
     
-    func createRibbon(for anchor: ARAnchor) -> SCNNode? {
+    func createRibbon() -> SCNNode? {
         let fontName = state.currentObject.fontName()
         let text = state.currentObject.getText()
         let fontSize = 200.0 as CGFloat
@@ -233,8 +239,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         textSprite.numberOfLines = 1
         textSprite.fontSize = fontSize
         textSprite.fontColor = state.currentObject.textColor()
-        let textureWidth = textSprite.frame.width * 1.1
-        let textureHeight = textSprite.frame.height * 1.1
+        let textureWidth = textSprite.frame.width + 100
+        let textureHeight = textSprite.frame.height + 20
         let materialScene = SKScene(size: CGSize(width: textureWidth, height: textureHeight))
         materialScene.anchorPoint = .init(x: 0.5, y: 0.5)
         textSprite.zRotation = .pi
@@ -244,7 +250,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         materialScene.scaleMode = .aspectFit
         
         // initialize
-        let ribbon = SCNRibbon(width: fontSize/1000, transforms: [SCNMatrix4Identity])
+        guard let transform = getCurrentCameraTransform() else { return nil }
+        let ribbon = SCNRibbon(width: fontSize/1000, transforms: [transform])
         ribbon.textureHorizontalScale = Double(1000 / textureWidth)
         let geometry = ribbon.geometry
         let material = SCNMaterial()
@@ -271,7 +278,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             case .threeDimensional:
                 break
             case .ribbon:
-                return createRibbon(for: anchor)
+                return createRibbon()
             case .nth:
                 break
             }
@@ -279,26 +286,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         return nil
     }
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        print("did add node")
     }
 
     /// - Tag: UpdateARContent
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         
-        //return
-        
-        // Update content only for plane anchors and nodes matching the setup created in `renderer(_:didAdd:for:)`.
-        guard let planeAnchor = anchor as?  ARPlaneAnchor,
-            let planeNode = node.childNodes.first,
-            let plane = planeNode.geometry as? SCNPlane
-            else { return }
-        
-        // Plane estimation may shift the center of a plane relative to its anchor's transform.
-        planeNode.simdPosition = float3(planeAnchor.center.x, 0, planeAnchor.center.z)
-        
-        // Plane estimation may also extend planes, or remove one plane to merge its extent into another.
-        plane.width = CGFloat(planeAnchor.extent.x)
-        plane.height = CGFloat(planeAnchor.extent.z)
     }
 
     // MARK: - ARSessionDelegate

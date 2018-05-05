@@ -73,6 +73,11 @@
 		FA9F2B452090711600E5AC00 /* PopUp+UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B402090711600E5AC00 /* PopUp+UIGestureRecognizer.swift */; };
 		FAAAACAD2072C9AE00D3B84D /* PressStart2P-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */; };
 		FACC5AFE209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */; };
+		FACC5B00209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC5AFF209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift */; };
+		FAE04ADD209ADFC8007C57CA /* ObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE04ADB209ADFC8007C57CA /* ObjectViewController.swift */; };
+		FAE04ADE209ADFC8007C57CA /* ObjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE04ADC209ADFC8007C57CA /* ObjectViewController.xib */; };
+		FAE04AE1209AE15F007C57CA /* ObjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE04ADF209AE15F007C57CA /* ObjectCollectionViewCell.swift */; };
+		FAE04AE2209AE15F007C57CA /* ObjectCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE04AE0209AE15F007C57CA /* ObjectCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +183,11 @@
 		FA9F2B402090711600E5AC00 /* PopUp+UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopUp+UIGestureRecognizer.swift"; sourceTree = "<group>"; };
 		FAAAACAC2072C9AE00D3B84D /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
 		FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Arrow.swift"; sourceTree = "<group>"; };
+		FACC5AFF209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+LocationSymbol.swift"; sourceTree = "<group>"; };
+		FAE04ADB209ADFC8007C57CA /* ObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectViewController.swift; sourceTree = "<group>"; };
+		FAE04ADC209ADFC8007C57CA /* ObjectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObjectViewController.xib; sourceTree = "<group>"; };
+		FAE04ADF209AE15F007C57CA /* ObjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCollectionViewCell.swift; sourceTree = "<group>"; };
+		FAE04AE0209AE15F007C57CA /* ObjectCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ObjectCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +232,8 @@
 				FA75FD33207733EA008A4B42 /* AppState.swift */,
 				FA75FD3D20774484008A4B42 /* UserDefaults.swift */,
 				FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */,
+				FACC5AFF209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift */,
+				FAE04ADA209ADF8F007C57CA /* Object View Controller */,
 				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
 				FA43458E207FEE9B00339ACF /* Text Input View Controller */,
 				FA75FE302083574C008A4B42 /* Video Player View Controller */,
@@ -389,6 +401,17 @@
 			path = PopUp;
 			sourceTree = "<group>";
 		};
+		FAE04ADA209ADF8F007C57CA /* Object View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FAE04ADB209ADFC8007C57CA /* ObjectViewController.swift */,
+				FAE04ADC209ADFC8007C57CA /* ObjectViewController.xib */,
+				FAE04ADF209AE15F007C57CA /* ObjectCollectionViewCell.swift */,
+				FAE04AE0209AE15F007C57CA /* ObjectCollectionViewCell.xib */,
+			);
+			path = "Object View Controller";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -468,6 +491,7 @@
 				FA75FD932082B622008A4B42 /* LondrinaSketch-Regular.ttf in Resources */,
 				84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */,
 				FA75FD872082B622008A4B42 /* SpaceMono-Regular.ttf in Resources */,
+				FAE04AE2209AE15F007C57CA /* ObjectCollectionViewCell.xib in Resources */,
 				FA9F2B362090686A00E5AC00 /* ColorPickerViewController.xib in Resources */,
 				FA75FD972082B622008A4B42 /* Quicksand-Regular.ttf in Resources */,
 				FA75FD6F2082B5E4008A4B42 /* Creepster-Regular.ttf in Resources */,
@@ -491,6 +515,7 @@
 				FA75FE2D2082BA02008A4B42 /* BungeeShade-Regular.ttf in Resources */,
 				FA75FD8E2082B622008A4B42 /* Knewave-Regular.ttf in Resources */,
 				FA75FD702082B5E4008A4B42 /* CreteRound-Regular.ttf in Resources */,
+				FAE04ADE209ADFC8007C57CA /* ObjectViewController.xib in Resources */,
 				FA75FD9C2082B622008A4B42 /* FasterOne-Regular.ttf in Resources */,
 				FA75FD962082B622008A4B42 /* Monoton-Regular.ttf in Resources */,
 				FA9F2B3B209068DF00E5AC00 /* ColorCollectionViewCell.xib in Resources */,
@@ -524,13 +549,16 @@
 				FA9F2B452090711600E5AC00 /* PopUp+UIGestureRecognizer.swift in Sources */,
 				FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */,
 				FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */,
+				FAE04AE1209AE15F007C57CA /* ObjectCollectionViewCell.swift in Sources */,
 				FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */,
 				FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */,
+				FACC5B00209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift in Sources */,
 				FA9F2B3A209068DF00E5AC00 /* ColorCollectionViewCell.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
 				FA43458B207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift in Sources */,
 				FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */,
 				FA9F2B352090686A00E5AC00 /* ColorPickerViewController.swift in Sources */,
+				FAE04ADD209ADFC8007C57CA /* ObjectViewController.swift in Sources */,
 				FA9F2B442090711600E5AC00 /* PopUp+Animator.swift in Sources */,
 				FACC5AFE209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift in Sources */,
 				FA75FD512078038B008A4B42 /* InstagramActivityIndicator.swift in Sources */,

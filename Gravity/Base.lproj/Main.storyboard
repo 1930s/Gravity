@@ -138,6 +138,9 @@
                                                                         </constraints>
                                                                         <inset key="imageEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
                                                                         <state key="normal" image="cube"/>
+                                                                        <connections>
+                                                                            <action selector="objectButtonPressedWithSender:" destination="7dh-A0-qGE" eventType="touchUpInside" id="pgo-Oh-ZW2"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgN-CJ-ZNe">
                                                                         <rect key="frame" x="284" y="0.0" width="44" height="44"/>

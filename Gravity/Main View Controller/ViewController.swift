@@ -78,6 +78,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func objectButtonPressed(sender: UIButton) {
+        let objectViewController = ObjectViewController()
+        objectViewController.didSelectObject = { object in
+            self.state.currentObject = object
+        }
+        objectViewController.modalPresentationStyle = .overCurrentContext
+        self.present(objectViewController, animated: true, completion: nil)
+    }
+    
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
         if sender.state == .began { disableViewAutorotation = true }
         else if sender.state == .ended { disableViewAutorotation = false }
@@ -122,7 +131,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
     
     func endTouchForShape() {
-        guard let transform = getCurrentCameraTransform(distanceInFront: 0.5) else { return }
+        guard let transform = getCurrentCameraTransform() else { return }
         let anchor = ARAnchor(transform: transform.toSimd())
         sceneView.session.add(anchor: anchor)
     }
@@ -190,7 +199,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
                 print(error)
             }
         }
-        self.state.currentObject.type = .shape(.arrow)
+        self.state.currentObject.type = .text(.ribbon)
         // Video recording
         videoRecorder = RecordAR(ARSceneKit: sceneView)
         videoRecorder?.enableAdjsutEnvironmentLighting = true
@@ -279,7 +288,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     func createRibbon() -> SCNNode? {
         let fontName = state.currentObject.fontName()
         let text = state.currentObject.getText()
-        let fontSize = 200.0 as CGFloat
+        let fontSize = 400.0 as CGFloat
         let textSprite = SKLabelNode(fontNamed: fontName)
         textSprite.text = text
         textSprite.verticalAlignmentMode = .center
@@ -300,8 +309,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         
         // initialize
         guard let transform = getCurrentCameraTransform() else { return nil }
-        let ribbon = SCNRibbon(width: fontSize/1000, transforms: [transform])
-        ribbon.textureHorizontalScale = Double(1000 / textureWidth)
+        let ribbon = SCNRibbon(width: fontSize/2000, transforms: [transform])
+        ribbon.textureHorizontalScale = Double(2000 / textureWidth)
         let geometry = ribbon.geometry
         let material = SCNMaterial()
         material.isDoubleSided = true
@@ -437,7 +446,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         self.present(textInputViewController, animated: true, completion: nil)
     }
     
-    private func getCurrentCameraTransform(distanceInFront: Float=0.3) -> SCNMatrix4? {
+    private func getCurrentCameraTransform(distanceInFront: Float=0.5) -> SCNMatrix4? {
         guard let transform = sceneView.session.currentFrame?.camera.transform else { return nil }
         let mat4 = SCNMatrix4(transform)
         let front = mat4.orientation().inverted().multiplied(by: distanceInFront)

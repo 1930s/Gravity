@@ -16,13 +16,33 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     
     var state: AppState = AppState() {
         didSet {
-            
+            // save state
+            do {
+                let data = try PropertyListEncoder().encode(self.state)
+                try data.write(to: FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data"))
+            } catch {
+                print(error)
+            }
+            setActionButton(forObject: state.currentObject)
         }
     }
     var maximumRecordingDuration: TimeInterval = 30.0
     private var recordingTimer: Timer?
     private var recordingStartTime: Date?
     private var videoRecorder: RecordAR?
+    
+    func setActionButton(forObject object: Object) {
+        switch object.type {
+        case .text:
+            self.actionButton.setImage(#imageLiteral(resourceName: "text"), for: .normal)
+        case .shape(let shapeType):
+            switch shapeType {
+            case .arrow:
+                self.actionButton.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
+            }
+            
+        }
+    }
     
     // MARK: - IBOutlets
     @IBOutlet weak var sessionInfoView: UIView!
@@ -37,6 +57,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var activityIndicator: InstagramActivityIndicator!
     @IBOutlet weak var touchDownGestureRecognizer: UILongPressGestureRecognizer!
+    @IBOutlet weak var pinchGestureRecognizer: UIPinchGestureRecognizer!
+    @IBOutlet weak var panGestureRecognizerForHorizontalMovement: UIPanGestureRecognizer!
+    @IBOutlet weak var panGestureRecognizerForVerticalMovement: UIPanGestureRecognizer!
     
     private var anchors: [ARAnchor] = []
     private var currentRibbonNode: SCNNode?
@@ -59,23 +82,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
     
     @IBAction func undoButtonPressed(sender: UIButton) {
-        let alert = UIAlertController(title: "Undo / Clear All", message: "Undo last object or clear all objects.", preferredStyle: .actionSheet)
-        let undo = UIAlertAction(title: "Undo Last", style: .default) { (action) in
-            guard let lastAnchor = self.anchors.last else { return }
-            self.sceneView.session.remove(anchor: lastAnchor)
-        }
-        let reset = UIAlertAction(title: "Clear All", style: .destructive) { (action) in
-            for anchor in self.anchors {
-                self.sceneView.session.remove(anchor: anchor)
-            }
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            
-        }
-        alert.addAction(undo)
-        alert.addAction(reset)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        guard let lastAnchor = self.anchors.last else { return }
+        self.sceneView.session.remove(anchor: lastAnchor)
     }
     
     @IBAction func objectButtonPressed(sender: UIButton) {
@@ -88,6 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
     
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
+        guard sender.location(in: self.view).y < buttonsContainerView.frame.origin.y else { return }
         if sender.state == .began { disableViewAutorotation = true }
         else if sender.state == .ended { disableViewAutorotation = false }
         switch state.currentObject.type {
@@ -105,13 +114,71 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         }
     }
     
+    @IBAction func panGestureForHorizontalMovementRecognized(sender: UIPanGestureRecognizer) {
+        
+    }
+    
+    @IBAction func pinchGestureRecognized(gestureRecognizer: UIPinchGestureRecognizer) {
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            guard let anchor = self.anchors.last, let node = sceneView.node(for: anchor) else { return }
+            let scale = gestureRecognizer.scale
+            node.scale = SCNVector3(scale, scale, scale)
+            gestureRecognizer.scale = 1.0
+        }
+    }
+    
     // MARK: OBJECT / Arrow
+    public enum GradientDirection {
+        case Up
+        case Left
+        case UpLeft
+        case UpRight
+    }
+    func gradientImage(size: CGSize, color1: UIColor, color2: UIColor, direction: GradientDirection = .Up) -> CGImage? {
+        
+        let _color1 = CIColor(color: color1)
+        let _color2 = CIColor(color: color2)
+        
+        let context = CIContext(options: nil)
+        let filter = CIFilter(name: "CILinearGradient")
+        var startVector: CIVector
+        var endVector: CIVector
+        
+        filter!.setDefaults()
+        
+        switch direction {
+        case .Up:
+            startVector = CIVector(x: size.width * 0.5, y: 0)
+            endVector = CIVector(x: size.width * 0.5, y: size.height)
+        case .Left:
+            startVector = CIVector(x: size.width, y: size.height * 0.5)
+            endVector = CIVector(x: 0, y: size.height * 0.5)
+        case .UpLeft:
+            startVector = CIVector(x: size.width, y: 0)
+            endVector = CIVector(x: 0, y: size.height)
+        case .UpRight:
+            startVector = CIVector(x: 0, y: 0)
+            endVector = CIVector(x: size.width, y: size.height)
+        }
+        
+        filter!.setValue(startVector, forKey: "inputPoint0")
+        filter!.setValue(endVector, forKey: "inputPoint1")
+        filter!.setValue(_color1, forKey: "inputColor0")
+        filter!.setValue(_color2, forKey: "inputColor1")
+        
+        let image = context.createCGImage(filter!.outputImage!, from: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        return image
+    }
+    
     func beginTouchForShape() {
         // Add shape to camera node
         let arrow = UIBezierPath.arrowShape(width: 0.1, height: 0.2, headWidthRatio: 0.5, headHeightRatio: 0.5)
         let shape = SCNShape(path: arrow, extrusionDepth: 0.05)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.green.cgColor
+        let color = self.state.currentObject.backgroundColor ?? UIColor.gravityBlue()
+        let color2 = color.modified(withAdditionalHue: 0.67, additionalSaturation: 0.0, additionalBrightness: 0.0)//UIColor.color(33, 209, 89)
+        let image = gradientImage(size: .init(width: 1, height: 300), color1: color, color2: color2)
+        material.diffuse.contents = image
         shape.materials = [material]
         let node = SCNNode(geometry: shape)
         //node.scale = SCNVector3(0.01, 0.01, 0.01)
@@ -173,6 +240,54 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         currentRibbonNode.geometry = geometry
     }
     
+    
+    func createRibbon() -> SCNNode? {
+        let fontName = state.currentObject.fontName()
+        let text = state.currentObject.getText()
+        let fontSize = 400.0 as CGFloat
+        let textSprite = SKLabelNode(fontNamed: fontName)
+        textSprite.text = text
+        textSprite.verticalAlignmentMode = .center
+        textSprite.horizontalAlignmentMode = .center
+        textSprite.lineBreakMode = .byWordWrapping
+        textSprite.numberOfLines = 1
+        textSprite.fontSize = fontSize
+        textSprite.fontColor = state.currentObject.textColor()
+        let textureWidth = textSprite.frame.width + 100
+        let textureHeight = textSprite.frame.height + 40
+        let materialScene = SKScene(size: CGSize(width: textureWidth, height: textureHeight))
+        materialScene.anchorPoint = .init(x: 0.5, y: 0.5)
+        textSprite.zRotation = .pi
+        textSprite.xScale = -1.0
+        let cropNode = SKCropNode()
+        let texture = gradientImage(size: materialScene.size, color1: state.currentObject.textColor(), color2: state.currentObject.textColor().modified(withAdditionalHue: 0.67, additionalSaturation: 0, additionalBrightness: 0))
+        let textureNode = SKSpriteNode(texture: SKTexture(cgImage: texture!))
+        cropNode.addChild(textureNode)
+        cropNode.maskNode = textSprite
+        //materialScene.addChild(textSprite)
+        materialScene.addChild(cropNode)
+        materialScene.backgroundColor = state.currentObject.backgroundColor ?? .clear
+        materialScene.scaleMode = .aspectFit
+        
+        // initialize
+        guard let transform = getCurrentCameraTransform() else { return nil }
+        let ribbon = SCNRibbon(width: fontSize/2000, transforms: [transform])
+        ribbon.textureHorizontalScale = Double(2000 / textureWidth)
+        let geometry = ribbon.geometry
+        let material = SCNMaterial()
+        material.isDoubleSided = true
+        material.diffuse.contents = materialScene
+        material.diffuse.wrapS = .repeat
+        material.diffuse.wrapT = .repeat
+        geometry.materials = [material]
+        
+        currentRibbon = ribbon
+        currentRibbonMaterial = material
+        currentRibbonNode = SCNNode(geometry: geometry)
+        
+        return currentRibbonNode
+    }
+    
     // MARK: TextInputViewControllerDelegate
     func textInput(didFinishWith text: String, font: UIFont, color: UIColor, backgroundColor: UIColor?) {
         self.dismiss(animated: true, completion: nil)
@@ -191,15 +306,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         if let data = try? Data(contentsOf: FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data")) {
             state = (try? PropertyListDecoder().decode(AppState.self, from: data)) ?? AppState()
         }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { (notification) in
-            do {
-                let data = try PropertyListEncoder().encode(self.state)
-                try data.write(to: FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data"))
-            } catch {
-                print(error)
-            }
-        }
-        self.state.currentObject.type = .text(.ribbon)
         // Video recording
         videoRecorder = RecordAR(ARSceneKit: sceneView)
         videoRecorder?.enableAdjsutEnvironmentLighting = true
@@ -285,47 +391,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
 
     // MARK: - ARSCNViewDelegate
     
-    func createRibbon() -> SCNNode? {
-        let fontName = state.currentObject.fontName()
-        let text = state.currentObject.getText()
-        let fontSize = 400.0 as CGFloat
-        let textSprite = SKLabelNode(fontNamed: fontName)
-        textSprite.text = text
-        textSprite.verticalAlignmentMode = .center
-        textSprite.horizontalAlignmentMode = .center
-        textSprite.lineBreakMode = .byWordWrapping
-        textSprite.numberOfLines = 1
-        textSprite.fontSize = fontSize
-        textSprite.fontColor = state.currentObject.textColor()
-        let textureWidth = textSprite.frame.width + 100
-        let textureHeight = textSprite.frame.height + 20
-        let materialScene = SKScene(size: CGSize(width: textureWidth, height: textureHeight))
-        materialScene.anchorPoint = .init(x: 0.5, y: 0.5)
-        textSprite.zRotation = .pi
-        textSprite.xScale = -1.0
-        materialScene.addChild(textSprite)
-        materialScene.backgroundColor = state.currentObject.backgroundColor ?? .clear
-        materialScene.scaleMode = .aspectFit
-        
-        // initialize
-        guard let transform = getCurrentCameraTransform() else { return nil }
-        let ribbon = SCNRibbon(width: fontSize/2000, transforms: [transform])
-        ribbon.textureHorizontalScale = Double(2000 / textureWidth)
-        let geometry = ribbon.geometry
-        let material = SCNMaterial()
-        material.isDoubleSided = true
-        material.diffuse.contents = materialScene
-        material.diffuse.wrapS = .repeat
-        material.diffuse.wrapT = .repeat
-        geometry.materials = [material]
-        
-        currentRibbon = ribbon
-        currentRibbonMaterial = material
-        currentRibbonNode = SCNNode(geometry: geometry)
-        
-        return currentRibbonNode
-    }
-    
     /// - Tag: PlaceARContent
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         switch state.currentObject.type {
@@ -356,13 +421,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     // MARK: - ARSessionDelegate
 
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        self.anchors += anchors
         guard let frame = session.currentFrame else { return }
         needsHelpInfo = false
         updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
-        self.anchors += anchors
     }
 
     func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
+        for anchor in anchors {
+            if let index = self.anchors.index(of: anchor) {
+                self.anchors.remove(at: index)
+            }
+        }
         guard let frame = session.currentFrame else { return }
         updateSessionInfoLabel(for: frame, trackingState: frame.camera.trackingState)
     }

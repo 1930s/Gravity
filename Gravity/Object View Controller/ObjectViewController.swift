@@ -51,14 +51,19 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Object", for: indexPath) as! ObjectCollectionViewCell
         let object = objects[indexPath.item]
-        if object.type == .text(.ribbon) {
-            cell.imageView.image = #imageLiteral(resourceName: "ribbon-3d")
-            cell.label.text = "Ribbon Text"
-        } else {
-            cell.imageView.image = #imageLiteral(resourceName: "3d-arrow")
-            cell.label.text = "Arrow"
+        switch object.type {
+        case .text:
+            cell.imageView.image = #imageLiteral(resourceName: "text")
+            cell.imageView.tintColor = object.textColor()
+            cell.label.text = object.text ?? "Text"
+        case .shape(let shapeType):
+            switch shapeType {
+            case .arrow:
+                cell.imageView.image = #imageLiteral(resourceName: "arrow")
+                cell.imageView.tintColor = object.backgroundColor ?? UIColor.gravityBlue()
+                cell.label.text = "Arrow"
+            }
         }
-        cell.imageView.tintColor = UIColor.white
         return cell
     }
     

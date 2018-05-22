@@ -12,13 +12,37 @@ extension UIColor {
     class func color(_ r: Int, _ g: Int, _ b: Int) -> UIColor {
         return UIColor(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: 1)
     }
+    
+    func modified(withAdditionalHue hue: CGFloat, additionalSaturation: CGFloat, additionalBrightness: CGFloat) -> UIColor {
+        
+        var currentHue: CGFloat = 0.0
+        var currentSaturation: CGFloat = 0.0
+        var currentBrigthness: CGFloat = 0.0
+        var currentAlpha: CGFloat = 0.0
+        
+        if self.getHue(&currentHue, saturation: &currentSaturation, brightness: &currentBrigthness, alpha: &currentAlpha){
+            while currentHue + hue > 1.0 {
+                currentHue -= 1.0
+            }
+            return UIColor(hue: currentHue + hue,
+                           saturation: currentSaturation + additionalSaturation,
+                           brightness: currentBrigthness + additionalBrightness,
+                           alpha: currentAlpha)
+        } else {
+            return self
+        }
+    }
+    
+    class func gravityBlue() -> UIColor {
+        return color(25, 151, 240)
+    }
 }
 
 class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet var collectionView: UICollectionView!
     var didSelectColor: (UIColor) -> Void = { _ in }
-    var colors: [UIColor] = [UIColor.clear, UIColor.black, UIColor.white, UIColor.color(63, 153, 237), .color(115, 190, 87), .color(252, 201, 101), .color(251, 140, 63), .color(235, 75, 63), .color(207, 21, 106), .color(162, 29, 184)]
+    var colors: [UIColor] = [UIColor.clear, UIColor.black, UIColor.white, UIColor.gravityBlue(), .color(115, 190, 87), .color(252, 201, 101), .color(251, 140, 63), .color(235, 75, 63), .color(207, 21, 106), .color(162, 29, 184)]
     init() {
         super.init(nibName: "ColorPickerViewController", bundle: nil)
     }

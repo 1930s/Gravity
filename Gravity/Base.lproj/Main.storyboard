@@ -29,6 +29,8 @@
                                 <connections>
                                     <outlet property="delegate" destination="7dh-A0-qGE" id="6YV-aS-dot"/>
                                     <outletCollection property="gestureRecognizers" destination="26z-Ka-QnW" appends="YES" id="nxK-AP-wc4"/>
+                                    <outletCollection property="gestureRecognizers" destination="sFs-58-F0Q" appends="YES" id="hBY-MO-h2P"/>
+                                    <outletCollection property="gestureRecognizers" destination="K2W-uD-G86" appends="YES" id="Fsc-yH-YzN"/>
                                 </connections>
                             </arscnView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-iu-90u" customClass="InstagramActivityIndicator" customModule="Gravity" customModuleProvider="target">
@@ -215,6 +217,8 @@
                         <outlet property="buttonsVisualEffectView" destination="I3N-0E-WMj" id="p2X-91-Ney"/>
                         <outlet property="helpButton" destination="pgN-CJ-ZNe" id="Wou-jF-HEV"/>
                         <outlet property="objectButton" destination="Cpk-te-mT7" id="2MT-9R-fPU"/>
+                        <outlet property="panGestureRecognizerForHorizontalMovement" destination="K2W-uD-G86" id="Hoo-NR-bHx"/>
+                        <outlet property="pinchGestureRecognizer" destination="sFs-58-F0Q" id="rWQ-Gm-hNi"/>
                         <outlet property="recordButton" destination="W46-Ja-uoI" id="92p-WV-uxz"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="sgr-g8-kdG"/>
                         <outlet property="sessionInfoLabel" destination="hCE-IA-wLv" id="fqx-0o-IdX"/>
@@ -230,6 +234,12 @@
                         <action selector="touchDownRecognizedWithSender:" destination="7dh-A0-qGE" id="g7x-xz-uPo"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <pinchGestureRecognizer id="sFs-58-F0Q">
+                    <connections>
+                        <action selector="pinchGestureRecognizedWithGestureRecognizer:" destination="7dh-A0-qGE" id="Iig-vK-Xcj"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="2" maximumNumberOfTouches="2" id="K2W-uD-G86"/>
             </objects>
             <point key="canvasLocation" x="1029.5999999999999" y="-222.63868065967017"/>
         </scene>

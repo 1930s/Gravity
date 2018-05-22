@@ -52,6 +52,7 @@ enum TextObjectType: Int, Codable {
 // 100...
 enum ShapeObjectType: Int, Codable {
     case arrow = 100
+    case location = 101
 }
 // 1000...
 enum MediaObjectType: Int, Codable {
@@ -116,7 +117,7 @@ struct Object: Codable, Hashable {
     }
     
     func textColor() -> UIColor {
-        return textAttributes.textColor ?? UIColor.white
+        return textAttributes.textColor ?? UIColor.gravityBlue()
     }
 }
 

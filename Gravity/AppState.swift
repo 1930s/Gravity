@@ -22,14 +22,17 @@ struct AppState: Codable {
 enum ObjectType: RawRepresentable, Codable {
     case text(TextObjectType) // 0...10
     case shape(ShapeObjectType) // 100...110
+    case media(MediaObjectType) // 1000...1100
     init?(rawValue: Int) {
         switch rawValue {
         case 0...3:
             self = ObjectType.text(TextObjectType(rawValue: rawValue)!)
         case 100...200:
             self = ObjectType.shape(ShapeObjectType(rawValue: rawValue)!)
+        case 1000...1100:
+            self = ObjectType.media(MediaObjectType(rawValue: rawValue)!)
         default:
-            self = .text(.twoDimensional)
+            self = .text(.ribbon)
         }
     }
     var rawValue: Int {
@@ -37,6 +40,8 @@ enum ObjectType: RawRepresentable, Codable {
         case .text(let type):
             return type.rawValue
         case .shape(let type):
+            return type.rawValue
+        case .media(let type):
             return type.rawValue
         }
     }
@@ -65,6 +70,7 @@ struct Object: Codable, Hashable {
     var text: String?
     var textAttributes: TextAttributes = TextAttributes()
     var backgroundColor: UIColor?
+    var mediaURL: URL?
     
     var hashValue: Int {
         return identifier.hashValue
@@ -78,6 +84,7 @@ struct Object: Codable, Hashable {
         case text
         case textAttributes
         case backgroundColor
+        case mediaURL
     }
     
     init(type: ObjectType) {
@@ -92,6 +99,7 @@ struct Object: Codable, Hashable {
         if let colorData = try values.decodeIfPresent(Data.self, forKey: .backgroundColor) {
             backgroundColor = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? UIColor
         }
+        mediaURL = try values.decodeIfPresent(URL.self, forKey: .mediaURL)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -102,6 +110,7 @@ struct Object: Codable, Hashable {
         if let color = backgroundColor {
             try container.encode(NSKeyedArchiver.archivedData(withRootObject: color), forKey: .backgroundColor)
         }
+        try container.encodeIfPresent(mediaURL, forKey: .mediaURL)
     }
     
     func fontName() -> String {

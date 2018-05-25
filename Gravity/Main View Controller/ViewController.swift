@@ -11,8 +11,9 @@ import SpriteKit
 import ARKit
 import ARVideoKit
 import AVKit
+import MobileCoreServices
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, TextInputViewControllerDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, TextInputViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ObjectViewControllerDelegate {
     
     var state: AppState = AppState() {
         didSet {
@@ -24,12 +25,62 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
                 print(error)
             }
             setActionButton(forObject: state.currentObject)
+            if state.currentObject.type == .media(.image) && self.currentImage == nil {
+                guard let mediaURL = state.currentObject.mediaURL?.absoluteString else { return }
+                guard let mediaFolder = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
+                let path = mediaFolder.appendingPathComponent(mediaURL, isDirectory: false)
+                guard let imageData = try? Data(contentsOf: path) else { return }
+                self.currentImage = UIImage(data: imageData)?.fixedOrientation().scaled(to: CGSize(width: 1024, height: 1024), scalingMode: .aspectFit)
+            }
         }
     }
     var maximumRecordingDuration: TimeInterval = 30.0
     private var recordingTimer: Timer?
     private var recordingStartTime: Date?
     private var videoRecorder: RecordAR?
+    
+    func objectViewController(didSelect object: Object) {
+        self.state.currentObject = object
+        switch object.type {
+        case .media:
+            presentImagePicker()
+        default:
+            break
+        }
+    }
+    
+    func presentImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) ?? []
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        defer {
+            self.dismiss(animated: true, completion: nil)
+        }
+        guard let mediaType = info[UIImagePickerControllerMediaType] as? String else { return }
+        if mediaType == kUTTypeImage as String {
+            guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+            do {
+                let mediaURL = UUID().uuidString.appending(".jpg")
+                let mediaFolder = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                try UIImageJPEGRepresentation(image, 1.0)?.write(to: mediaFolder.appendingPathComponent(mediaURL, isDirectory: false))
+                self.currentImage = nil
+                var object = self.state.currentObject
+                object.type = .media(.image)
+                object.mediaURL = URL(string: mediaURL)
+                self.state.currentObject = object
+            } catch {
+                print(error)
+            }
+        }
+    }
     
     func setActionButton(forObject object: Object) {
         switch object.type {
@@ -39,8 +90,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             switch shapeType {
             case .arrow:
                 self.actionButton.setImage(#imageLiteral(resourceName: "arrow"), for: .normal)
+            case .location:
+                self.actionButton.setImage(#imageLiteral(resourceName: "location"), for: .normal)
             }
-            
+        case .media(let mediaType):
+            switch mediaType {
+            case .image:
+                self.actionButton.setImage(#imageLiteral(resourceName: "image"), for: .normal)
+            }
         }
     }
     
@@ -69,6 +126,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     private var needsHelpInfo: Bool = true
     private var currentNode: SCNNode?
     private var disableViewAutorotation = false
+    private var currentImage: UIImage?
     
     // MARK: Actions
     
@@ -78,6 +136,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             self.presentTextInputViewController()
         case .shape(let shapeType):
             break
+        case .media(_):
+            self.presentImagePicker()
         }
     }
     
@@ -88,9 +148,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     
     @IBAction func objectButtonPressed(sender: UIButton) {
         let objectViewController = ObjectViewController()
-        objectViewController.didSelectObject = { object in
-            self.state.currentObject = object
-        }
+        objectViewController.delegate = self
         objectViewController.modalPresentationStyle = .overCurrentContext
         self.present(objectViewController, animated: true, completion: nil)
     }
@@ -111,6 +169,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         case .shape:
             if sender.state == .began { beginTouchForShape() }
             else if sender.state == .ended { endTouchForShape() }
+        case .media(_):
+            if sender.state == .began { beginTouchForImage() }
+            else if sender.state == .ended { endTouchForImage() }
         }
     }
     
@@ -127,7 +188,49 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         }
     }
     
-    // MARK: OBJECT / Arrow
+    // MARK: Object > Media > Image
+    func beginTouchForImage() {
+        // Add shape to camera node
+        guard let image = currentImage else { return }
+        var height: CGFloat = 0.25
+        var width: CGFloat = 0.25
+        if image.size.width > image.size.height {
+            height = image.size.height / image.size.width * width
+        } else {
+            width = image.size.width / image.size.height * height
+        }
+        let shape = SCNPlane(width: width, height: height)
+        let material = SCNMaterial()
+        material.diffuse.contents = image
+        shape.materials = [material]
+        let node = SCNNode(geometry: shape)
+        //node.scale = SCNVector3(0.01, 0.01, 0.01)
+        let cameraNode = sceneView.pointOfView
+        let parentNode = SCNNode()
+        parentNode.addChildNode(node)
+        //parentNode.localRotate(by: SCNQuaternion(angle: .pi, axis: SCNVector3(0, 0, 1)))
+        parentNode.position = SCNVector3(0, 0, -0.5)
+        cameraNode?.addChildNode(parentNode)
+        currentNode = parentNode
+    }
+    
+    func endTouchForImage() {
+        guard let transform = getCurrentCameraTransform() else { return }
+        let anchor = ARAnchor(transform: transform.toSimd())
+        sceneView.session.add(anchor: anchor)
+    }
+    
+    func imageNode() -> SCNNode? {
+        guard let shape = currentNode else { return nil }
+        shape.removeFromParentNode()
+        shape.transform = SCNMatrix4MakeRotation(.pi/2, 0, 0, 1)
+        let node = SCNNode()
+        node.addChildNode(shape)
+        currentNode = nil
+        return node
+    }
+    
+    // MARK: Object > Shape > Arrow
     public enum GradientDirection {
         case Up
         case Left
@@ -407,6 +510,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             }
         case .shape(let shapeType):
             return shapeNode()
+        case .media(let mediaType):
+            switch mediaType {
+            case .image:
+                return imageNode()
+            }
         }
         return nil
     }

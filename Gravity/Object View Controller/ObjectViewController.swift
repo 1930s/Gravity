@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol ObjectViewControllerDelegate {
+    func objectViewController(didSelect object: Object)
+}
+
 class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var navigationBar: UINavigationBar!
-    var didSelectObject: (Object) -> Void = { _ in }
+    var delegate: ObjectViewControllerDelegate?
     var objects: [Object] = []
     
     init() {
@@ -29,7 +33,9 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.register(objectCellNib, forCellWithReuseIdentifier: "Object")
         let ribbonObject = Object(type: .text(.ribbon))
         let arrowObject = Object(type: .shape(.arrow))
-        objects = [ribbonObject, arrowObject]
+        let locationObject = Object(type: .shape(.location))
+        let imageObject = Object(type: .media(.image))
+        objects = [ribbonObject, arrowObject, locationObject, imageObject]
         collectionView.contentInset.top = navigationBar.frame.height
         collectionView.backgroundColor = nil
         navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -62,6 +68,17 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
                 cell.imageView.image = #imageLiteral(resourceName: "arrow")
                 cell.imageView.tintColor = object.backgroundColor ?? UIColor.gravityBlue()
                 cell.label.text = "Arrow"
+            case .location:
+                cell.imageView.image = #imageLiteral(resourceName: "location")
+                cell.imageView.tintColor = object.backgroundColor ?? UIColor.gravityBlue()
+                cell.label.text = "Location"
+            }
+        case .media(let mediaType):
+            switch mediaType {
+            case .image:
+                cell.imageView.image = #imageLiteral(resourceName: "image")
+                cell.imageView.tintColor = object.backgroundColor ?? UIColor.gravityBlue()
+                cell.label.text = "Image"
             }
         }
         return cell
@@ -69,7 +86,7 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        didSelectObject(objects[indexPath.row])
+        delegate?.objectViewController(didSelect: objects[indexPath.row])
         self.dismiss(animated: true, completion: nil)
     }
     

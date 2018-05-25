@@ -62,6 +62,7 @@
 		FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */; };
 		FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */; };
 		FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80F2E9208358F200AA7698 /* CircularButtonView.swift */; };
+		FA86AC7B20B69A5A002385E1 /* UIImage+MaximumSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */; };
 		FA9F2B352090686A00E5AC00 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */; };
 		FA9F2B362090686A00E5AC00 /* ColorPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */; };
 		FA9F2B3A209068DF00E5AC00 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */; };
@@ -172,6 +173,7 @@
 		FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNMathExtensions.swift; sourceTree = "<group>"; };
 		FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNRibbon.swift; sourceTree = "<group>"; };
 		FA80F2E9208358F200AA7698 /* CircularButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButtonView.swift; sourceTree = "<group>"; };
+		FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+MaximumSize.swift"; sourceTree = "<group>"; };
 		FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerViewController.xib; sourceTree = "<group>"; };
 		FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				FA75FD3D20774484008A4B42 /* UserDefaults.swift */,
 				FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */,
 				FACC5AFF209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift */,
+				FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */,
 				FAE04ADA209ADF8F007C57CA /* Object View Controller */,
 				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
 				FA43458E207FEE9B00339ACF /* Text Input View Controller */,
@@ -541,6 +544,7 @@
 				FA434591207FF25A00339ACF /* TextInputViewController.swift in Sources */,
 				FA9F2B432090711600E5AC00 /* PopUp.swift in Sources */,
 				FA75FD4E2077FFBC008A4B42 /* RecordButton.swift in Sources */,
+				FA86AC7B20B69A5A002385E1 /* UIImage+MaximumSize.swift in Sources */,
 				FA4E99322084673700C3E9AA /* VideoPreviewViewController.swift in Sources */,
 				FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */,
 				FA75FD34207733EA008A4B42 /* AppState.swift in Sources */,

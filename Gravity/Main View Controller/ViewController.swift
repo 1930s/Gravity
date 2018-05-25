@@ -166,8 +166,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             default:
                 break
             }
-        case .shape:
-            if sender.state == .began { beginTouchForShape() }
+        case .shape(let shapeType):
+            if sender.state == .began { beginTouchForShape(shapeType) }
             else if sender.state == .ended { endTouchForShape() }
         case .media(_):
             if sender.state == .began { beginTouchForImage() }
@@ -273,10 +273,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         return image
     }
     
-    func beginTouchForShape() {
+    func beginTouchForShape(_ type: ShapeObjectType) {
         // Add shape to camera node
-        let arrow = UIBezierPath.arrowShape(width: 0.1, height: 0.2, headWidthRatio: 0.5, headHeightRatio: 0.5)
-        let shape = SCNShape(path: arrow, extrusionDepth: 0.05)
+        var shapePath: UIBezierPath = UIBezierPath()
+        var extrusionDepth: CGFloat = 0.05
+        var scale = 1.0
+        switch type {
+        case .arrow:
+            shapePath = UIBezierPath.arrowShape(width: 0.1, height: 0.2, headWidthRatio: 0.5, headHeightRatio: 0.5)
+        case .location:
+            shapePath = UIBezierPath.locationSymbol(scale: 0.001)
+            shapePath.flatness = 0.00001
+            extrusionDepth = 0.01
+            scale = 0.6
+        }
+        let shape = SCNShape(path: shapePath, extrusionDepth: extrusionDepth)
         let material = SCNMaterial()
         let color = self.state.currentObject.backgroundColor ?? UIColor.gravityBlue()
         let color2 = color.modified(withAdditionalHue: 0.67, additionalSaturation: 0.0, additionalBrightness: 0.0)//UIColor.color(33, 209, 89)
@@ -284,6 +295,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         material.diffuse.contents = image
         shape.materials = [material]
         let node = SCNNode(geometry: shape)
+        node.scale = SCNVector3(scale, scale, scale)
         //node.scale = SCNVector3(0.01, 0.01, 0.01)
         let cameraNode = sceneView.pointOfView
         let rotationAnimation = CABasicAnimation(keyPath: "rotation")

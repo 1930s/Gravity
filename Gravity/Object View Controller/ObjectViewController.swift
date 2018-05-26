@@ -61,7 +61,7 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
         case .text:
             cell.imageView.image = #imageLiteral(resourceName: "text")
             cell.imageView.tintColor = object.textColor()
-            cell.label.text = object.text ?? "Text"
+            cell.label.text = indexPath.row < 3 ? "Text" : object.text
         case .shape(let shapeType):
             switch shapeType {
             case .arrow:

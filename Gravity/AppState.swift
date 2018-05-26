@@ -89,6 +89,20 @@ struct Object: Codable, Hashable {
     
     init(type: ObjectType) {
         self.type = type
+        switch type {
+        case .text(_):
+            self.text = randomQuote()
+        default:
+            break
+        }
+    }
+    
+    func randomQuote() -> String? {
+        guard let url = Bundle.main.url(forResource: "Quotes", withExtension: "plist") else { return nil }
+        guard let quotes = NSArray(contentsOf: url) as? [String] else { return nil }
+        guard quotes.count > 0 else { return nil }
+        let randomIndex = arc4random_uniform(UInt32(quotes.count))
+        return quotes[Int(randomIndex)]
     }
     
     init(from decoder: Decoder) throws {

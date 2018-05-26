@@ -63,6 +63,7 @@
 		FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */; };
 		FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80F2E9208358F200AA7698 /* CircularButtonView.swift */; };
 		FA86AC7B20B69A5A002385E1 /* UIImage+MaximumSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */; };
+		FA86AC7D20B81979002385E1 /* Quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA86AC7C20B81979002385E1 /* Quotes.plist */; };
 		FA9F2B352090686A00E5AC00 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */; };
 		FA9F2B362090686A00E5AC00 /* ColorPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */; };
 		FA9F2B3A209068DF00E5AC00 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */; };
@@ -174,6 +175,7 @@
 		FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNRibbon.swift; sourceTree = "<group>"; };
 		FA80F2E9208358F200AA7698 /* CircularButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButtonView.swift; sourceTree = "<group>"; };
 		FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+MaximumSize.swift"; sourceTree = "<group>"; };
+		FA86AC7C20B81979002385E1 /* Quotes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Quotes.plist; sourceTree = "<group>"; };
 		FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerViewController.xib; sourceTree = "<group>"; };
 		FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				842316E51F2030C300D189D1 /* Main.storyboard */,
 				842316EA1F2030C300D189D1 /* LaunchScreen.storyboard */,
 				842316ED1F2030C300D189D1 /* Info.plist */,
+				FA86AC7C20B81979002385E1 /* Quotes.plist */,
 				84ABEA091F3D15E70052D547 /* Assets.scnassets */,
 				112FE5661F4F95A200BF85EA /* Assets.xcassets */,
 			);
@@ -508,6 +511,7 @@
 				FA75FD8C2082B622008A4B42 /* Diplomata-Regular.ttf in Resources */,
 				FA75FD8F2082B622008A4B42 /* IndieFlower.ttf in Resources */,
 				FA75FD6E2082B5E4008A4B42 /* Caveat-Regular.ttf in Resources */,
+				FA86AC7D20B81979002385E1 /* Quotes.plist in Resources */,
 				FA75FE2F2082BA02008A4B42 /* BowlbyOneSC-Regular.ttf in Resources */,
 				FA75FD992082B622008A4B42 /* Ramabhadra-Regular.ttf in Resources */,
 				FA75FD882082B622008A4B42 /* LuckiestGuy-Regular.ttf in Resources */,

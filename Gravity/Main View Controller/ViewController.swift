@@ -135,9 +135,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         case .text(let textType):
             self.presentTextInputViewController()
         case .shape(let shapeType):
-            break
+            self.presentColorPicker()
         case .media(_):
             self.presentImagePicker()
+        }
+    }
+    
+    func presentColorPicker() {
+        let popup = PopUp()
+        let colorPicker = ColorPickerViewController()
+        popup.presentingViewController = self
+        popup.presentedViewController = colorPicker
+        popup.present(from: CGPoint(x: self.view.frame.midX, y: self.buttonsContainerView.frame.minY - 90), preferredSize: CGSize(width: self.view.bounds.width-10, height: 60.0))
+        //self.popUp = popup
+        //popup.passthroughViews = [self.navigationBar]
+        colorPicker.colors.removeFirst()
+        colorPicker.didSelectColor = { color in
+            self.dismiss(animated: true, completion: nil)
+            self.state.currentObject.backgroundColor = color
         }
     }
     

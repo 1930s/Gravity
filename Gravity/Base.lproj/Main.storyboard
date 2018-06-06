@@ -152,6 +152,9 @@
                                                                         </constraints>
                                                                         <inset key="imageEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
                                                                         <state key="normal" image="info"/>
+                                                                        <connections>
+                                                                            <action selector="videosButtonPressedWithSender:" destination="7dh-A0-qGE" eventType="touchUpInside" id="2ne-gv-PTs"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>

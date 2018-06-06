@@ -13,7 +13,7 @@ import ARVideoKit
 import AVKit
 import MobileCoreServices
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, TextInputViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ObjectViewControllerDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, TextInputViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ObjectViewControllerDelegate, VideosViewControllerDelegate {
     
     var state: AppState = AppState() {
         didSet {
@@ -128,6 +128,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     private var disableViewAutorotation = false
     private var currentImage: UIImage?
     
+    func videosViewController(_ viewController: VideosViewController, didSelectVideo url: URL) {
+        let previewViewController = VideoPreviewViewController(fileURL: url)
+        DispatchQueue.main.async {
+            previewViewController.modalPresentationStyle = .overCurrentContext
+            viewController.present(previewViewController, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: Actions
     
     @IBAction func actionButtonPressed(sender: UIButton) {
@@ -166,6 +174,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         objectViewController.delegate = self
         objectViewController.modalPresentationStyle = .overCurrentContext
         self.present(objectViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func videosButtonPressed(sender: UIButton) {
+        let videosViewController = VideosViewController()
+        videosViewController.delegate = self
+        videosViewController.modalPresentationStyle = .overCurrentContext
+        self.present(videosViewController, animated: true, completion: nil)
     }
     
     @IBAction func touchDownRecognized(sender: UILongPressGestureRecognizer) {
@@ -502,7 +517,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         
         // Show debug UI to view performance metrics (e.g. frames per second).
         //sceneView.showsStatistics = true
-        self.videoRecorder?.record(forDuration: 3.0)
+        self.videoRecorder?.record(forDuration: 2.0, { (url) in
+            do {
+                try FileManager.default.removeItem(at: url)
+            } catch {
+                print(error)
+            }
+        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {

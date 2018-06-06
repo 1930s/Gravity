@@ -68,7 +68,6 @@ class VideoPreviewViewController: UIViewController {
     }
     
     @IBAction func deleteVideo(sender: UIButton) {
-        try? FileManager.default.removeItem(at: url)
         self.dismiss(animated: true, completion: nil)
     }
     

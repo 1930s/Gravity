@@ -62,8 +62,12 @@
 		FA7FF8042074234F00C969A9 /* SCNMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */; };
 		FA7FF8062074AAC600C969A9 /* SCNRibbon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */; };
 		FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80F2E9208358F200AA7698 /* CircularButtonView.swift */; };
+		FA815C6120C7BE340088C92E /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA815C5F20C7BE340088C92E /* VideoTableViewCell.swift */; };
+		FA815C6220C7BE340088C92E /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA815C6020C7BE340088C92E /* VideoTableViewCell.xib */; };
 		FA86AC7B20B69A5A002385E1 /* UIImage+MaximumSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */; };
 		FA86AC7D20B81979002385E1 /* Quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA86AC7C20B81979002385E1 /* Quotes.plist */; };
+		FA9C52AF20BE91E90060BB30 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C52AD20BE91E90060BB30 /* VideosViewController.swift */; };
+		FA9C52B020BE91E90060BB30 /* VideosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9C52AE20BE91E90060BB30 /* VideosViewController.xib */; };
 		FA9F2B352090686A00E5AC00 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */; };
 		FA9F2B362090686A00E5AC00 /* ColorPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */; };
 		FA9F2B3A209068DF00E5AC00 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */; };
@@ -174,8 +178,12 @@
 		FA7FF8032074234E00C969A9 /* SCNMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNMathExtensions.swift; sourceTree = "<group>"; };
 		FA7FF8052074AAC600C969A9 /* SCNRibbon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNRibbon.swift; sourceTree = "<group>"; };
 		FA80F2E9208358F200AA7698 /* CircularButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButtonView.swift; sourceTree = "<group>"; };
+		FA815C5F20C7BE340088C92E /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		FA815C6020C7BE340088C92E /* VideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
 		FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+MaximumSize.swift"; sourceTree = "<group>"; };
 		FA86AC7C20B81979002385E1 /* Quotes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Quotes.plist; sourceTree = "<group>"; };
+		FA9C52AD20BE91E90060BB30 /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
+		FA9C52AE20BE91E90060BB30 /* VideosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideosViewController.xib; sourceTree = "<group>"; };
 		FA9F2B332090686A00E5AC00 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		FA9F2B342090686A00E5AC00 /* ColorPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerViewController.xib; sourceTree = "<group>"; };
 		FA9F2B38209068DF00E5AC00 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -238,6 +246,7 @@
 				FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */,
 				FACC5AFF209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift */,
 				FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */,
+				FA9C52B120BE91EE0060BB30 /* Videos View Controller */,
 				FAE04ADA209ADF8F007C57CA /* Object View Controller */,
 				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
 				FA43458E207FEE9B00339ACF /* Text Input View Controller */,
@@ -384,6 +393,17 @@
 			path = "Video Player View Controller";
 			sourceTree = "<group>";
 		};
+		FA9C52B120BE91EE0060BB30 /* Videos View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FA9C52AD20BE91E90060BB30 /* VideosViewController.swift */,
+				FA9C52AE20BE91E90060BB30 /* VideosViewController.xib */,
+				FA815C5F20C7BE340088C92E /* VideoTableViewCell.swift */,
+				FA815C6020C7BE340088C92E /* VideoTableViewCell.xib */,
+			);
+			path = "Videos View Controller";
+			sourceTree = "<group>";
+		};
 		FA9F2B372090687500E5AC00 /* Color Picker View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,8 +518,10 @@
 				84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */,
 				FA75FD872082B622008A4B42 /* SpaceMono-Regular.ttf in Resources */,
 				FAE04AE2209AE15F007C57CA /* ObjectCollectionViewCell.xib in Resources */,
+				FA815C6220C7BE340088C92E /* VideoTableViewCell.xib in Resources */,
 				FA9F2B362090686A00E5AC00 /* ColorPickerViewController.xib in Resources */,
 				FA75FD972082B622008A4B42 /* Quicksand-Regular.ttf in Resources */,
+				FA9C52B020BE91E90060BB30 /* VideosViewController.xib in Resources */,
 				FA75FD6F2082B5E4008A4B42 /* Creepster-Regular.ttf in Resources */,
 				FA75FD982082B622008A4B42 /* UnifrakturCook-Bold.ttf in Resources */,
 				FAAAACAD2072C9AE00D3B84D /* PressStart2P-Regular.ttf in Resources */,
@@ -558,11 +580,13 @@
 				FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */,
 				FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */,
 				FAE04AE1209AE15F007C57CA /* ObjectCollectionViewCell.swift in Sources */,
+				FA815C6120C7BE340088C92E /* VideoTableViewCell.swift in Sources */,
 				FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */,
 				FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */,
 				FACC5B00209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift in Sources */,
 				FA9F2B3A209068DF00E5AC00 /* ColorCollectionViewCell.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
+				FA9C52AF20BE91E90060BB30 /* VideosViewController.swift in Sources */,
 				FA43458B207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift in Sources */,
 				FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */,
 				FA9F2B352090686A00E5AC00 /* ColorPickerViewController.swift in Sources */,

@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8I5-Xq-FWd">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="eQd-4w-MpX">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -52,10 +52,10 @@
             <constraints>
                 <constraint firstItem="qjY-oA-qKK" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="H4Y-qw-XyT"/>
                 <constraint firstAttribute="trailing" secondItem="8I5-Xq-FWd" secondAttribute="trailing" id="ISp-Fb-XzG"/>
-                <constraint firstItem="8I5-Xq-FWd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="PvW-4r-fhg"/>
                 <constraint firstItem="qjY-oA-qKK" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Yht-93-w46"/>
                 <constraint firstItem="qjY-oA-qKK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hLg-Uw-GcT"/>
                 <constraint firstAttribute="bottom" secondItem="8I5-Xq-FWd" secondAttribute="bottom" id="jX8-3L-Eq8"/>
+                <constraint firstItem="8I5-Xq-FWd" firstAttribute="top" secondItem="qjY-oA-qKK" secondAttribute="bottom" id="wGB-Ym-gHx"/>
                 <constraint firstItem="8I5-Xq-FWd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wYV-6H-lGL"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

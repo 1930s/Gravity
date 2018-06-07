@@ -36,7 +36,7 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
         let locationObject = Object(type: .shape(.location))
         let imageObject = Object(type: .media(.image))
         objects = [ribbonObject, arrowObject, locationObject, imageObject]
-        collectionView.contentInset.top = navigationBar.frame.height
+        //collectionView.contentInset.top = navigationBar.frame.height
         collectionView.backgroundColor = nil
         navigationBar.setBackgroundImage(UIImage(), for: .default)
     }

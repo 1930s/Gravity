@@ -151,7 +151,7 @@
                                                                             <constraint firstAttribute="height" constant="44" id="xDH-3p-aLy"/>
                                                                         </constraints>
                                                                         <inset key="imageEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
-                                                                        <state key="normal" image="info"/>
+                                                                        <state key="normal" image="590-stack"/>
                                                                         <connections>
                                                                             <action selector="videosButtonPressedWithSender:" destination="7dh-A0-qGE" eventType="touchUpInside" id="2ne-gv-PTs"/>
                                                                         </connections>
@@ -248,8 +248,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="590-stack" width="28" height="16"/>
         <image name="cube" width="48" height="48"/>
-        <image name="info" width="48" height="48"/>
         <image name="text" width="48" height="48"/>
         <image name="undo" width="48" height="48"/>
     </resources>

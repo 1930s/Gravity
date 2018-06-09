@@ -95,6 +95,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         guard let mediaType = info[UIImagePickerControllerMediaType] as? String else { return }
         var object = self.state.currentObject
         if mediaType == kUTTypeImage as String {
+            object.identifier = UUID()
             guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
             guard let mediaURL = object.mediaURL else { return }
             do {

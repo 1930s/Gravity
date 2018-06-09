@@ -83,9 +83,17 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
                 if let image = imageCache.object(forKey: object.identifier as NSUUID) {
                     cell.imageView.image = image
                 } else {
-                    if let mediaURL = object.mediaURL, let imageData = try? Data(contentsOf: mediaURL), let image = UIImage(data: imageData)?.fixedOrientation().scaled(to: CGSize(width: 300, height: 300), scalingMode: .aspectFit) {
-                        cell.imageView.image = image
-                        imageCache.setObject(image, forKey: object.identifier as NSUUID)
+                    DispatchQueue.global(qos: .background).async {
+                        if let mediaURL = object.mediaURL, let imageData = try? Data(contentsOf: mediaURL), let image = UIImage(data: imageData)?.fixedOrientation().scaled(to: CGSize(width: 300, height: 300), scalingMode: .aspectFit) {
+                            self.imageCache.setObject(image, forKey: object.identifier as NSUUID)
+                            DispatchQueue.main.async {
+                                if let cell = collectionView.cellForItem(at: indexPath) as? ObjectCollectionViewCell {
+                                    cell.imageView.image = image
+                                    cell.setNeedsLayout()
+                                    cell.layoutIfNeeded()
+                                }
+                            }
+                        }
                     }
                 }
                 cell.imageView.tintColor = object.backgroundColor ?? UIColor.gravityBlue()

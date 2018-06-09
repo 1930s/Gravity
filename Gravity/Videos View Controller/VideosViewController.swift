@@ -62,6 +62,7 @@ class VideosViewController: UIViewController, UITableViewDataSource, UITableView
                 return date1 > date2
             })
             videos = try files.compactMap({
+                guard $0.pathExtension == "mp4" else { return nil }
                 let asset = AVURLAsset(url: $0)
                 let duration = asset.duration
                 guard let date = try $0.resourceValues(forKeys: [.creationDateKey]).creationDate else { return nil }

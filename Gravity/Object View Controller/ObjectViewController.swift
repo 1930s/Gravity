@@ -10,6 +10,7 @@ import UIKit
 
 protocol ObjectViewControllerDelegate {
     func objectViewController(didSelect object: Object)
+    func objectViewController(didDelete object: Object)
 }
 
 class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -60,11 +61,18 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Object", for: indexPath) as! ObjectCollectionViewCell
         let object = objects[indexPath.item]
+        cell.button.isHidden = indexPath.row < 4
+        cell.buttonAction = { sender in
+            guard !sender.isHidden else { return }
+            objects.remove(at: indexPath.row)
+            collectionView.deleteItems(at: [indexPath])
+            delegate?.objectViewController(didDelete: object)
+        }
         switch object.type {
         case .text:
             cell.imageView.image = #imageLiteral(resourceName: "text")
             cell.imageView.tintColor = object.textColor()
-            cell.label.text = indexPath.row < 3 ? "Text" : object.text
+            cell.label.text = indexPath.row < 4 ? "Text" : object.text
         case .shape(let shapeType):
             switch shapeType {
             case .arrow:

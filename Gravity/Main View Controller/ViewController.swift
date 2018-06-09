@@ -63,6 +63,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     func objectViewController(didSelect object: Object) {
         // Reset current object state variables
         self.currentImage = nil
+        self.needsHelpInfo = true
         self.state.currentObject = object
         switch object.type {
         case .media:
@@ -73,6 +74,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         default:
             break
         }
+    }
+    
+    func objectViewController(didDelete object: Object) {
+        guard let index = self.state.recentObjects.index(of: object)
+        self.state.recentObjects.remove(at: index)
     }
     
     func presentImagePicker() {

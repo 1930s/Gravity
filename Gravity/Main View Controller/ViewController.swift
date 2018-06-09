@@ -25,25 +25,51 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
                 print(error)
             }
             setActionButton(forObject: state.currentObject)
-            if state.currentObject.type == .media(.image) && self.currentImage == nil {
-                guard let mediaURL = state.currentObject.mediaURL?.absoluteString else { return }
-                guard let mediaFolder = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
-                let path = mediaFolder.appendingPathComponent(mediaURL, isDirectory: false)
-                guard let imageData = try? Data(contentsOf: path) else { return }
-                self.currentImage = UIImage(data: imageData)?.fixedOrientation().scaled(to: CGSize(width: 1024, height: 1024), scalingMode: .aspectFit)
-            }
         }
     }
+    // VIDEO RECORDING
     var maximumRecordingDuration: TimeInterval = 30.0
     private var recordingTimer: Timer?
     private var recordingStartTime: Date?
     private var videoRecorder: RecordAR?
     
+    // MARK: - View Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Load state
+        if let data = try? Data(contentsOf: FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data")) {
+            state = (try? PropertyListDecoder().decode(AppState.self, from: data)) ?? AppState()
+        }
+        loadObjectMedia()
+        // Video recording
+        videoRecorder = RecordAR(ARSceneKit: sceneView)
+        videoRecorder?.enableAdjsutEnvironmentLighting = true
+        // Set up UI
+        let shadowView = self.buttonsContainerView
+        shadowView?.addShadowMotionEffects(intensity: 5.0, radius: 6.0)
+        shadowView?.addParallaxMotionEffects(intensity: 10.0)
+        let cornerRadiusView = self.buttonsVisualEffectView
+        cornerRadiusView?.layer.cornerRadius = 14.0
+        cornerRadiusView?.layer.masksToBounds = true
+        recordButton.recordingStateDidChange = { recordButton in
+            if recordButton.buttonState == .Recording {
+                self.startRecording()
+            } else {
+                self.stopRecording()
+            }
+        }
+    }
+    
     func objectViewController(didSelect object: Object) {
+        // Reset current object state variables
+        self.currentImage = nil
         self.state.currentObject = object
         switch object.type {
         case .media:
-            presentImagePicker()
+            loadObjectMedia()
+            if self.currentImage == nil {
+                presentImagePicker()
+            }
         default:
             break
         }
@@ -53,7 +79,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) ?? []
-        self.present(imagePicker, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(imagePicker, animated: true, completion: nil)
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -65,17 +93,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             self.dismiss(animated: true, completion: nil)
         }
         guard let mediaType = info[UIImagePickerControllerMediaType] as? String else { return }
+        var object = self.state.currentObject
         if mediaType == kUTTypeImage as String {
             guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+            guard let mediaURL = object.mediaURL else { return }
             do {
-                let mediaURL = UUID().uuidString.appending(".jpg")
-                let mediaFolder = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                try UIImageJPEGRepresentation(image, 1.0)?.write(to: mediaFolder.appendingPathComponent(mediaURL, isDirectory: false))
-                self.currentImage = nil
-                var object = self.state.currentObject
+                try UIImageJPEGRepresentation(image, 1.0)?.write(to: mediaURL)
                 object.type = .media(.image)
-                object.mediaURL = URL(string: mediaURL)
                 self.state.currentObject = object
+                loadObjectMedia()
             } catch {
                 print(error)
             }
@@ -128,6 +154,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     private var disableViewAutorotation = false
     private var currentImage: UIImage?
     
+    func loadObjectMedia() {
+        guard let mediaURL = state.currentObject.mediaURL else { return }
+        guard let imageData = try? Data(contentsOf: mediaURL) else { return }
+        self.currentImage = UIImage(data: imageData)?.fixedOrientation().scaled(to: CGSize(width: 1024, height: 1024), scalingMode: .aspectFit)
+    }
+    
     func videosViewController(_ viewController: VideosViewController, didSelectVideo url: URL) {
         let previewViewController = VideoPreviewViewController(fileURL: url)
         DispatchQueue.main.async {
@@ -170,7 +202,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     }
     
     @IBAction func objectButtonPressed(sender: UIButton) {
-        let objectViewController = ObjectViewController()
+        let objectViewController = ObjectViewController(recentObjects: self.state.recentObjects)
         objectViewController.delegate = self
         objectViewController.modalPresentationStyle = .overCurrentContext
         self.present(objectViewController, animated: true, completion: nil)
@@ -203,6 +235,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
             if sender.state == .began { beginTouchForImage() }
             else if sender.state == .ended { endTouchForImage() }
         }
+        addObjectToRecents()
+    }
+    
+    private func addObjectToRecents() {
+        let currentObject = state.currentObject
+        if currentObject.type == .media(.image) && self.currentImage == nil {
+            return
+        }
+        var recentObjects = state.recentObjects
+        if let index = recentObjects.index(of: currentObject) {
+            recentObjects.remove(at: index)
+        }
+        recentObjects.insert(currentObject, at: 0)
+        state.recentObjects = recentObjects
     }
     
     @IBAction func panGestureForHorizontalMovementRecognized(sender: UIPanGestureRecognizer) {
@@ -221,7 +267,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     // MARK: Object > Media > Image
     func beginTouchForImage() {
         // Add shape to camera node
-        guard let image = currentImage else { return }
+        let image = currentImage ?? #imageLiteral(resourceName: "Limit Point Logo")
         var height: CGFloat = 0.25
         var width: CGFloat = 0.25
         if image.size.width > image.size.height {
@@ -443,32 +489,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         state.currentObject.backgroundColor = backgroundColor
     }
 
-    // MARK: - View Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Load state
-        if let data = try? Data(contentsOf: FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data")) {
-            state = (try? PropertyListDecoder().decode(AppState.self, from: data)) ?? AppState()
-        }
-        // Video recording
-        videoRecorder = RecordAR(ARSceneKit: sceneView)
-        videoRecorder?.enableAdjsutEnvironmentLighting = true
-        // Set up UI
-        let shadowView = self.buttonsContainerView
-        shadowView?.addShadowMotionEffects(intensity: 5.0, radius: 6.0)
-        shadowView?.addParallaxMotionEffects(intensity: 10.0)
-        let cornerRadiusView = self.buttonsVisualEffectView
-        cornerRadiusView?.layer.cornerRadius = 14.0
-        cornerRadiusView?.layer.masksToBounds = true
-        recordButton.recordingStateDidChange = { recordButton in
-            if recordButton.buttonState == .Recording {
-                self.startRecording()
-            } else {
-                self.stopRecording()
-            }
-        }
-    }
     
     private func startRecording() {
         self.videoRecorder?.record()

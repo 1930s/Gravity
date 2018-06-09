@@ -18,9 +18,11 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet var navigationBar: UINavigationBar!
     var delegate: ObjectViewControllerDelegate?
     var objects: [Object] = []
+    private var imageCache: NSCache<NSUUID, UIImage> = NSCache()
     
-    init() {
+    init(recentObjects: [Object]) {
         super.init(nibName: "ObjectViewController", bundle: nil)
+        objects = recentObjects
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,7 +37,7 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
         let arrowObject = Object(type: .shape(.arrow))
         let locationObject = Object(type: .shape(.location))
         let imageObject = Object(type: .media(.image))
-        objects = [ribbonObject, arrowObject, locationObject, imageObject]
+        objects = [ribbonObject, arrowObject, locationObject, imageObject] + objects
         //collectionView.contentInset.top = navigationBar.frame.height
         collectionView.backgroundColor = nil
         navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -44,6 +46,7 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        imageCache.removeAllObjects()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -77,6 +80,14 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
             switch mediaType {
             case .image:
                 cell.imageView.image = #imageLiteral(resourceName: "image")
+                if let image = imageCache.object(forKey: object.identifier as NSUUID) {
+                    cell.imageView.image = image
+                } else {
+                    if let mediaURL = object.mediaURL, let imageData = try? Data(contentsOf: mediaURL), let image = UIImage(data: imageData)?.fixedOrientation().scaled(to: CGSize(width: 300, height: 300), scalingMode: .aspectFit) {
+                        cell.imageView.image = image
+                        imageCache.setObject(image, forKey: object.identifier as NSUUID)
+                    }
+                }
                 cell.imageView.tintColor = object.backgroundColor ?? UIColor.gravityBlue()
                 cell.label.text = "Image"
             }

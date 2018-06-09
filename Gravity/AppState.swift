@@ -70,21 +70,43 @@ struct Object: Codable, Hashable {
     var text: String?
     var textAttributes: TextAttributes = TextAttributes()
     var backgroundColor: UIColor?
-    var mediaURL: URL?
+    var mediaURL: URL? {
+        get {
+            do {
+                let mediaURL = identifier.uuidString.appending(".jpg")
+                let mediaFolder = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("media", isDirectory: true)
+                if FileManager.default.fileExists(atPath: mediaFolder.absoluteString) == false {
+                    try FileManager.default.createDirectory(at: mediaFolder, withIntermediateDirectories: true, attributes: nil)
+                }
+                let url = mediaFolder.appendingPathComponent(mediaURL)
+                return url
+            } catch {
+                print(error)
+            }
+            return nil
+        }
+    }
+    var image: UIImage? {
+        get {
+            guard let mediaURL = mediaURL else { return nil }
+            return UIImage(contentsOfFile: mediaURL.absoluteString)
+        }
+    }
     
     var hashValue: Int {
         return identifier.hashValue
     }
+    
     static func ==(lhs: Object, rhs: Object) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        return lhs.type == rhs.type && lhs.text == rhs.text && lhs.textAttributes == rhs.textAttributes && lhs.backgroundColor == rhs.backgroundColor && lhs.identifier == rhs.identifier
     }
     
     enum CodingKeys: String, CodingKey {
+        case identifier
         case type
         case text
         case textAttributes
         case backgroundColor
-        case mediaURL
     }
     
     init(type: ObjectType) {
@@ -104,27 +126,27 @@ struct Object: Codable, Hashable {
         let randomIndex = arc4random_uniform(UInt32(quotes.count))
         return quotes[Int(randomIndex)]
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
+        identifier = try values.decode(UUID.self, forKey: .identifier)
         type = try values.decode(ObjectType.self, forKey: .type)
         text = try values.decodeIfPresent(String.self, forKey: .text)
         textAttributes = try values.decode(TextAttributes.self, forKey: .textAttributes)
         if let colorData = try values.decodeIfPresent(Data.self, forKey: .backgroundColor) {
             backgroundColor = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? UIColor
         }
-        mediaURL = try values.decodeIfPresent(URL.self, forKey: .mediaURL)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(identifier, forKey: .identifier)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(text, forKey: .text)
         try container.encodeIfPresent(textAttributes, forKey: .textAttributes)
         if let color = backgroundColor {
             try container.encode(NSKeyedArchiver.archivedData(withRootObject: color), forKey: .backgroundColor)
         }
-        try container.encodeIfPresent(mediaURL, forKey: .mediaURL)
     }
     
     func fontName() -> String {
@@ -144,7 +166,7 @@ struct Object: Codable, Hashable {
     }
 }
 
-struct TextAttributes: Codable {
+struct TextAttributes: Codable, Equatable {
     var fontName: String?
     var fontSize: CGFloat?
     var textColor: UIColor?

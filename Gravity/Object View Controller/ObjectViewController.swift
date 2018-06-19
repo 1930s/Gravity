@@ -64,9 +64,9 @@ class ObjectViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.button.isHidden = indexPath.row < 4
         cell.buttonAction = { sender in
             guard !sender.isHidden else { return }
-            objects.remove(at: indexPath.row)
+            self.objects.remove(at: indexPath.row)
             collectionView.deleteItems(at: [indexPath])
-            delegate?.objectViewController(didDelete: object)
+            self.delegate?.objectViewController(didDelete: object)
         }
         switch object.type {
         case .text:

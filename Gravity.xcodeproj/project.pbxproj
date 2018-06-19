@@ -22,6 +22,8 @@
 		FA4E99322084673700C3E9AA /* VideoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E99302084673700C3E9AA /* VideoPreviewViewController.swift */; };
 		FA4E99332084673700C3E9AA /* VideoPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */; };
 		FA4E9935208473DC00C3E9AA /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */; };
+		FA6148B820CC2656004EB7F1 /* ViewController+ObjectViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6148B720CC2656004EB7F1 /* ViewController+ObjectViewControllerDelegate.swift */; };
+		FA6148BA20CC27B2004EB7F1 /* ViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6148B920CC27B2004EB7F1 /* ViewController+UIImagePickerControllerDelegate.swift */; };
 		FA6FFB462085306600332394 /* ARVideoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6FFB452085304100332394 /* ARVideoKit.framework */; };
 		FA6FFB472085306600332394 /* ARVideoKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA6FFB452085304100332394 /* ARVideoKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA75FD34207733EA008A4B42 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA75FD33207733EA008A4B42 /* AppState.swift */; };
@@ -136,6 +138,8 @@
 		FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPreviewViewController.xib; sourceTree = "<group>"; };
 		FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
 		FA5EA2FC2084919B00C10A9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FA6148B720CC2656004EB7F1 /* ViewController+ObjectViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ObjectViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		FA6148B920CC27B2004EB7F1 /* ViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		FA6FFB402085304000332394 /* ARVideoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ARVideoKit.xcodeproj; path = ARVideoKit/ARVideoKit.xcodeproj; sourceTree = "<group>"; };
 		FA75FD33207733EA008A4B42 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		FA75FD3D20774484008A4B42 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 			isa = PBXGroup;
 			children = (
 				842316E31F2030C300D189D1 /* ViewController.swift */,
+				FA6148B720CC2656004EB7F1 /* ViewController+ObjectViewControllerDelegate.swift */,
+				FA6148B920CC27B2004EB7F1 /* ViewController+UIImagePickerControllerDelegate.swift */,
 				FA43458A207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift */,
 				FA43458C207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift */,
 				FA75FD572079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift */,
@@ -580,12 +586,14 @@
 				FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */,
 				FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */,
 				FAE04AE1209AE15F007C57CA /* ObjectCollectionViewCell.swift in Sources */,
+				FA6148BA20CC27B2004EB7F1 /* ViewController+UIImagePickerControllerDelegate.swift in Sources */,
 				FA815C6120C7BE340088C92E /* VideoTableViewCell.swift in Sources */,
 				FA80F2EA208358F200AA7698 /* CircularButtonView.swift in Sources */,
 				FA75FD3E20774484008A4B42 /* UserDefaults.swift in Sources */,
 				FACC5B00209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift in Sources */,
 				FA9F2B3A209068DF00E5AC00 /* ColorCollectionViewCell.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
+				FA6148B820CC2656004EB7F1 /* ViewController+ObjectViewControllerDelegate.swift in Sources */,
 				FA9C52AF20BE91E90060BB30 /* VideosViewController.swift in Sources */,
 				FA43458B207F4F7C00339ACF /* UIView+AddShadowMotionEffects.swift in Sources */,
 				FA75FD582079FFE0008A4B42 /* ViewController+AVPlayerViewControllerDelegate.swift in Sources */,

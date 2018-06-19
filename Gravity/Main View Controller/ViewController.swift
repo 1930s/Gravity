@@ -11,9 +11,8 @@ import SpriteKit
 import ARKit
 import ARVideoKit
 import AVKit
-import MobileCoreServices
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, TextInputViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ObjectViewControllerDelegate, VideosViewControllerDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, TextInputViewControllerDelegate, UINavigationControllerDelegate, VideosViewControllerDelegate {
     
     var state: AppState = AppState() {
         didSet {
@@ -60,60 +59,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         }
     }
     
-    func objectViewController(didSelect object: Object) {
+    func resetCurrentObjectState() {
         // Reset current object state variables
         self.currentImage = nil
         self.needsHelpInfo = true
-        self.state.currentObject = object
-        switch object.type {
-        case .media:
-            loadObjectMedia()
-            if self.currentImage == nil {
-                presentImagePicker()
-            }
-        default:
-            break
+    }
+    
+    func presentImagePickerIfNecessary() {
+        if self.currentImage == nil {
+            presentImagePicker()
         }
     }
     
-    func objectViewController(didDelete object: Object) {
-        guard let index = self.state.recentObjects.index(of: object)
-        self.state.recentObjects.remove(at: index)
-    }
     
-    func presentImagePicker() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) ?? []
-        DispatchQueue.main.async {
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        defer {
-            self.dismiss(animated: true, completion: nil)
-        }
-        guard let mediaType = info[UIImagePickerControllerMediaType] as? String else { return }
-        var object = self.state.currentObject
-        if mediaType == kUTTypeImage as String {
-            object.identifier = UUID()
-            guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-            guard let mediaURL = object.mediaURL else { return }
-            do {
-                try UIImageJPEGRepresentation(image, 1.0)?.write(to: mediaURL)
-                object.type = .media(.image)
-                self.state.currentObject = object
-                loadObjectMedia()
-            } catch {
-                print(error)
-            }
-        }
-    }
     
     func setActionButton(forObject object: Object) {
         switch object.type {

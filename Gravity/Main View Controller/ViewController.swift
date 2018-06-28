@@ -400,7 +400,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
     func createRibbon() -> SCNNode? {
         let fontName = state.currentObject.fontName()
         let text = state.currentObject.getText()
-        let fontSize = 400.0 as CGFloat
+        let fontSize = 200.0 as CGFloat
         let textSprite = SKLabelNode(fontNamed: fontName)
         textSprite.text = text
         textSprite.verticalAlignmentMode = .center

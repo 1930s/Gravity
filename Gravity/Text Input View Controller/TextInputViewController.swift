@@ -147,6 +147,13 @@ class TextInputViewController: UIViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.object.text = textView.text
     }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        DispatchQueue.main.async {
+            textView.selectAll(nil)
+        }
+        return true
+    }
     /*
     // MARK: - Navigation
 

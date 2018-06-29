@@ -22,6 +22,7 @@
 		FA4E99322084673700C3E9AA /* VideoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E99302084673700C3E9AA /* VideoPreviewViewController.swift */; };
 		FA4E99332084673700C3E9AA /* VideoPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */; };
 		FA4E9935208473DC00C3E9AA /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */; };
+		FA565C8F20E628CF005D24CC /* String+ContainsEmojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA565C8E20E628CF005D24CC /* String+ContainsEmojis.swift */; };
 		FA6148B820CC2656004EB7F1 /* ViewController+ObjectViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6148B720CC2656004EB7F1 /* ViewController+ObjectViewControllerDelegate.swift */; };
 		FA6148BA20CC27B2004EB7F1 /* ViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6148B920CC27B2004EB7F1 /* ViewController+UIImagePickerControllerDelegate.swift */; };
 		FA6FFB462085306600332394 /* ARVideoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6FFB452085304100332394 /* ARVideoKit.framework */; };
@@ -137,6 +138,7 @@
 		FA4E99302084673700C3E9AA /* VideoPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewViewController.swift; sourceTree = "<group>"; };
 		FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPreviewViewController.xib; sourceTree = "<group>"; };
 		FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
+		FA565C8E20E628CF005D24CC /* String+ContainsEmojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ContainsEmojis.swift"; sourceTree = "<group>"; };
 		FA5EA2FC2084919B00C10A9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FA6148B720CC2656004EB7F1 /* ViewController+ObjectViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ObjectViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		FA6148B920CC27B2004EB7F1 /* ViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */,
 				FACC5AFF209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift */,
 				FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */,
+				FA565C8E20E628CF005D24CC /* String+ContainsEmojis.swift */,
 				FA9C52B120BE91EE0060BB30 /* Videos View Controller */,
 				FAE04ADA209ADF8F007C57CA /* Object View Controller */,
 				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
@@ -583,6 +586,7 @@
 				FA75FD34207733EA008A4B42 /* AppState.swift in Sources */,
 				FA43459A2080069200339ACF /* UIButton-BorderedStyle.swift in Sources */,
 				FA9F2B412090711600E5AC00 /* PopUp+PresentationController.swift in Sources */,
+				FA565C8F20E628CF005D24CC /* String+ContainsEmojis.swift in Sources */,
 				FA9F2B452090711600E5AC00 /* PopUp+UIGestureRecognizer.swift in Sources */,
 				FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */,
 				FA43458D207F50B500339ACF /* UIView+AddParallaxMotionEffects.swift in Sources */,

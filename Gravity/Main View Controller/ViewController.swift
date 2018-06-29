@@ -415,13 +415,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, Te
         materialScene.anchorPoint = .init(x: 0.5, y: 0.5)
         textSprite.zRotation = .pi
         textSprite.xScale = -1.0
-        let cropNode = SKCropNode()
-        let texture = gradientImage(size: materialScene.size, color1: state.currentObject.textColor(), color2: state.currentObject.textColor().modified(withAdditionalHue: 0.67, additionalSaturation: 0, additionalBrightness: 0))
-        let textureNode = SKSpriteNode(texture: SKTexture(cgImage: texture!))
-        cropNode.addChild(textureNode)
-        cropNode.maskNode = textSprite
-        //materialScene.addChild(textSprite)
-        materialScene.addChild(cropNode)
+        var ribbonNode: SKNode = textSprite
+        if !text.containsEmoji {
+            let cropNode = SKCropNode()
+            let texture = gradientImage(size: materialScene.size, color1: state.currentObject.textColor(), color2: state.currentObject.textColor().modified(withAdditionalHue: 0.67, additionalSaturation: 0, additionalBrightness: 0))
+            let textureNode = SKSpriteNode(texture: SKTexture(cgImage: texture!))
+            cropNode.addChild(textureNode)
+            cropNode.maskNode = textSprite
+            ribbonNode = cropNode
+        }
+        materialScene.addChild(ribbonNode)
         materialScene.backgroundColor = state.currentObject.backgroundColor ?? .clear
         materialScene.scaleMode = .aspectFit
         

@@ -19,6 +19,7 @@
 		FA434592207FF25A00339ACF /* TextInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA434590207FF25A00339ACF /* TextInputViewController.xib */; };
 		FA43459A2080069200339ACF /* UIButton-BorderedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4345992080069200339ACF /* UIButton-BorderedStyle.swift */; };
 		FA43459C208095BB00339ACF /* UIVerticallyCenteredTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43459B208095BB00339ACF /* UIVerticallyCenteredTextView.swift */; };
+		FA443C57220ACDBC00CC7BB7 /* README in Resources */ = {isa = PBXBuildFile; fileRef = FA443C56220ACDBC00CC7BB7 /* README */; };
 		FA4E99322084673700C3E9AA /* VideoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E99302084673700C3E9AA /* VideoPreviewViewController.swift */; };
 		FA4E99332084673700C3E9AA /* VideoPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */; };
 		FA4E9935208473DC00C3E9AA /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */; };
@@ -135,6 +136,7 @@
 		FA434590207FF25A00339ACF /* TextInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextInputViewController.xib; sourceTree = "<group>"; };
 		FA4345992080069200339ACF /* UIButton-BorderedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton-BorderedStyle.swift"; sourceTree = "<group>"; };
 		FA43459B208095BB00339ACF /* UIVerticallyCenteredTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVerticallyCenteredTextView.swift; sourceTree = "<group>"; };
+		FA443C56220ACDBC00CC7BB7 /* README */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; path = README; sourceTree = SOURCE_ROOT; };
 		FA4E99302084673700C3E9AA /* VideoPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewViewController.swift; sourceTree = "<group>"; };
 		FA4E99312084673700C3E9AA /* VideoPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPreviewViewController.xib; sourceTree = "<group>"; };
 		FA4E9934208473DC00C3E9AA /* AVPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		842316D31F2030C300D189D1 = {
 			isa = PBXGroup;
 			children = (
+				FA443C56220ACDBC00CC7BB7 /* README */,
 				FA6FFB402085304000332394 /* ARVideoKit.xcodeproj */,
 				FA75FD9E2082B89E008A4B42 /* FontBlaster */,
 				FA75FD4F2078036E008A4B42 /* InstagramActivityIndicator */,
@@ -244,18 +247,15 @@
 		842316DE1F2030C300D189D1 /* Gravity */ = {
 			isa = PBXGroup;
 			children = (
-				FA9F2B462090712300E5AC00 /* PopUp */,
-				FA9F2B372090687500E5AC00 /* Color Picker View Controller */,
 				842316DF1F2030C300D189D1 /* AppDelegate.swift */,
 				FA75FD33207733EA008A4B42 /* AppState.swift */,
 				FA75FD3D20774484008A4B42 /* UserDefaults.swift */,
-				FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */,
-				FACC5AFF209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift */,
-				FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */,
-				FA565C8E20E628CF005D24CC /* String+ContainsEmojis.swift */,
+				FA9F2B462090712300E5AC00 /* PopUp */,
+				FA9F2B372090687500E5AC00 /* Color Picker View Controller */,
 				FA9C52B120BE91EE0060BB30 /* Videos View Controller */,
 				FAE04ADA209ADF8F007C57CA /* Object View Controller */,
 				FA75FD4A2077FEA0008A4B42 /* SceneKit Extensions */,
+				FA443C58220ACFBE00CC7BB7 /* Various Extensions */,
 				FA43458E207FEE9B00339ACF /* Text Input View Controller */,
 				FA75FE302083574C008A4B42 /* Video Player View Controller */,
 				FA75FD472077FE0F008A4B42 /* Main View Controller */,
@@ -279,6 +279,17 @@
 				FA43459B208095BB00339ACF /* UIVerticallyCenteredTextView.swift */,
 			);
 			path = "Text Input View Controller";
+			sourceTree = "<group>";
+		};
+		FA443C58220ACFBE00CC7BB7 /* Various Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FACC5AFD209A2BA700DBB9D2 /* UIBezierPath+Arrow.swift */,
+				FACC5AFF209AD60100DBB9D2 /* UIBezierPath+LocationSymbol.swift */,
+				FA86AC7A20B69A5A002385E1 /* UIImage+MaximumSize.swift */,
+				FA565C8E20E628CF005D24CC /* String+ContainsEmojis.swift */,
+			);
+			path = "Various Extensions";
 			sourceTree = "<group>";
 		};
 		FA6FFB412085304000332394 /* Products */ = {
@@ -481,7 +492,7 @@
 				TargetAttributes = {
 					842316DB1F2030C300D189D1 = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -566,6 +577,7 @@
 				FA75FD8D2082B622008A4B42 /* Righteous-Regular.ttf in Resources */,
 				FA75FD8A2082B622008A4B42 /* PermanentMarker-Regular.ttf in Resources */,
 				842316E71F2030C300D189D1 /* Main.storyboard in Resources */,
+				FA443C57220ACDBC00CC7BB7 /* README in Resources */,
 				FA4E99332084673700C3E9AA /* VideoPreviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -761,18 +773,18 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = GZABHNF58X;
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Gravity";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3fe1e1e1-a5d7-4634-b1c2-9ea7a0423d59";
+				PROVISIONING_PROFILE_SPECIFIER = "Gravity Dist";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -781,18 +793,18 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = GZABHNF58X;
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.limit-point.Gravity";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3fe1e1e1-a5d7-4634-b1c2-9ea7a0423d59";
+				PROVISIONING_PROFILE_SPECIFIER = "Gravity Dist";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
